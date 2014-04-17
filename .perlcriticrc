@@ -1,0 +1,41 @@
+################################################################################
+# Default settings for Perl::Critic
+verbose = 4
+only = 1
+include = NamingConventions ClassHierarchies
+criticism-fatal = 1
+force = 0
+color = 1
+top = 50
+pager = less
+severity = 3
+allow-unsafe = 1
+theme = (pbp || security) && bugs
+exclude = Variables  Modules::RequirePackage
+
+################################################################################
+[TestingAndDebugging::RequireUseWarnings]
+equivalent_modules = Modern::Perl
+
+################################################################################
+[Documentation::PodSpelling]
+stop_words = Timmerman
+
+################################################################################
+[Subroutines::RequireArgUnpacking]
+short_subroutine_statements = 5
+
+################################################################################
+[Example::TestingAndDebugging::RequireUseStrict]
+arg2 = value2
+equivalent_modules = Modern::Perl
+arg1 = value1
+set_themes = foo bar
+maximum_violations_per_document = 57
+add_themes = baz
+severity = 1
+
+################################################################################
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = Modern::Perl
+

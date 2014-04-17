@@ -1,0 +1,7 @@
+Build.PL
+Changes
+lib/Data2any/Xml.pm
+LICENSE_Perl_5
+MANIFEST
+README
+t/100-test.t

@@ -1,0 +1,153 @@
+---
+Application:
+  abstract: Module to do something interresting
+  author:
+    email: marcel@some-provider.com
+    name: marcel
+  copyright: 2014
+  documentation:
+    - README
+  licenses:
+    - Perl_5
+  name: Data2any::Xml
+  notes: []
+  use_appstate: 1
+  use_git: 1
+  use_moose: 1
+  use_scrutinize: 1
+  version: !!perl/hash:version
+    original: 0.0.1
+    qv: 1
+    version:
+      - 0
+      - 0
+      - 1
+Bugs: {}
+Build:
+  modulebuildrc:
+    '*':
+      verbose: 0
+    test:
+      verbose: 1
+Changes:
+  - date: 2014-04-17
+    descriptions:
+      - Original version; created by buildBuilder version v0.1.0
+      - Use AppState modules in program and module
+    module: Data2any::Xml
+    program: example_program.pl
+    version: 0.0.1
+Cpan:
+  Account: ''
+Git:
+  git-ignore-list:
+    - .git
+    - '~*'
+    - '*.bak'
+    - .directory
+    - MYMETA*
+    - MANIFEST.SKIP
+    - blib
+    - _build
+    - Build
+    - Build.bat
+    - Build.COM
+    - BUILD.COM
+    - build.com
+    - Distribution-Tests/*
+    - Old/*
+    - Tests/*
+    - '*.tgz'
+    - '*.tb2'
+    - '*.tar'
+    - '*.tar.gz'
+    - '*.tar.b2'
+    - pm_to_blib
+    - script/example_program.pl
+  github:
+    account: ''
+    repository: ''
+Manifest-skip-list:
+  - '^\..*'
+  - '\bData2any-Xml-[\d\.\_]+'
+  - '^MYMETA\.'
+  - \bBuild$
+  - \bBuild.bat$
+  - '~$'
+  - \.bak$
+  - '^MANIFEST\.SKIP'
+  - \bblib
+  - \b_build
+  - \bBuild.COM$
+  - \bBUILD.COM$
+  - \bbuild.com$
+  - \bDistribution-Tests/\.*
+  - \bProject.yml$
+  - \bOld/.*
+  - \bTests/.*
+  - .*\.tgz$
+  - .*\.tb2$
+  - .*\.tar$
+  - .*\.tar\.gz$
+  - .*\.tar\.b2$
+  - \bpm_to_blib$
+  - '^script/example_program.pl$'
+Perl:
+  critic_rc:
+    Defaults:
+      allow-unsafe: 1
+      color: 1
+      criticism-fatal: 1
+      exclude: Variables  Modules::RequirePackage
+      force: 0
+      include: NamingConventions ClassHierarchies
+      only: 1
+      pager: less
+      severity: 3
+      theme: (pbp || security) && bugs
+      top: 50
+      verbose: 4
+    Documentation::PodSpelling:
+      stop_words: Timmerman
+    Example::TestingAndDebugging::RequireUseStrict:
+      add_themes: baz
+      arg1: value1
+      arg2: value2
+      equivalent_modules: Modern::Perl
+      maximum_violations_per_document: 57
+      set_themes: foo bar
+      severity: 1
+    Subroutines::RequireArgUnpacking:
+      short_subroutine_statements: 5
+    TestingAndDebugging::RequireUseStrict:
+      equivalent_modules: Modern::Perl
+    TestingAndDebugging::RequireUseWarnings:
+      equivalent_modules: Modern::Perl
+  perl_version: !!perl/hash:version
+    original: v5.16.3
+    qv: 1
+    version:
+      - 5
+      - 16
+      - 3
+Readme:
+  description: |2
+        The README is used to introduce the module and provide instructions on how
+        to install the module, any machine dependencies it may have (for example C
+        compilers and installed libraries) and any other information that should be
+        provided before the module is installed.
+    
+        A README file is required for CPAN modules since CPAN extracts the README
+        file from a module distribution so that people browsing the archive can use
+        it get an idea of the modules uses. It is usually a good idea to provide
+        version information here so that people can decide whether fixes for the
+        module are worth downloading.
+  example: |2
+        use Data2any::Xml;
+        my $obj = Data2any::Xml->new();
+Tests:
+  - module: Data2any::Xml
+    test-programs:
+      - t/100-test.t
+Todo:
+  2014-04-17: Think of what to build
