@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" baseprofile="full" version="1.1" height="200"><rect width="300" fill="red" height="200"/><circle fill="green" cx="150" r="80" cy="100"/><text text-anchor="middle" y="125" fill="white" x="150" font-size="60">SVG</text></svg>
+

@@ -1,0 +1,88 @@
+#!/home/marcel/Software/bin/yaml2xml
+#
+---
+################################################################################
+# 
+- SENDTO:
+   xml: '> Data2xml.xml'
+   tex: '| texml - Data2xml.tex'
+   pdf: '| texml - - | pdflatex'
+
+################################################################################
+- STARTDOCUMENT:
+################################################################################
+
+- XML version=1.0 encoding=utf-8:
+- DOCTYPE root=TeXML:
+
+- TeXML:
+   - cmd name=documentclass:
+      - opt: 12pt
+      - parm: book
+   - cmd name=usepackage:
+      - parm: graphicx
+   - cmd name=usepackage:
+      - parm: float
+   - cmd name=floatstyle:
+      - parm: boxed
+   - cmd name=restylefloat:
+      - parm: figure
+   - env name=document:
+      - !perl/Data2xml::Xml::LorumIpsum
+	 type: 1500
+      - group:
+         - cmd name=it:
+	 - Lorum krankjorum
+	 - cmd name=bf:
+	 - ' en de zeven geitjes'
+      - env name=figure:
+         - opt: htbp
+         - cmd name=centering:
+	 
+	 - cmd name=setlength gr=0:
+	 - cmd name=fboxsep:
+	    - parm: 0.5cm
+	 - cmd name=setlength gr=0:
+	 - cmd name=fboxrule:
+	    - parm: 0.5pt
+	 - cmd name=fbox gr=0:
+	 - group:
+	    - cmd name=includegraphics:
+	       - opt: angle=45, scale=0.2
+	       #, width=200px
+	       #, scale=0.2
+	       - parm: svg-ex0.png
+	 - cmd name=caption:
+	    - parm: Translated SVG Image
+
+################################################################################
+- ENDDOCUMENT:
+################################################################################
+
+---
+################################################################################
+# Make a SVG document and store in svg-ex0.svg
+#
+- SENDTO:
+   svg: '> svg-ex0.svg'
+   pdf: '| /usr/bin/convert - svg-ex0.pdf'
+   png: '| /usr/bin/convert - svg-ex0.png'
+   eps: '| /usr/bin/convert - svg-ex0.eps'
+
+################################################################################
+- STARTDOCUMENT:
+################################################################################
+
+- XML version=1.0 encoding=utf-8:
+- DOCTYPE root=svg:
+- svg version=1.1 baseprofile=full:
+  xmlns=http://www.w3.org/2000/svg:
+  width=300 height=200:
+   - rect width=300 height=200 fill=red:
+   - circle cx=150 cy=100 r=80 fill=green:
+   - text x=150 y=125 font-size=60:
+     text-anchor=middle fill=white: SVG
+
+################################################################################
+- ENDDOCUMENT:
+################################################################################

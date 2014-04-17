@@ -1,0 +1,116 @@
+---
+################################################################################
+# Chapter. Document number 0
+#
+#- DollarVars substitute=1:
+#- Shortcuts parse=1:
+- chapter:
+   - info:
+      - title: How to use YAML
+   
+   - section:
+      - info:
+         - title: Short introduction to YAML
+
+      - para:
+         - YAML or quote[YAML Ain't Markup Language] (trademark[YAML])
+#	 - xref linkend=YAML-man:
+         - footnote:
+	    - para:
+	       - 'Manual can be found '
+	       - link xl:href=http://www.yaml.org/spec/1.2/spec.html: here
+	    
+	 - >
+	    is a data description language designed by Oren Ben-Kiki, Clark Evens 
+	    and Ingy d&ouml;t Net. The purpose of this language is to
+	    describe your data after which a program loads it using a Perl 
+	    module. Other languages like Ruby and Python also have modules to
+	    read YAML. Data2any uses YAML and translates it to xml. Because of
+	    this the program will use only a subset of YAML and the definitions
+	    must be given in a specific way and order.
+	    
+
+      - para:
+
+
+
+
+
+---
+      - para:
+	 - figure floatstyle=left pgwide=0:
+	    - mediaobject:
+	       - imageobject:
+#		  - imagedata format=SVG width=75 align=right:
+		  - imagedata format=SVG width=75 align=right:
+		     - svg version=1.1 baseprofile=full:
+		       xmlns=http://www.w3.org/2000/svg:
+		       width=300 height=200:
+			- rect width=300 height=200 fill=red:
+			- circle cx=150 cy=100 r=80 fill=green:
+			- text x=150 y=125 font-size=60:
+			  text-anchor=middle fill=white: SVG
+	 - !perl/Data2any::Xml::LorumIpsum
+	    type: 1500
+
+	 - sidebar:
+	    - PI:
+	       target: dbfo
+	       data:
+	        sidebar-width: 160px
+	        float-type: right
+
+	    - mediaobject:
+	       - imageobject:
+		  - imagedata format=SVG width=75:
+		     - svg version=1.1 baseprofile=full:
+		       xmlns=http://www.w3.org/2000/svg:
+		       width=300 height=200:
+			- rect width=300 height=200 fill=red:
+			- circle cx=150 cy=100 r=80 fill=green:
+			- text x=150 y=125 font-size=60:
+			  text-anchor=middle fill=white: SVG
+#	       - textobject:
+#		  - !perl/Data2any::Xml::LorumIpsum
+#		     type: 1500
+
+	 - sidebar:
+	    - PI:
+	       target: dbfo
+	       data:
+	        sidebar-width: 160px
+	        float-type: right
+	    - !perl/Data2any::Xml::LorumIpsum
+	       type: 1500
+	    
+
+	 - note:
+	    - title: Note section
+	    - para:
+	       - !perl/Data2any::Xml::LorumIpsum
+		  type: 1500
+
+	 - caution:
+	    - title: Caution section
+	    - para:
+	       - !perl/Data2any::Xml::LorumIpsum
+		  type: 1500
+
+	 - tip:
+	    - title: Tip section
+	    - para:
+	       - !perl/Data2any::Xml::LorumIpsum
+		  type: 1500
+
+	 - important:
+	    - title: Important section
+	    - para:
+	       - !perl/Data2any::Xml::LorumIpsum
+		  type: 1500
+
+	 - warning:
+	    - title: Warning section
+	    - para:
+	       - !perl/Data2any::Xml::LorumIpsum
+		  type: 1500
+

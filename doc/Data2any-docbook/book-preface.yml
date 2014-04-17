@@ -1,0 +1,164 @@
+---
+################################################################################
+# Preface. Document number 0
+#
+- preface:
+   - title: Introduction
+   - para: >
+      Welcome to emphasis[Data2any]. Data2any is a Perl module to convert data
+      structures into XML. This book will explain all intricasies of the
+      data structure needed by the module and to explain how to write a plugin.
+      Also, explanation of the data structure in Yaml format is given.
+
+   - section:
+      - title: Who this book is for
+      - para: >
+	 There are plenty XML aware editors around with automatic coloring and
+	 autocompletion of words to name a few items such editors make use of.
+	 So why bother? Well, this
+	 book is for users who want to create XML without thinking about the
+	 syntax all the time. While this module will solve this for you, it is
+	 not a very easy task. The people who aren't strong in programming
+	 or programming Perl in particular. For them there is the program
+	 filename[yaml2xml] and they only need to study the information of
+	 the YAML data description language and the installed plugins.
+
+      - para: >
+         Some more reasons to use the module and/or program are itemized below:
+      - itemizedlist:
+         - listitem:
+	    - para: >
+	       When using YAML as input for the program filename[yaml2xml] a
+	       nice input format can give a better view of your text than in
+	       full xml code.
+#	       You can see for yourself in the pictures below. Take
+#	       note about the text on which you want to concentrate, it is more
+#	       visible.
+#	    - para:
+#	       - The yaml example
+#	       - mediaobject:
+#		  - imageobject:
+#		     - imagedata align=left scale=124 format=PNG:
+#		       fileref=docbook-yaml-example.png:
+
+#	    - para:
+#	       - And the xml example
+#	       - mediaobject:
+#		  - imageobject:
+#		     - imagedata align=left scale=120 format=PNG:
+#		       fileref=docbook-xml-example.png:
+	 - listitem:
+	    - Shortcuts parse=0:
+	    - para: >
+	       Use of shortcuts in the text such as b[real] will translate to
+	       <b>real</b>. This is also an enhancement of visibility. This
+	       facility makes it easy to insert tags inlined into your text when
+	       the tag doesn't need any attributes.
+	    - Shortcuts parse=1:
+	 - listitem:
+	    - DollarVars substitute=0:
+	    - para: >
+	       Use of preset variables such as $time and $date are nice to
+	       make your document a bit more dynamic. The variables are set by
+	       the module for later use. It is possible to set new variables at
+	       the start of the document, in the text and in the plugins code.
+	       There are also special variables called counters.
+	    - DollarVars substitute=1:
+	 - listitem:
+	    - para: >
+	       Use of plugins can make tedious work simple. Take for example an
+	       imaginary plugin which can insert a set of elements to build a
+	       table row. Now, instead of writing a static piece of XML:
+            - programlisting:
+	       - CDATA: |
+		  <table>
+	             <tr>
+			<td>table row 1 data col 1</td>
+			<td>table row 1 data col 2</td>
+		     </tr>
+		     <tr>
+			td>table row 2 data col 1</td>
+			td>table row 2 data col 2</td>
+		     </tr>
+		  </table>
+	    - para: one could write the following:
+            - programlisting: |
+	       - table:
+		  - !perl/Data2any::Html::TableRow
+	             - table row 1 data col 1
+		     - table row 1 data col 2
+		  - !perl/Data2any::Html::TableRow
+	             - table row 2 data col 1
+		     - table row 2 data col 2
+	    - para: >
+	       You can easily extend this idea to let this plugin gather
+	       information from other sources such as system log files, network
+	       servers, websites and databases and put that into a table. Very
+	       nice to make a report of some sort.
+	 - listitem:
+	    - para: >
+	       Plugins can also help to devide a big document into smaller
+	       pieces to make the whole more managable. The pieces can then be
+	       maintained by different authors. With some xml processors like
+	       filename[xsltporoc] it is possible to use xincludes which can do
+	       the same.
+	 - listitem:
+	    - para: >
+	       Once you've edited your text in the Yaml format you are not tied
+	       to that system. Just generate the XML and work from that moment
+	       with some editor. However, it will then not be possible (yet) to
+	       return back to the Yaml format and you loose the use of plugins
+	       and the other facilities.
+
+#      - para: >
+#	 of the program filename[yaml2xml] who will write yaml text in a text
+#	 editor and using existing plugins from the filename[Data2any]
+#	 installation. In later chapters will be explained how Data2any can be
+#	 used and how to write new plugin code.
+
+   - section:
+      - title: Structure of the book
+      - para: >
+	 This book will make its introduction by starting with an example of the
+	 Perl code needed to do a minimal conversion. Then makes a comparison
+	 with a similar datastructure defined in yaml and introduces the
+	 conversion program filename[yaml2xml]. Then a lot will be explained
+	 using Yaml before coming back to the Perl data structures. These will
+	 be shown side by side with the yaml code. Besides converting, the
+	 program is capable to send the results to other agents like xslt
+	 processors or just to file or the standard output.
+
+      - itemizedlist:
+	 - listitem: 
+	    - para: $COUNT_chap=1 Chapter $COUNT_chap++, Introducing Data2any
+	    - para:
+	       - >
+		  This chapter introduces you to the module with a simple
+		  phrase["Hello World"] example showing the data structure and
+		  its result. The same example will then also be compared with a
+		  representable piece of yaml code and the use of
+		  filename[yaml2xml].
+
+	 - listitem:
+	    - para: Chapter $COUNT_chap++, How to use Yaml
+	    - para: >
+	       This chapter will show you how to write Yaml code which the
+	       program filename[yaml2xml] will convert to XML. A full
+	       description of all the possebilities are given here.
+
+	 - listitem:
+	    - para: Chapter $COUNT_chap++, Defining the data structure
+	    - para: >
+	       In this chapter we will return to the Perl code and describe the
+	       datastructure for conversions to XML.
+
+	 - listitem:
+	    - para: Chapter $COUNT_chap++, Error messages
+	    - para: >
+	       This program makes use of several other modules which have all
+	       their own way of saying that there is something wrong. In this
+	       chapter I will explain the messages and what they all mean.
+
+	 - listitem:
+	    - para: $COUNT_app=A Chapter $COUNT_app++, Availability
+	    - para: >

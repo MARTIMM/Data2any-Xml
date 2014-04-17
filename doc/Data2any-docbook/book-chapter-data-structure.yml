@@ -1,0 +1,79 @@
+---
+################################################################################
+# Chapter. Document number 0
+#
+- chapter audience=programmers:
+   - info:
+      - title: Defining the data structure
+   
+   - section:
+      - info:
+         - title: The program layout
+      - para: >
+	 Before going into details I will show you again the global layout of
+	 the program.
+	 
+	 The program must be prepared before using any of the
+	 modules functions.
+	 This can be accompleshed by importing the module. Then the data must be
+	 prepared after which the initialization, the conversion and generation
+	 of XML will take place. 
+
+      - DollarVars substitute=0:
+      - Shortcuts parse=0:
+      - programlisting: |
+	 # Importing modules
+	 use Modern::Perl;
+	 require Data2any;
+
+	 # Creating the data structure
+	 my $data = [[...][...]];
+
+	 # Initialize module with the data
+	 my $d2xml = Data2any->new( inputData => $data
+				  , dataLabel => 'internal'
+				  , logging => 1
+				  , requestDocument => 0
+				  );
+
+	 # Convert to XML
+	 $d2xml->nodetreeFromData;
+	 $d2xml->xmlFromNodetree;	 
+	 $d2xml->postprocess;
+      - DollarVars substitute=1:
+      - Shortcuts parse=1:
+
+      - para: >
+         We will first explain the data structure now before we go into the
+	 details of the used functions.
+   
+   - section:
+      - info:
+         - title: The data
+      - para: >
+	 The data specification describes a set of documents as a set of array
+	 references in an array reference like the following example is a
+	 declaration of a set of two douments.
+	    
+      - DollarVars substitute=0:
+      - programlisting: |
+         my $document1 = [];
+	 my $document2 = [];
+	 my $data = [ $document1, $document2];
+      - DollarVars substitute=1:
+
+   - section:
+      - info:
+         - title: Use of arrays
+
+      - para:
+         - >
+	    This chapter describes the data structure which is needed for the
+	    Data2any module.
+	    The data structure needed for the program is designed in such a way
+	    that many situations can be described.
+
+
+
+
+

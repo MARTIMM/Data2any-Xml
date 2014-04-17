@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TeXML>
+<TeXML><cmd name="documentclass"><opt>12pt</opt><parm>book</parm></cmd><cmd name="usepackage"><parm>graphicx</parm></cmd><env name="document">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+<group><cmd name="it"/>kjsdh jkhsf<cmd name="bf"/> aksjhdkjas daksjhd kjas ddkh</group><env name="figure"><opt>htbp</opt><cmd name="centering"/><cmd name="setlength"/><cmd name="fboxsep"><parm>0pt</parm></cmd><cmd name="setlength"/><cmd name="fboxrule"><parm>0.5pt</parm></cmd><fbox><group><cmd name="includegraphics"><opt>angle=45, scale=0.2</opt><parm>svg-ex0.png</parm></cmd><cmd name="caption"><parm>Translated SVG Image</parm></cmd></group></fbox></env></env></TeXML>

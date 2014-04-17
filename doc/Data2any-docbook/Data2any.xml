@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book [
+<!ENTITY company "Acme Mc Carpenter, Inc">
+<!ENTITY product "Data2any">
+<!ENTITY ouml "&#246;">
+]>
+<book xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+  <title>Using the Perl module Data2any</title>
+  <info>
+    <author>
+      <personname>
+        <firstname>Marcel</firstname>
+        <surname>Timmerman</surname>
+      </personname>
+      <email>mt1957@gmail.com</email>
+    </author>
+    <address>
+      <city>Haarlem</city>
+      <country>Netherlands</country>
+    </address>
+    <copyright>
+      <year>2013</year>
+      <holder>Marcel Timmerman</holder>
+    </copyright>
+    <date>2014-01-27</date>
+    <abstract>
+      <para>&product; is capable of transforming an internally build data structure into xml after which it is possible to store it in a file or send it to any program for conversion or some other type of processor. 
+</para>
+      <para>Version of yaml2xml when book is written: v0.0.4</para>
+      <para>Version of Data2any when book is written: $version_Data2any</para>
+      <para>Generated on date 2014-01-27.</para>
+    </abstract>
+  </info>
+  <dedication>
+    <para>To my wife Juhi, who finds me too often behind the computer.
+</para>
+  </dedication>
+  <preface>
+    <title>Introduction</title>
+    <para>Welcome to <emphasis/>. Data2any is a Perl module to convert data structures into XML. This book will explain all intricasies of the data structure needed by the module and to explain how to write a plugin. Also, explanation of the data structure in Yaml format is given.
+</para>
+    <section>
+      <title>Who this book is for</title>
+      <para>There are plenty XML aware editors around with automatic coloring and autocompletion of words to name a few items such editors make use of. So why bother? Well, this book is for users who want to create XML without thinking about the syntax all the time. While this module will solve this for you, it is not a very easy task. The people who aren't strong in programming or programming Perl in particular. For them there is the program <filename/> and they only need to study the information of the YAML data description language and the installed plugins.
+</para>
+      <para>Some more reasons to use the module and/or program are itemized below:
+</para>
+      <itemizedlist>
+        <listitem>
+          <para>When using YAML as input for the program <filename/> a nice input format can give a better view of your text than in full xml code.
+</para>
+        </listitem>
+        <listitem>
+          <para>Use of shortcuts in the text such as b[real] will translate to &lt;b&gt;real&lt;/b&gt;. This is also an enhancement of visibility. This facility makes it easy to insert tags inlined into your text when the tag doesn't need any attributes.
+</para>
+        </listitem>
+        <listitem>
+          <para>Use of preset variables such as $time and $date are nice to make your document a bit more dynamic. The variables are set by the module for later use. It is possible to set new variables at the start of the document, in the text and in the plugins code. There are also special variables called counters.
+</para>
+        </listitem>
+        <listitem>
+          <para>Use of plugins can make tedious work simple. Take for example an imaginary plugin which can insert a set of elements to build a table row. Now, instead of writing a static piece of XML:
+</para>
+          <programlisting><![CDATA[<table>
+   <tr>
+      <td>table row 1 data col 1</td>
+      <td>table row 1 data col 2</td>
+   </tr>
+   <tr>
+      td>table row 2 data col 1</td>
+      td>table row 2 data col 2</td>
+   </tr>
+</table>
+]]></programlisting>
+          <para>one could write the following:</para>
+          <programlisting>- table:
+   - !perl/Data2any::Html::TableRow
+      - table row 1 data col 1
+      - table row 1 data col 2
+   - !perl/Data2any::Html::TableRow
+      - table row 2 data col 1
+      - table row 2 data col 2
+</programlisting>
+          <para>You can easily extend this idea to let this plugin gather information from other sources such as system log files, network servers, websites and databases and put that into a table. Very nice to make a report of some sort.
+</para>
+        </listitem>
+        <listitem>
+          <para>Plugins can also help to devide a big document into smaller pieces to make the whole more managable. The pieces can then be maintained by different authors. With some xml processors like <filename/> it is possible to use xincludes which can do the same.
+</para>
+        </listitem>
+        <listitem>
+          <para>Once you've edited your text in the Yaml format you are not tied to that system. Just generate the XML and work from that moment with some editor. However, it will then not be possible (yet) to return back to the Yaml format and you loose the use of plugins and the other facilities.
+</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <section>
+      <title>Structure of the book</title>
+      <para>This book will make its introduction by starting with an example of the Perl code needed to do a minimal conversion. Then makes a comparison with a similar datastructure defined in yaml and introduces the conversion program <filename/>. Then a lot will be explained using Yaml before coming back to the Perl data structures. These will be shown side by side with the yaml code. Besides converting, the program is capable to send the results to other agents like xslt processors or just to file or the standard output.
+</para>
+      <itemizedlist>
+        <listitem>
+          <para>Chapter 1, Introducing Data2any</para>
+          <para>This chapter introduces you to the module with a simple <phrase/> example showing the data structure and its result. The same example will then also be compared with a representable piece of yaml code and the use of <filename/>.
+</para>
+        </listitem>
+        <listitem>
+          <para>Chapter 2, How to use Yaml</para>
+          <para>This chapter will show you how to write Yaml code which the program <filename/> will convert to XML. A full description of all the possebilities are given here.
+</para>
+        </listitem>
+        <listitem>
+          <para>Chapter 3, Defining the data structure</para>
+          <para>In this chapter we will return to the Perl code and describe the datastructure for conversions to XML.
+</para>
+        </listitem>
+        <listitem>
+          <para>Chapter 4, Error messages</para>
+          <para>This program makes use of several other modules which have all their own way of saying that there is something wrong. In this chapter I will explain the messages and what they all mean.
+</para>
+        </listitem>
+        <listitem>
+          <para>Chapter A, Availability</para>
+          <para>
+</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </preface>
+  <chapter>
+    <info>
+      <title>Introducing Data2any</title>
+    </info>
+    <section>
+      <info>
+        <title>lorem</title>
+      </info>
+      <para>
+</para>
+    </section>
+    <section>
+      <title>Simple example</title>
+      <para>Lorem ipsum</para>
+      <programlisting xml:id="ex.simpleprog.1"><![CDATA[
+use Modern::Perl;
+require Data2any;
+]]><co xml:id="co.import.module"/><![CDATA[
+
+my $data = ]]><co xml:id="co.data.contruction"/><![CDATA[
+[[{ DOCTYPE => { root => 'html'}}
+ ,{ html =>
+    [{ body => 
+       [{ 'h1 id=hw class=helloWorld' => 'Hello World Example'}
+       ,{ p => 'Hello World, this is <b /> easy! Wrote this'
+             . ' on $date at $time!'
+        }
+       ]
+     }
+    ]
+  }
+ ]
+];
+
+my $d2xml = Data2any->new( inputData => $data
+                         , dataLabel => 'internal'
+                         , logging => 1
+                         , requestDocument => 0
+                         );
+]]><co xml:id="co.module.init"/><![CDATA[
+
+$d2xml->nodetreeFromData;
+]]><co xml:id="co.translate.1"/><![CDATA[
+$d2xml->xmlFromNodetree;
+]]><co xml:id="co.translate.2"/><![CDATA[
+$d2xml->postprocess;
+]]><co xml:id="co.translate.3"/></programlisting>
+      <calloutlist>
+        <callout arearefs="co.import.module">
+          <para>An important ingredient, import the module Data2any. In Perl this is nessesary to get the module code known to the program.
+</para>
+        </callout>
+        <callout arearefs="co.data.contruction">
+          <para>$data is the variable we use here to build our structure. It looks already complex while the output is quite simple.
+</para>
+        </callout>
+        <callout arearefs="co.module.init">
+          <para>The next step is to call the constructor of the module and set a few attributes to work with.
+</para>
+        </callout>
+        <callout arearefs="co.translate.1">
+          <para>First step in translation is to convert the data into a tree of nodes. These are AppState::NodeTree::Node objects belonging to another module. For simple translations it isn't nessesary to know the how they are build. The node tree can be retrieved from the $d2xml object if needed.
+</para>
+        </callout>
+        <callout arearefs="co.translate.2">
+          <para>Second step is to generate the xml in text format. The text can be retrieved from the $d2xml object.
+</para>
+        </callout>
+        <callout arearefs="co.translate.3">
+          <para>The last step is to add some extra's like a httpheader, or to send the xml to other processors for translation or storage.
+</para>
+        </callout>
+      </calloutlist>
+      <para>Which will produce the following<screen><![CDATA[<!DOCTYPE html>
+<html>
+  <body>
+<h1 class="helloWorld" id="hw">Hello World Example</h1>
+<p>Hello World, this is <b>real</b> easy! Wrote this on
+2013-11-09 at 17:18:15!</p>
+  </body>
+</html>
+]]></screen></para>
+    </section>
+  </chapter>
+  <chapter>
+    <info>
+      <title>How to use YAML</title>
+    </info>
+    <section>
+      <info>
+        <title>Short introduction to YAML</title>
+      </info>
+      <para>YAML or <quote/> (<trademark/>)<footnote><para>Manual can be found <link xl:href="http://www.yaml.org/spec/1.2/spec.html">here</link></para></footnote>is a data description language designed by Oren Ben-Kiki, Clark Evens  and Ingy d&ouml;t Net. The purpose of this language is to describe your data after which a program loads it using a Perl  module. Other languages like Ruby and Python also have modules to read YAML. Data2any uses YAML and translates it to xml. Because of this the program will use only a subset of YAML and the definitions must be given in a specific way and order.
+</para>
+      <para/>
+    </section>
+  </chapter>
+  <chapter audience="programmers">
+    <info>
+      <title>Defining the data structure</title>
+    </info>
+    <section>
+      <info>
+        <title>The program layout</title>
+      </info>
+      <para>Before going into details I will show you again the global layout of the program.
+The program must be prepared before using any of the modules functions. This can be accompleshed by importing the module. Then the data must be prepared after which the initialization, the conversion and generation of XML will take place. 
+</para>
+      <programlisting># Importing modules
+use Modern::Perl;
+require Data2any;
+
+# Creating the data structure
+my $data = [[...][...]];
+
+# Initialize module with the data
+my $d2xml = Data2any-&gt;new( inputData =&gt; $data
+                         , dataLabel =&gt; 'internal'
+                         , logging =&gt; 1
+                         , requestDocument =&gt; 0
+                         );
+
+# Convert to XML
+$d2xml-&gt;nodetreeFromData;
+$d2xml-&gt;xmlFromNodetree;        
+$d2xml-&gt;postprocess;
+</programlisting>
+      <para>We will first explain the data structure now before we go into the details of the used functions.
+</para>
+    </section>
+    <section>
+      <info>
+        <title>The data</title>
+      </info>
+      <para>The data specification describes a set of documents as a set of array references in an array reference like the following example is a declaration of a set of two douments.
+   
+</para>
+      <programlisting>my $document1 = [];
+my $document2 = [];
+my $data = [ $document1, $document2];
+</programlisting>
+    </section>
+    <section>
+      <info>
+        <title>Use of arrays</title>
+      </info>
+      <para>This chapter describes the data structure which is needed for the Data2any module. The data structure needed for the program is designed in such a way that many situations can be described.
+</para>
+    </section>
+  </chapter>
+  <appendix>
+    <info>
+      <title>Availability</title>
+      <abstract>
+        <para>lorem
+</para>
+      </abstract>
+    </info>
+    <section>
+      <title>Availability</title>
+      <para>The program is developed on a Linux platform. I suppose it will be able to work on any Unix platform with a reasonable recent Perl version and CPAN modules. Other operating systems still need to be investigated.
+</para>
+      <section>
+        <title>Installation of the module and program</title>
+        <para>Installation steps are simple for Linux systems. For this and other systems the following instructions can be followed:
+</para>
+        <itemizedlist>
+          <listitem>
+            <para>Linux</para>
+            <literallayout>&gt; su
+... password ...
+# yum 
+# cpan Data2any
+...
+</literallayout>
+            <para>Windows XP</para>
+            <para>Windows 8</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+  </appendix>
+  <index/>
+</book>

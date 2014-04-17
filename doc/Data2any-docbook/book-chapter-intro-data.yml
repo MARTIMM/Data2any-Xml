@@ -1,0 +1,125 @@
+---
+################################################################################
+# Chapter. Document number 0
+#
+- chapter:
+   - info:
+      - title: Introducing Data2any
+   
+   - section:
+      - info:
+         - title: lorem
+      - para: >
+
+   - section:
+      - title: Simple example
+      - para: Lorem ipsum
+
+      - DollarVars substitute=0:
+      - programlisting xml:id=ex.simpleprog.1:
+#         - PI:
+#	    target: dbfo
+#	    data:
+#	     keep-together: auto
+
+#         - PI:
+#	    target: dbfo-need
+#	    data:
+#	     height: 3cm
+#	     space-before: 2em
+         - CDATA chopTrailingSpace=1: |
+	 
+	    use Modern::Perl;
+	    require Data2any;
+	 - co xml:id=co.import.module:
+	 - CDATA chopTrailingSpace=1: |
+
+
+	    my $data = 
+	 - co xml:id=co.data.contruction:
+	 - CDATA chopTrailingSpace=1: |
+	 
+	    [[{ DOCTYPE => { root => 'html'}}
+	     ,{ html =>
+	        [{ body => 
+	           [{ 'h1 id=hw class=helloWorld' => 'Hello World Example'}
+	           ,{ p => 'Hello World, this is b[real] easy! Wrote this'
+	        	 . ' on $date at $time!'
+	            }
+	           ]
+	         }
+	        ]
+	      }
+	     ]
+	    ];
+
+	    my $d2xml = Data2any->new
+	 - co xml:id=co.module.init:
+	 - CDATA chopTrailingSpace=1: |
+
+	       ( inputData => $data
+	       , dataLabel => 'internal'
+	       , logging => 1
+	       , requestDocument => 0
+	       );
+
+
+	 - CDATA chopTrailingSpace=1: |
+
+
+	    $d2xml->nodetreeFromData;
+	 - co xml:id=co.translate.1:
+	 - CDATA chopTrailingSpace=1: |
+	 
+	    $d2xml->xmlFromNodetree;
+	 - co xml:id=co.translate.2:
+	 - CDATA chopTrailingSpace=1: |
+	 
+	    $d2xml->postprocess;
+	 - co xml:id=co.translate.3:
+
+
+      - calloutlist:
+	 - callout arearefs=co.import.module:
+	    - para: >
+	       An important ingredient, import the module Data2any. In
+	       Perl this is nessesary to get the module code known to the
+	       program.
+	 - callout arearefs=co.data.contruction:
+	    - para: >
+	       $data is the variable we use here to build our structure.
+	       It looks already complex while the output is quite simple.
+	 - callout arearefs=co.module.init:
+	    - para: >
+	       The next step is to call the constructor of the module and
+	       set a few attributes to work with.
+	 - callout arearefs=co.translate.1:
+	    - para: >
+	       First step in translation is to convert the data into a tree
+	       of nodes. These are AppState::NodeTree::Node objects belonging
+	       to another module. For simple translations it isn't nessesary
+	       to know the how they are build. The node tree
+	       can be retrieved from the $d2xml object if needed.
+	 - callout arearefs=co.translate.2:
+	    - para: >
+	       Second step is to generate the xml in text format. The text
+	       can be retrieved from the $d2xml object.
+	 - callout arearefs=co.translate.3:
+	    - para: >
+	       The last step is to add some extra's like a httpheader, or to
+	       send the xml to other processors for translation or storage.
+
+      - DollarVars substitute=1:
+
+      - para:
+	 - Which will produce the following
+	 - screen:
+	    - CDATA: |
+	       <!DOCTYPE html>
+	       <html>
+		 <body>
+	       <h1 class="helloWorld" id="hw">Hello World Example</h1>
+	       <p>Hello World, this is <b>real</b> easy! Wrote this on
+	       2013-11-09 at 17:18:15!</p>
+		 </body>
+	       </html>

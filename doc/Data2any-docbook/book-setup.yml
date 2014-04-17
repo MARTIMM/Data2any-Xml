@@ -1,0 +1,117 @@
+#!/usr/bin/env yaml2any
+#
+---
+################################################################################
+# - Docbook v5.* do not use a dtd defined with DOCTYPE anymore
+# - Program to translate is xsltproc
+# - Stylesheets are found at /usr/share/sgml/docbook
+#
+# Book to describe the Data2any perl module
+#
+################################################################################
+# 
+- DocumentControl:
+   Translator: Xml
+
+   SendTo:
+    xml: '| xmllint --format - > Data2any.xml'
+    fo: '| xsltproc --xinclude book-stylesheet.xsl - > Data2any.fo'
+    fop: '| xsltproc --xinclude book-stylesheet.xsl - | fop - Data2any.pdf'
+    xep: |
+     | xsltproc --xinclude book-stylesheet.xsl -
+     | xep -fo - -pdf Data2any.pdf
+    chk: |
+     | xmllint --format - | tee Data2any.xml
+     | rnv /usr/share/xml/docbook5/schema/rng/5.0/docbook.rnc
+#    tex: |
+#     | dblatex -t tex -o Data2any.tex -
+#    texpdf: |
+#     | dblatex -t tex -o Data2any.tex -
+#     ; pdflatex Data2any.tex Data2any.pdf
+
+   Preprocess:
+    dependencies:
+     __BASENAME__.pdf:
+      on: book-stylesheet.xsl
+      command: yaml2xml -l 1 --docnbr 3 book-stylesheet.yml
+    always:
+     commands: |
+      yaml2xml -l 1 __BASENAME__.yml | rnv /usr/share/xml/docbook5/schema/rng/5.0/docbook.rnc
+
+   Postprocess:
+
+
+- XML version=1.0 encoding=utf-8:
+- DOCTYPE root=book:
+   entities:
+    - company "Acme Mc Carpenter, Inc"
+    - product "Data2any"
+#    - versionD2x "0.14.4"
+#    - versionY2x "0.0.4"
+#    - % isobox SYSTEM "isobox.ent" %isobox;
+    - ouml "&#246;"
+#    - boxdl "&#2510;"
+
+
+- book:
+  xmlns=http://docbook.org/ns/docbook:
+  xmlns:xi=http://www.w3.org/2001/XInclude:
+  xmlns:xl=http://www.w3.org/1999/xlink:
+#  version=5.0 xml:lang=en revisionflag=changed:
+  version=5.0 xml:lang=en:
+   - title: Using the Perl module Data2any
+   - info:
+      - author:
+         - personname:
+            - firstname: Marcel
+            - surname: Timmerman
+	 - email: mt1957@gmail.com
+      - address:
+         - city: Haarlem
+	 - country: Netherlands
+      - copyright:
+         - year: 2013
+	 - holder: Marcel Timmerman
+      - date: $date
+      - abstract:
+         - para: >
+	    &product; is capable of transforming an internally build data
+	    structure into xml after which it is possible to store it in a file
+	    or send it to any program for conversion or some other type of
+	    processor. 
+	 - para: Version of yaml2xml when book is written: $version_yaml2xml
+	 - para: Version of Data2any when book is written: $version_Data2any
+	 - para: Generated on date $date.
+
+   - dedication:
+      - para: >
+	 To my wife Juhi, who finds me too often behind the computer.
+
+
+   - !perl/Data2any::Xml::LinkFile
+      type: include
+      reference: book-preface.yml
+      document: 0	 
+
+   - !perl/Data2any::Xml::LinkFile
+      type: include
+      reference: book-chapter-intro-data.yml
+      document: 0
+
+   - !perl/Data2any::Xml::LinkFile
+      type: include
+      reference: book-chapter-yaml-code.yml
+      document: 0
+
+   - !perl/Data2any::Xml::LinkFile
+      type: include
+      reference: book-chapter-data-structure.yml
+      document: 0
+
+   - !perl/Data2any::Xml::LinkFile
+      type: include
+      reference: book-appendix-install.yml
+      document: 0
+
+
+   - index:
