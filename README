@@ -26,8 +26,13 @@ DEPENDENCIES
   Program and Modules
     perl                                     5.16.3    
     AppState                                 v0.4.15   
+    AppState::Ext::Constants                 v0.2.6    
+    HTTP::Headers                            6.05      
     Modern::Perl                             1.20140107
     Moose                                    2.1204    
+    Text::Tabs                               2013.0523 
+    YAML                                     0.90      
+    constant                                 1.27      
     namespace::autoclean                     0.15      
     version                                  0.9908    
 

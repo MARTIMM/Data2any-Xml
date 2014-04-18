@@ -32,7 +32,7 @@ sub process
 {
   my($self) = @_;
 
-  my $nd = $self->getDataItem('nodeData');
+  my $nd = $self->get_data_item('node_data');
   my $cfg = AppState->instance->get_app_object('Config');
 
   # Get and check type
@@ -51,7 +51,7 @@ fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
 EOIPSUM
 
-    $self->extendNodeTree([$ipsum1500]);
+    $self->extend_node_tree([$ipsum1500]);
   }
 
   else

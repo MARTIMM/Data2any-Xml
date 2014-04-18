@@ -6,12 +6,13 @@ require Module::Build;
 
 my $build = Module::Build->new
 ( module_name           => 'Data2any::Xml'
-, dist_name             => 'Data2any-Xml'
+, dist_name             => '.'
 , abstract              => 'Module to do something interresting'
 , author                => 'marcel <marcel@some-provider.com>'
 
 , license               => 'Perl_5'
 , create_licence        => 0            # License is generated independently
+, script_files          => 'script'
 
 , release_status        => 'stable'
 
@@ -25,8 +26,13 @@ my $build = Module::Build->new
 
 , requires =>
   { 'AppState'                                  => 'v0.4.15'
+  , 'AppState::Ext::Constants'                  => 'v0.2.6'
+  , 'HTTP::Headers'                             => '6.05'
   , 'Modern::Perl'                              => '1.20140107'
   , 'Moose'                                     => '2.1204'
+  , 'Text::Tabs'                                => '2013.0523'
+  , 'YAML'                                      => '0.90'
+  , 'constant'                                  => '1.27'
   , 'namespace::autoclean'                      => '0.15'
   , 'version'                                   => '0.9908'
   }

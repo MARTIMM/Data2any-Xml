@@ -3,14 +3,14 @@
 verbose = 4
 only = 1
 include = NamingConventions ClassHierarchies
-criticism-fatal = 1
 force = 0
+criticism-fatal = 1
 color = 1
 top = 50
 pager = less
 severity = 3
-allow-unsafe = 1
 theme = (pbp || security) && bugs
+allow-unsafe = 1
 exclude = Variables  Modules::RequirePackage
 
 ################################################################################
@@ -27,13 +27,13 @@ short_subroutine_statements = 5
 
 ################################################################################
 [Example::TestingAndDebugging::RequireUseStrict]
-arg2 = value2
 equivalent_modules = Modern::Perl
-arg1 = value1
+arg2 = value2
 set_themes = foo bar
+arg1 = value1
+severity = 1
 maximum_violations_per_document = 57
 add_themes = baz
-severity = 1
 
 ################################################################################
 [TestingAndDebugging::RequireUseStrict]

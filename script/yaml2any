@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 #
 use Modern::Perl;
 use namespace::autoclean;
@@ -213,7 +213,9 @@ if( !defined $filename )
 
 # Initialize module
 #
-my $data2any = Data2any->new( inputFile => $filename, dataFileType => 'Yaml');
+my $data2any = Data2any->new( input_file => $filename
+                            , data_file_type => 'Yaml'
+                            );
 # ==!!==
 #$data2any->translator('Xml');
 # ==!!==
@@ -221,7 +223,7 @@ my $data2any = Data2any->new( inputFile => $filename, dataFileType => 'Yaml');
 # And modify some object values
 #
 my $docnbr = $cmd->get_option('docnbr');
-$data2any->requestDocument($docnbr) if defined $docnbr;
+$data2any->request_document($docnbr) if defined $docnbr;
 
 my $logging = $cmd->get_option('logging');
 $data2any->logging($logging) if defined $logging;
@@ -233,12 +235,12 @@ $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
 # Transform steps to get results
 #
 $data2any->nodetreeFromData;
-$data2any->setDollarVar( version_yaml2xml => $VERSION);
+$data2any->set_dollar_var( version_yaml2any => $VERSION);
 $data2any->transform_nodetree;
 $data2any->postprocess;
 
 #-------------------------------------------------------------------------------
-
+#
 $self->leave;
 
 

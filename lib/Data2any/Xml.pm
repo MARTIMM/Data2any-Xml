@@ -264,7 +264,7 @@ sub atTheEndHandler
 
     elsif( $node->name eq 'SetVariables' )
     {
-      $data2any->setDollarVar( %{$node->attributes})
+      $data2any->set_dollar_var( %{$node->attributes})
         if ref $node->attributes eq 'HASH';
     }
 
@@ -509,34 +509,34 @@ sub doSubstituteDollarVars
           $value =~ m/\$(COUNT[_\w\d]+)=(\w+)/
         )
       {
-        $self->setDollarVar( $counterName => $counterValue);
+        $self->set_dollar_var( $counterName => $counterValue);
         $value =~ s/\$(COUNT[_\w\d]+)=(\w+)\s+//;
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\+\+/ )
       {
-        $counterValue =$self->getDollarVar($counterName);
+        $counterValue =$self->get_dollar_var($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\+\+/$counterValue/;
         $counterValue++;
-        $self->setDollarVar( $counterName => $counterValue);
+        $self->set_dollar_var( $counterName => $counterValue);
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\-\-/ )
       {
-        $counterValue =$self->getDollarVar($counterName);
+        $counterValue =$self->get_dollar_var($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\-\-/$counterValue/;
         $counterValue--;
-        $self->setDollarVar( $counterName => $counterValue);
+        $self->set_dollar_var( $counterName => $counterValue);
       }
 
     } while( defined $counterName );
 
 
 
-    foreach my $vn ($self->getDVarNames)
+    foreach my $vn ($self->get_dvar_names)
     {
       last unless $value =~ m/\$\{?[_\w\d]+/;
-      $value =~ s/\$\{?$vn\b\}?/$self->getDollarVar($vn)/ge;
+      $value =~ s/\$\{?$vn\b\}?/$self->get_dollar_var($vn)/ge;
     }
   }
 

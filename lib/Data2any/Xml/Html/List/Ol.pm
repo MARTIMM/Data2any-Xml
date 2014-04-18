@@ -110,7 +110,7 @@ sub process
 {
   my($self) = @_;
 
-  my $nd = $self->getDataItem('nodeData');
+  my $nd = $self->get_data_item('node_data');
 
   # Get the maximum level to have an ordered list. Above that it will become
   # unordered.
@@ -130,7 +130,7 @@ sub process
 
   # Start converting the list where result is planted on the parent node.
   #
-  my $tree = $self->convertList( $nd->{list}, $self->getDataItem('parentNode'));
+  my $tree = $self->convertList( $nd->{list}, $self->get_data_item('parent_node'));
 }
 
 ################################################################################
@@ -155,12 +155,12 @@ sub convertList
     my $listTreeNode;
     if( $self->level >= $self->maxLevel )
     {
-      $listTreeNode = $self->mkNode('ul');
+      $listTreeNode = $self->mk_node('ul');
     }
 
     else
     {
-      $listTreeNode = $self->mkNode('ol');
+      $listTreeNode = $self->mk_node('ol');
       $listTreeNode->addAttr( type => $self->levelType
                             , start => $self->levelStart
                             );
@@ -184,7 +184,7 @@ sub convertList
       $listValue //= '';
       $listTitle = "b[$listTitle]" if $self->level <= $self->maxBoldLevel;
 
-      my $liNode = $self->mkNode('li');
+      my $liNode = $self->mk_node('li');
       $liNode->parent($listTreeNode);
 
       if( ref $listValue eq 'ARRAY' )

@@ -1,15 +1,13 @@
 package Data2any::Xml::LinkFile;
 
-use version; our $VERSION = '' . version->parse("v0.0.10");
+use version; our $VERSION = '' . version->parse("v0.0.11");
 use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
 use Moose;
-extends 'Data2any::Tools';
+extends qw(Data2any::Tools);
 
 use AppState;
-use AppState::Ext::Constants;
-my $m = AppState::Ext::Constants->new;
 
 #-------------------------------------------------------------------------------
 has '+version' => ( default => $VERSION);
@@ -32,7 +30,7 @@ sub process
 {
   my($self) = @_;
 
-  my $nd = $self->getDataItem('nodeData');
+  my $nd = $self->get_data_item('node_data');
   my $cfg = AppState->instance->get_app_object('ConfigManager');
 
   # Get and check type
@@ -46,15 +44,15 @@ sub process
   {
     # Get the variables to include a file
     #
-    $self->setInputFile($nd->{reference});
-    $self->requestDocument($nd->{document});
-    $self->setDataFileType('Yaml');
+    $self->set_input_file($nd->{reference});
+    $self->request_document($nd->{document});
+    $self->set_data_file_type('Yaml');
 
     # Load the file, clone the data and extend the nodetree at the parentnode.
     #
-    $self->loadInputFile;
+    $self->load_input_file;
     my $copy = $cfg->cloneDocument;
-    $self->extendNodeTree($copy);
+    $self->extend_node_tree($copy);
   }
 
   # Include a document from the current file
@@ -65,15 +63,15 @@ sub process
     # structure used to communicate items from Data2xml and AppState::NodeTree
     # to the module.
     #
-    my $tbd = $self->getDataItem('tree_build_data');
-#say STDERR "Tbd: $tbd, if = $tbd->{inputFile}";
-    $self->setInputFile($tbd->{inputFile});
-    $self->setDataFileType('Yaml');
-    $self->requestDocument($nd->{document});
+    my $tbd = $self->get_data_item('tree_build_data');
+#say STDERR "Tbd: $tbd, if = $tbd->{input_file}";
+    $self->set_input_file($tbd->{input_file});
+    $self->set_data_file_type('Yaml');
+    $self->request_document($nd->{document});
 
-    $self->loadInputFile;
+    $self->load_input_file;
     my $copy = $cfg->cloneDocument;
-    $self->extendNodeTree($copy);
+    $self->extend_node_tree($copy);
   }
 
 #  # Generate a html reference to given url
@@ -86,19 +84,19 @@ sub process
 #    my $href = $nd->{reference};
 #    if( defined $href )
 #    {
-#      $aNode = $self->mkNode('a');
-#      $self->setDefaultAttributes( $aNode, 1);
-#      $aNode->parent($self->getDataItem('parentNode'));
+#      $aNode = $self->mk_node('a');
+#      $self->set_default_attributes( $aNode, 1);
+#      $aNode->parent($self->get_data_item('parent_node'));
 #      $aNode->addAttr( href => $href);
 #      $aNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
-##$self->setDollarVar( href => $href);
+##$self->set_dollar_var( href => $href);
 #
 #      # Is there an image ?
 #      #
 #      if( defined $nd->{image} and -r $nd->{image} )
 #      {
-#       my $imgNode = $self->mkNode('img');
-#       $self->setDefaultAttributes( $imgNode, 2);
+#       my $imgNode = $self->mk_node('img');
+#       $self->set_default_attributes( $imgNode, 2);
 #       $imgNode->parent($aNode);
 #       $imgNode->addAttr( src => $nd->{image});
 #       $imgNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
@@ -122,7 +120,7 @@ sub process
   {
     $self->log( [ "Type $type not supported"
                 , 'Type href only for html, see Data2xml::Html::LinkFile'
-                ], $m->M_ERROR);
+                ], $self->M_ERROR);
   }
 }
 

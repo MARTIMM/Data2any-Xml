@@ -32,7 +32,7 @@ sub process
 {
   my($self) = @_;
 
-  my $nd = $self->getDataItem('nodeData');
+  my $nd = $self->get_data_item('node_data');
   my $cfg = AppState->instance->get_app_object('Config');
 
   # Get and check type
@@ -50,19 +50,19 @@ sub process
     my $href = $nd->{reference};
     if( defined $href )
     {
-      $aNode = $self->mkNode('a');
-      $self->setDefaultAttributes( $aNode, 1);
-      $aNode->parent($self->getDataItem('parentNode'));
+      $aNode = $self->mk_node('a');
+      $self->set_default_attributes( $aNode, 1);
+      $aNode->parent($self->get_data_item('parent_node'));
       $aNode->addAttr( href => $href);
       $aNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
-#$self->setDollarVar( href => $href);
+#$self->set_dollar_var( href => $href);
 
       # Is there an image ?
       #
       if( defined $nd->{image} and -r $nd->{image} )
       {
-        my $imgNode = $self->mkNode('img');
-        $self->setDefaultAttributes( $imgNode, 2);
+        my $imgNode = $self->mk_node('img');
+        $self->set_default_attributes( $imgNode, 2);
         $imgNode->parent($aNode);
         $imgNode->addAttr( src => $nd->{image});
         $imgNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
