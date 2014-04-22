@@ -1,7 +1,7 @@
 package Data2xml::Html::Table::Log;
 use Modern::Perl;
 use Moose;
-extends 'Data2xml::Tools';
+extends 'Data2any::Aux::BlessedStructTools';
 
 #-------------------------------------------------------------------------------
 use YAML ();

@@ -42,11 +42,9 @@ lib/Data2any/Xml/Html/Table/.directory
 lib/Data2any/Xml/Html/Table/Log.pm
 lib/Data2any/Xml/Html/Table/ServerInfo.pm
 lib/Data2any/Xml/Html5/.directory
-lib/Data2any/Xml/LinkFile.pm
-lib/Data2any/Xml/LorumIpsum.pm
 lib/Data2any/Xml/Svg/.directory
 LICENSE_Perl_5
 MANIFEST
 README
-t/100-test.t
 script/yaml2any
+t/100-test.t

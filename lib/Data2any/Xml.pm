@@ -5,20 +5,23 @@
 package Data2any::Xml;
 
 use Modern::Perl;
-use version; our $VERSION = '' . version->parse('v0.1.0');
+use version; our $VERSION = '' . version->parse('v0.2.0');
 use 5.016003;
 
 use namespace::autoclean;
+#use utf8;
+#use feature 'unicode_strings';
+require Encode;
 
 use Moose;
 
-extends 'Data2any::TranslatorTools';
+extends 'Data2any::Aux::TranslatorTools';
 
 require HTTP::Headers;
 
 #-------------------------------------------------------------------------------
 #
-has '+version' =>       ( default => $VERSION);
+has '+version' => ( default => $VERSION);
 
 has substituteDollarVars =>
     ( is                => 'rw'
@@ -91,6 +94,146 @@ has resultText =>
       , modifyXml       => 'substr'
       , replaceXml      => 'replace'
       , lengthXml       => 'length'
+      }
+    );
+
+has parser =>
+    ( is                => 'ro'
+    , isa               => 'Parse::RecDescent'
+    , default           =>
+      sub
+      {
+        my($self) = @_;
+        $Data2xml::Xml::toolsAddress = $self;
+
+        my $grammar =<<'EOGRAMMAR';
+
+                { my( @ids, @text, @pieces, $inQuote);
+                  $inQuote = 0;
+                  @text = ();
+#say STDERR "Arg: $Data2xml::Xml::toolsAddress";
+                }
+
+# Start parsing here. Begin with skipping nothing and initialize some variables.
+# Then process the 'textItems' production. When that parses ok, return the
+# resulting text as an array reference to the caller.
+#
+textInit:       <skip: ''>
+                {
+                  $inQuote = 0;
+                  @text = ();
+                  1;
+                }
+
+                textItems
+                {
+                  $return = \@text;
+
+                  1;
+                }
+
+# Try shortCut1, word or other symbols zero, one or more times
+#
+textItems:      (shortCut1 | word | otherSymbols)(s?)
+
+# Shortcut1: id[text], Test for id and look in advance for the beginning bracket
+#
+shortCut1:      id ... '['
+                {
+                  if( $item[1] )
+                  {
+                    my $id = $item[1];
+                    push @ids, $item[1];
+
+                    # Pushing a reference => create new array and push ref of it
+                    #
+                    my @pt = @text;
+                    push @pieces, \@pt;
+                    @text = ();
+
+                    1;
+                  }
+
+                  else
+                  {
+                    undef;
+                  }
+                }
+
+                # The brackets and the content. The content is something which
+                # is the same as at the start. This will introduce nesting.
+                #
+                '[' textItems ']'
+                {
+                  my $id = pop @ids;
+                  my $t = pop @pieces;
+                  if( join( '', @text) )
+                  {
+#                   push @$t, "<$id>", @text, "</$id>";
+                    push @$t
+                       , $Data2xml::Xml::toolsAddress->rewriteShortcut
+                                           ( $id
+                                           , @text
+                                           );
+#say STDERR "RW 1: ", $Data2xml::Xml::toolsAddress->rewriteShortcut( $id, @text);
+                  }
+
+                  else
+                  {
+#                   push @$t, "<$id />";
+                    push @$t
+                       , $Data2xml::Xml::toolsAddress->rewriteShortcut($id)
+                       ;
+#say STDERR "RW 2: ", $Data2xml::Xml::toolsAddress->rewriteShortcut( $id, @text);
+                  }
+
+                  @text = @$t;
+
+                  1;
+                }
+
+# Test for the id. All letters and digits(exept for the first character) with
+# the following characters '_', ':' and '-'.
+#
+id:             /[A-Za-z\_\:\-][A-Za-z0-9\_\:\-]*/
+                {
+                  $return = $item[1];
+                  1;
+                }
+
+# A word is anything but brackets and spaces.
+#
+word:           /[^\[\]\s]+/
+                {
+                  push @text, $item[1];
+                  1;
+                }
+
+                # When there is a bracket following a non-word, treat this as
+                # just text.
+                | '['
+                {
+                  push @text, '[';
+                  1;
+                }
+
+                # Start all over to process the rest
+                #
+                textItems ']'
+                {
+                  push @text, ']';
+                  1;
+                }
+
+otherSymbols:   /[ \t\n\r\(\)]+/
+                {
+                  push @text, $item[1];
+                  1;
+                }
+
+EOGRAMMAR
+
+        return Parse::RecDescent->new($grammar);
       }
     );
 
@@ -236,7 +379,7 @@ sub atTheEndHandler
 
   elsif( ref($node) eq 'AppState::NodeTree::NodeText' )
   {
-    my $v = $self->convertValue($node->value);
+    my $v = Encode::decode( 'utf8', $self->convertValue($node->value));
 
     # Translate short written xml like b[...] or br[] into <b>...</b> or <br/>
     #
@@ -252,7 +395,7 @@ sub atTheEndHandler
 #    $v =~ s/^\n+//;
 #    $v =~ s/\n+$//;
 
-    $self->addToXml($v);
+    $self->addToXml(Encode::encode( 'utf8', $v));
   }
 
   elsif( ref($node) eq 'AppState::NodeTree::Node' )
@@ -421,10 +564,11 @@ sub mkXmlStartEndTag
 #
 sub rewriteShortcut
 {
-  my( $self, $id, $text) = @_;
+  my( $self, $id, @text) = @_;
 
-  return (defined $text and ref $text eq 'ARRAY')
-         ? ("<$id>", @$text, "</$id>")
+#say "RWSC: $id, @text";
+  return scalar(@text)
+         ? ("<$id>" . join( ' ', @text) . "</$id>")
          : ("<$id />")
          ;
 }
@@ -600,6 +744,13 @@ sub postprocess
 
 1;
 #-------------------------------------------------------------------------------
+# Documentation
+#
+
+=head1 NAME
+
+Data2any::Xml - Translator to transform node tree data into XML.
+
 
 
 __END__

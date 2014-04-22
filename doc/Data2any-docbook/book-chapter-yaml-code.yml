@@ -36,7 +36,7 @@
 
 
 
----
+#---
       - para:
 	 - figure floatstyle=left pgwide=0:
 	    - mediaobject:
@@ -50,8 +50,8 @@
 			- circle cx=150 cy=100 r=80 fill=green:
 			- text x=150 y=125 font-size=60:
 			  text-anchor=middle fill=white: SVG
-	 - !perl/Data2any::Xml::LorumIpsum
-	    type: 1500
+	 - !perl/Data2any::Any::LoremIpsum
+	    type: cheese-ipsum
 
 	 - sidebar:
 	    - PI:
@@ -70,9 +70,6 @@
 			- circle cx=150 cy=100 r=80 fill=green:
 			- text x=150 y=125 font-size=60:
 			  text-anchor=middle fill=white: SVG
-#	       - textobject:
-#		  - !perl/Data2any::Xml::LorumIpsum
-#		     type: 1500
 
 	 - sidebar:
 	    - PI:
@@ -80,37 +77,39 @@
 	       data:
 	        sidebar-width: 160px
 	        float-type: right
-	    - !perl/Data2any::Xml::LorumIpsum
-	       type: 1500
+	    - !perl/Data2any::Any::LoremIpsum
+	       type: standard-1500
 	    
 
 	 - note:
 	    - title: Note section
 	    - para:
-	       - !perl/Data2any::Xml::LorumIpsum
-		  type: 1500
+	       - !perl/Data2any::Any::LoremIpsum
+		  type: Cicero-45BC-1.10.32
 
 	 - caution:
 	    - title: Caution section
 	    - para:
-	       - !perl/Data2any::Xml::LorumIpsum
-		  type: 1500
+	       - !perl/Data2any::Any::LoremIpsum
+		  type: samuel-l-ipsum
 
 	 - tip:
 	    - title: Tip section
 	    - para:
-	       - !perl/Data2any::Xml::LorumIpsum
-		  type: 1500
+	       - !perl/Data2any::Any::LoremIpsum
+		  type: paragraphs
+                  size: 4
 
 	 - important:
 	    - title: Important section
 	    - para:
-	       - !perl/Data2any::Xml::LorumIpsum
-		  type: 1500
+	       - !perl/Data2any::Any::LoremIpsum
+		  type: veggie-ipsum
 
 	 - warning:
 	    - title: Warning section
 	    - para:
-	       - !perl/Data2any::Xml::LorumIpsum
-		  type: 1500
+	       - !perl/Data2any::Any::LoremIpsum
+		  type: words
+                  size: 5
 

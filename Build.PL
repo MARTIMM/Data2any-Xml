@@ -12,7 +12,6 @@ my $build = Module::Build->new
 
 , license               => 'Perl_5'
 , create_licence        => 0            # License is generated independently
-, script_files          => 'script'
 
 , release_status        => 'stable'
 
@@ -22,6 +21,7 @@ my $build = Module::Build->new
                            , show_count => 1
                            }
 , extra_manify_args     => { utf8 => 1 }
+, script_files          => 'script'
 
 
 , requires =>

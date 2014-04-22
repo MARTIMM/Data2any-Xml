@@ -4,8 +4,6 @@
 .directory
 MYMETA*
 MANIFEST.SKIP
-MANIFEST
-Build.PL
 blib
 _build
 Build

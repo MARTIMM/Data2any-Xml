@@ -22,13 +22,13 @@
       <year>2013</year>
       <holder>Marcel Timmerman</holder>
     </copyright>
-    <date>2014-01-27</date>
+    <date>2014-04-22</date>
     <abstract>
       <para>&product; is capable of transforming an internally build data structure into xml after which it is possible to store it in a file or send it to any program for conversion or some other type of processor. 
 </para>
-      <para>Version of yaml2xml when book is written: v0.0.4</para>
-      <para>Version of Data2any when book is written: $version_Data2any</para>
-      <para>Generated on date 2014-01-27.</para>
+      <para>Version of yaml2any when book is written: v0.0.5</para>
+      <para>Version of Data2any when book is written: v0.1.1</para>
+      <para>Generated on date 2014-04-22.</para>
     </abstract>
   </info>
   <dedication>
@@ -37,17 +37,17 @@
   </dedication>
   <preface>
     <title>Introduction</title>
-    <para>Welcome to <emphasis/>. Data2any is a Perl module to convert data structures into XML. This book will explain all intricasies of the data structure needed by the module and to explain how to write a plugin. Also, explanation of the data structure in Yaml format is given.
+    <para>Welcome to <emphasis>Data2any</emphasis>. Data2any is a Perl module to convert data structures into XML. This book will explain all intricasies of the data structure needed by the module and to explain how to write a plugin. Also, explanation of the data structure in Yaml format is given.
 </para>
     <section>
       <title>Who this book is for</title>
-      <para>There are plenty XML aware editors around with automatic coloring and autocompletion of words to name a few items such editors make use of. So why bother? Well, this book is for users who want to create XML without thinking about the syntax all the time. While this module will solve this for you, it is not a very easy task. The people who aren't strong in programming or programming Perl in particular. For them there is the program <filename/> and they only need to study the information of the YAML data description language and the installed plugins.
+      <para>There are plenty XML aware editors around with automatic coloring and autocompletion of words to name a few items such editors make use of. So why bother? Well, this book is for users who want to create XML without thinking about the syntax all the time. While this module will solve this for you, it is not a very easy task. The people who aren't strong in programming or programming Perl in particular. For them there is the program <filename>yaml2xml</filename> and they only need to study the information of the YAML data description language and the installed plugins.
 </para>
       <para>Some more reasons to use the module and/or program are itemized below:
 </para>
       <itemizedlist>
         <listitem>
-          <para>When using YAML as input for the program <filename/> a nice input format can give a better view of your text than in full xml code.
+          <para>When using YAML as input for the program <filename>yaml2xml</filename> a nice input format can give a better view of your text than in full xml code.
 </para>
         </listitem>
         <listitem>
@@ -85,7 +85,7 @@
 </para>
         </listitem>
         <listitem>
-          <para>Plugins can also help to devide a big document into smaller pieces to make the whole more managable. The pieces can then be maintained by different authors. With some xml processors like <filename/> it is possible to use xincludes which can do the same.
+          <para>Plugins can also help to devide a big document into smaller pieces to make the whole more managable. The pieces can then be maintained by different authors. With some xml processors like <filename>xsltporoc</filename> it is possible to use xincludes which can do the same.
 </para>
         </listitem>
         <listitem>
@@ -96,17 +96,17 @@
     </section>
     <section>
       <title>Structure of the book</title>
-      <para>This book will make its introduction by starting with an example of the Perl code needed to do a minimal conversion. Then makes a comparison with a similar datastructure defined in yaml and introduces the conversion program <filename/>. Then a lot will be explained using Yaml before coming back to the Perl data structures. These will be shown side by side with the yaml code. Besides converting, the program is capable to send the results to other agents like xslt processors or just to file or the standard output.
+      <para>This book will make its introduction by starting with an example of the Perl code needed to do a minimal conversion. Then makes a comparison with a similar datastructure defined in yaml and introduces the conversion program <filename>yaml2xml</filename>. Then a lot will be explained using Yaml before coming back to the Perl data structures. These will be shown side by side with the yaml code. Besides converting, the program is capable to send the results to other agents like xslt processors or just to file or the standard output.
 </para>
       <itemizedlist>
         <listitem>
           <para>Chapter 1, Introducing Data2any</para>
-          <para>This chapter introduces you to the module with a simple <phrase/> example showing the data structure and its result. The same example will then also be compared with a representable piece of yaml code and the use of <filename/>.
+          <para>This chapter introduces you to the module with a simple <phrase>"Hello   World"</phrase> example showing the data structure and its result. The same example will then also be compared with a representable piece of yaml code and the use of <filename>yaml2xml</filename>.
 </para>
         </listitem>
         <listitem>
           <para>Chapter 2, How to use Yaml</para>
-          <para>This chapter will show you how to write Yaml code which the program <filename/> will convert to XML. A full description of all the possebilities are given here.
+          <para>This chapter will show you how to write Yaml code which the program <filename>yaml2xml</filename> will convert to XML. A full description of all the possebilities are given here.
 </para>
         </listitem>
         <listitem>
@@ -143,15 +143,14 @@
       <para>Lorem ipsum</para>
       <programlisting xml:id="ex.simpleprog.1"><![CDATA[
 use Modern::Perl;
-require Data2any;
-]]><co xml:id="co.import.module"/><![CDATA[
+require Data2any; ]]><co xml:id="co.import.module"/><![CDATA[
 
 my $data = ]]><co xml:id="co.data.contruction"/><![CDATA[
 [[{ DOCTYPE => { root => 'html'}}
  ,{ html =>
     [{ body => 
        [{ 'h1 id=hw class=helloWorld' => 'Hello World Example'}
-       ,{ p => 'Hello World, this is <b /> easy! Wrote this'
+       ,{ p => 'Hello World, this is <b>real</b> easy! Wrote this'
              . ' on $date at $time!'
         }
        ]
@@ -161,19 +160,16 @@ my $data = ]]><co xml:id="co.data.contruction"/><![CDATA[
  ]
 ];
 
-my $d2xml = Data2any->new( inputData => $data
-                         , dataLabel => 'internal'
-                         , logging => 1
-                         , requestDocument => 0
-                         );
-]]><co xml:id="co.module.init"/><![CDATA[
+my $d2xml = Data2any->new ]]><co xml:id="co.module.init"/><![CDATA[
+   ( inputData => $data
+   , dataLabel => 'internal'
+   , logging => 1
+   , requestDocument => 0
+   ); 
 
-$d2xml->nodetreeFromData;
-]]><co xml:id="co.translate.1"/><![CDATA[
-$d2xml->xmlFromNodetree;
-]]><co xml:id="co.translate.2"/><![CDATA[
-$d2xml->postprocess;
-]]><co xml:id="co.translate.3"/></programlisting>
+$d2xml->nodetreeFromData; ]]><co xml:id="co.translate.1"/><![CDATA[
+$d2xml->xmlFromNodetree; ]]><co xml:id="co.translate.2"/><![CDATA[
+$d2xml->postprocess; ]]><co xml:id="co.translate.3"/></programlisting>
       <calloutlist>
         <callout arearefs="co.import.module">
           <para>An important ingredient, import the module Data2any. In Perl this is nessesary to get the module code known to the program.
@@ -219,9 +215,48 @@ $d2xml->postprocess;
       <info>
         <title>Short introduction to YAML</title>
       </info>
-      <para>YAML or <quote/> (<trademark/>)<footnote><para>Manual can be found <link xl:href="http://www.yaml.org/spec/1.2/spec.html">here</link></para></footnote>is a data description language designed by Oren Ben-Kiki, Clark Evens  and Ingy d&ouml;t Net. The purpose of this language is to describe your data after which a program loads it using a Perl  module. Other languages like Ruby and Python also have modules to read YAML. Data2any uses YAML and translates it to xml. Because of this the program will use only a subset of YAML and the definitions must be given in a specific way and order.
+      <para>YAML or <quote>YAML   Ain't   Markup   Language</quote> (<trademark>YAML</trademark>)<footnote><para>Manual can be found <link xl:href="http://www.yaml.org/spec/1.2/spec.html">here</link></para></footnote>is a data description language designed by Oren Ben-Kiki, Clark Evens  and Ingy d&ouml;t Net. The purpose of this language is to describe your data after which a program loads it using a Perl  module. Other languages like Ruby and Python also have modules to read YAML. Data2any uses YAML and translates it to xml. Because of this the program will use only a subset of YAML and the definitions must be given in a specific way and order.
 </para>
       <para/>
+      <para><figure floatstyle="left" pgwide="0"><mediaobject><imageobject><imagedata format="SVG" width="75" align="right"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseprofile="full" width="300" height="200"><rect width="300" height="200" fill="red"/><circle cx="150" cy="100" r="80" fill="green"/><text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text></svg></imagedata></imageobject></mediaobject></figure>I love cheese, especially airedale queso. Cheese and biscuits halloumi
+cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow
+port-salut camembert de normandie macaroni cheese feta who moved my cheese
+babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue
+castello caerphilly chalk and cheese. Lancashire.
+<sidebar><?dbfo float-type='right' sidebar-width='160px' ?><mediaobject><imageobject><imagedata format="SVG" width="75"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseprofile="full" width="300" height="200"><rect width="300" height="200" fill="red"/><circle cx="150" cy="100" r="80" fill="green"/><text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text></svg></imagedata></imageobject></mediaobject></sidebar><sidebar><?dbfo float-type='right' sidebar-width='160px' ?>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
+</sidebar><note><title>Note section</title><para>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
+magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit
+esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+voluptas nulla pariatur?
+</para></note><caution><title>Caution section</title><para>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is
+advertised as the most popular gun in American crime. Do you believe that shit?
+It actually says that in the little book that comes with it: the most popular
+gun in American crime. Like they're actually proud of that shit.
+</para></caution><tip><title>Tip section</title><para>Incidunt veniam consequuntur possimus itaque aliquid eaque pariatur eos. Ratione itaque quaerat culpa. Saepe provident ipsa voluptate voluptas molestiae. Totam reiciendis repellendus quaerat fugit atque ut. Cum repudiandae recusandae amet pariatur expedita. Voluptatem in libero dolores.
+
+Nostrum ad voluptas pariatur minus maiores quibusdam odit. Rem dolorum eos unde hic. Maxime et ea exercitationem doloribus qui. Ea rerum aut modi ipsam rem minus fugiat sed.
+
+Laboriosam et ex dicta in in dolorem. Nesciunt quidem molestiae nihil vel architecto debitis voluptatum. Aspernatur tempora possimus omnis. Sit voluptatem rerum hic consequatur cumque. Voluptatem maxime quaerat nihil vel voluptatibus quas. Reprehenderit dolorem tempora tempora vel earum possimus unde incidunt.
+
+Quo eius et ea. Eveniet aspernatur voluptatem sint sint odit inventore. Et doloremque quis occaecati. Voluptas blanditiis distinctio mollitia eos quia.</para></tip><important><title>Important section</title><para>Veggies sunt bona vobis, proinde vos postulo esse magis grape pea sprouts
+horseradish courgette maize spinach prairie turnip jicama coriander quandong
+gourd broccoli seakale gumbo. Parsley corn lentil zucchini radicchio maize
+horseradish courgette maize spinach prairie turnip jícama coriander quandong
+burdock avocado sea lettuce. Garbanzo tigernut earthnut pea fennel.
+</para></important><warning><title>Warning section</title><para>eos quaerat praesentium suscipit magnam</para></warning></para>
     </section>
   </chapter>
   <chapter audience="programmers">

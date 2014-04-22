@@ -1,11 +1,11 @@
-package Data2xml::Html::LinkFile;
+package Data2any::Xml::Html::LinkFile;
 
 use version; our $VERSION = '' . version->parse("v0.0.10");
 use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
 use Moose;
-extends 'Data2xml::Tools';
+extends 'Data2any::Aux::BlessedStructTools';
 
 use AppState;
 use AppState::Ext::Constants;
@@ -85,9 +85,8 @@ sub process
   else
   {
     $self->log( [ "Type $type not supported."
-                , "Types include and includeThis not only for html."
-                , "Look for Data2xml::Xml::LinkFile"
-                ], $m->M_ERROR);
+                ], $m->M_ERROR
+              );
   }
 }
 
@@ -103,7 +102,7 @@ __END__
 
 =head1 NAME
 
-Data2xml::Html::LinkFile - Generate html code to make a link reference
+Data2any::Xml::Html::LinkFile - Generate html code to make a link reference
 
 =head1 SYNOPSIS
 
@@ -111,7 +110,7 @@ Data2xml::Html::LinkFile - Generate html code to make a link reference
 
 =item * Example 1
 
-  - !perl/Data2xml::Html::LinkFile
+  - !perl/Data2any::Xml::Html::LinkFile
      type: href
      alttext: file manager
      image: file_manager.png
@@ -119,7 +118,7 @@ Data2xml::Html::LinkFile - Generate html code to make a link reference
 
 =item * Example 2
 
-  - !perl/Data2xml::Html::LinkFile
+  - !perl/Data2any::Xml::Html::LinkFile
      type: href
      text: google
      reference: http://google.com

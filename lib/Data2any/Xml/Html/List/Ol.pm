@@ -9,7 +9,7 @@ use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
 use Moose;
-extends 'Data2xml::Tools';
+extends 'Data2any::Aux::BlessedStructTools';
 
 use AppState;
 use AppState::Ext::Constants;
