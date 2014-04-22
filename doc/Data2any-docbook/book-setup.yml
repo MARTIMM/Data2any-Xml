@@ -48,7 +48,10 @@
     - product "Data2any"
 #    - versionD2x "0.14.4"
 #    - versionY2x "0.0.4"
-#    - % isobox SYSTEM "isobox.ent" %isobox;
+    - % isoamsa SYSTEM "Entities/isoamsa.ent"
+    - %isoamsa;
+    - % isoamsb SYSTEM "Entities/isoamsb.ent"
+    - %isoamsb;
     - ouml "&#246;"
 #    - boxdl "&#2510;"
 

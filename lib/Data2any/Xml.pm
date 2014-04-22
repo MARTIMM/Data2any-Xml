@@ -469,9 +469,20 @@ sub atTheEndHandler
       if( defined $entities and ref $entities eq 'ARRAY' )
       {
         $self->addToXml("[\n");
+
+        # Go through each of the declarations
+        #
         foreach my $e (@$entities)
         {
-          $self->addToXml("<!ENTITY $e>\n");
+          if( $e =~ m/%[^\s;]+;/ )
+          {
+            $self->addToXml("$e\n");
+          }
+          
+          else
+          {
+            $self->addToXml("<!ENTITY $e>\n");
+          }
         }
 
         $self->addToXml("]");
