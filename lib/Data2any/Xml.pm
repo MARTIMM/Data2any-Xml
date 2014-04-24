@@ -5,7 +5,7 @@
 package Data2any::Xml;
 
 use Modern::Perl;
-use version; our $VERSION = '' . version->parse('v0.2.0');
+use version; our $VERSION = '' . version->parse('v0.2.1');
 use 5.016003;
 
 use namespace::autoclean;
@@ -379,7 +379,7 @@ sub atTheEndHandler
 
   elsif( ref($node) eq 'AppState::NodeTree::NodeText' )
   {
-    my $v = Encode::decode( 'utf8', $self->convertValue($node->value));
+    my $v = Encode::decode( 'UTF-8', $self->convertValue($node->value));
 
     # Translate short written xml like b[...] or br[] into <b>...</b> or <br/>
     #
@@ -395,7 +395,7 @@ sub atTheEndHandler
 #    $v =~ s/^\n+//;
 #    $v =~ s/\n+$//;
 
-    $self->addToXml(Encode::encode( 'utf8', $v));
+    $self->addToXml(Encode::encode( 'UTF-8', $v));
   }
 
   elsif( ref($node) eq 'AppState::NodeTree::Node' )
@@ -629,7 +629,7 @@ sub convertValue
 
     # Protect first any user written symbol entities
     #
-    $value =~ s/\&(\w+);/__|$1|__/g;
+    $value =~ s/\&(\w+|#x[0-9A-F]+|#[0-9]+);/__|$1|__/g;
 
     # Convert any characters
     #
@@ -637,7 +637,7 @@ sub convertValue
 
     # Convert the protected entities back
     #
-    $value =~ s/__\|(\w+)\|__/\&$1;/g;
+    $value =~ s/__\|(\w+|#x[0-9A-F]+|#[0-9]+)\|__/\&$1;/g;
 
 #  $value = XML::Quote::xml_quote($value);
   }

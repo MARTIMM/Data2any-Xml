@@ -48,10 +48,8 @@
     - product "Data2any"
 #    - versionD2x "0.14.4"
 #    - versionY2x "0.0.4"
-    - % isoamsa SYSTEM "Entities/isoamsa.ent"
-    - %isoamsa;
-    - % isoamsb SYSTEM "Entities/isoamsb.ent"
-    - %isoamsb;
+    - % isopub SYSTEM "Entities/isopub.ent"
+    - %isopub;
     - ouml "&#246;"
 #    - boxdl "&#2510;"
 
@@ -89,7 +87,8 @@
    - dedication:
       - para: >
 	 To my wife Juhi, who finds me too often behind the computer.
-
+         &blk12; &bull; &check; &female; &hellip;
+         &#x2026;
 
    - !perl/Data2any::Any::IncludeDocument
       type: include
