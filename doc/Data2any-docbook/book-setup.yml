@@ -11,12 +11,15 @@
 ################################################################################
 # 
 - DocumentControl:
-   Translator: Xml
+#   Translator: Xml
 
    SendTo:
     xml: '| xmllint --format - > Data2any.xml'
     fo: '| xsltproc --encoding utf-8 --xinclude book-stylesheet.xsl - > Data2any.fo'
     fop: '| xsltproc --encoding utf-8 --xinclude book-stylesheet.xsl - | fop - Data2any.pdf'
+    xxep: |
+#     | cat
+     | xep -xml - -xsl book-stylesheet.xsl -param abc=def -pdf Data2any.pdf
     xep: |
      | xsltproc --encoding utf-8 --xinclude book-stylesheet.xsl -
      | xep -fo - -pdf Data2any.pdf

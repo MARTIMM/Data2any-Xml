@@ -55,7 +55,6 @@ sub process
       $aNode->parent($self->get_data_item('parent_node'));
       $aNode->addAttr( href => $href);
       $aNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
-#$self->set_dollar_var( href => $href);
 
       # Is there an image ?
       #

@@ -14,18 +14,25 @@ use 5.016003;
 # Temporary solution to use lib locally before install
 # and to let apache look into my libraries.
 #
-use lib qw( lib ../../lib
-            /home/marcel/Software/lib/perl5
-            /home/marcel/Software/lib64/perl5
-          );
+#use lib qw( lib ../../lib
+#            /home/marcel/Software/lib/perl5
+#            /home/marcel/Software/lib64/perl5
+#          );
 
 # Temporary solution to let apache look into my libraries.
 #
 #use lib qw( /home/marcel/Software/lib/perl5 /home/marcel/Software/lib64/perl5);
 require Data2any;
+require Data2any::Aux::GeneralTools;
 
 #-------------------------------------------------------------------------------
 #
+has gtls =>
+    ( is                => 'ro'
+    , isa               => 'Data2any::Aux::GeneralTools'
+    , default           => sub { return Data2any::Aux::GeneralTools->new; }
+    );
+
 has description =>
     ( is		=> 'ro'
     , isa		=> 'Str'
@@ -216,17 +223,18 @@ if( !defined $filename )
 my $data2any = Data2any->new( input_file => $filename
                             , data_file_type => 'Yaml'
                             );
+
+my $logging = $cmd->get_option('logging');
+$data2any->logging($logging) if defined $logging;
+
 # ==!!==
-#$data2any->translator('Xml');
+$data2any->translator('Xml');
 # ==!!==
 
 # And modify some object values
 #
 my $docnbr = $cmd->get_option('docnbr');
 $data2any->request_document($docnbr) if defined $docnbr;
-
-my $logging = $cmd->get_option('logging');
-$data2any->logging($logging) if defined $logging;
 
 my $sendToSelect = $cmd->get_option('sendToSelect');
 $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
@@ -235,7 +243,7 @@ $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
 # Transform steps to get results
 #
 $data2any->nodetreeFromData;
-$data2any->set_dollar_var( version_yaml2any => $VERSION);
+$self->gtls->set_dollar_var( version_yaml2any => $VERSION);
 $data2any->transform_nodetree;
 $data2any->postprocess;
 

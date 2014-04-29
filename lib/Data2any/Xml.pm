@@ -9,19 +9,26 @@ use version; our $VERSION = '' . version->parse('v0.2.1');
 use 5.016003;
 
 use namespace::autoclean;
-#use utf8;
-#use feature 'unicode_strings';
-require Encode;
 
 use Moose;
 
-extends 'Data2any::Aux::TranslatorTools';
+extends 'AppState::Ext::Constants';
 
+require Encode;
 require HTTP::Headers;
+require Data2any::Aux::GeneralTools;
+
+use Parse::RecDescent;
+$::RD_HINT = 1;
+my $toolsAddress = sub { return ''; };
 
 #-------------------------------------------------------------------------------
 #
-has '+version' => ( default => $VERSION);
+has _gtls =>
+    ( is                => 'ro'
+    , isa               => 'Data2any::Aux::GeneralTools'
+    , default           => sub { return Data2any::Aux::GeneralTools->new; }
+    );
 
 has substituteDollarVars =>
     ( is                => 'rw'
@@ -407,7 +414,7 @@ sub atTheEndHandler
 
     elsif( $node->name eq 'SetVariables' )
     {
-      $data2any->set_dollar_var( %{$node->attributes})
+      $self->_gtls->set_dollar_var( %{$node->attributes})
         if ref $node->attributes eq 'HASH';
     }
 
@@ -664,34 +671,34 @@ sub doSubstituteDollarVars
           $value =~ m/\$(COUNT[_\w\d]+)=(\w+)/
         )
       {
-        $self->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_dollar_var( $counterName => $counterValue);
         $value =~ s/\$(COUNT[_\w\d]+)=(\w+)\s+//;
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\+\+/ )
       {
-        $counterValue =$self->get_dollar_var($counterName);
+        $counterValue =$self->_gtls->get_dollar_var($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\+\+/$counterValue/;
         $counterValue++;
-        $self->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_dollar_var( $counterName => $counterValue);
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\-\-/ )
       {
-        $counterValue =$self->get_dollar_var($counterName);
+        $counterValue =$self->_gtls->get_dollar_var($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\-\-/$counterValue/;
         $counterValue--;
-        $self->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_dollar_var( $counterName => $counterValue);
       }
 
     } while( defined $counterName );
 
 
 
-    foreach my $vn ($self->get_dvar_names)
+    foreach my $vn ($self->_gtls->get_dvar_names)
     {
       last unless $value =~ m/\$\{?[_\w\d]+/;
-      $value =~ s/\$\{?$vn\b\}?/$self->get_dollar_var($vn)/ge;
+      $value =~ s/\$\{?$vn\b\}?/$self->_gtls->get_dollar_var($vn)/ge;
     }
   }
 
