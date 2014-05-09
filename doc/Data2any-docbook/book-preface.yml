@@ -56,14 +56,14 @@
 	       the tag doesn't need any attributes.
 	    - Shortcuts parse=1:
 	 - listitem:
-	    - DollarVars substitute=0:
+	    - Variables substitute=0:
 	    - para: >
 	       Use of preset variables such as $time and $date are nice to
 	       make your document a bit more dynamic. The variables are set by
 	       the module for later use. It is possible to set new variables at
 	       the start of the document, in the text and in the plugins code.
 	       There are also special variables called counters.
-	    - DollarVars substitute=1:
+	    - Variables substitute=1:
 	 - listitem:
 	    - para: >
 	       Use of plugins can make tedious work simple. Take for example an

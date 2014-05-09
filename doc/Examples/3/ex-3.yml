@@ -1,0 +1,78 @@
+#!/usr/bin/env yaml2any
+#
+---
+#-------------------------------------------------------------------------------
+# Document 0, The document to start with.
+#
+- DocumentControl:
+   Translator: Xml
+
+   SendTo:
+    # ex-3.yml -s cat
+    #
+    cat: '| cat > __BASENAME__.html'
+
+    # ex-3.yml -s xml
+    #
+    xml: |
+     | xmllint --format -
+     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
+
+    # ex-3.yml -s wk
+    #
+    # Stream the data directly to wkhtmltopdf.
+    #
+    wk: '| wkhtmltopdf - __BASENAME__.pdf'
+
+    # ex-3.yml -s wk2
+    #
+    # xmllint formats the file nicely treating it however as an xml file
+    # causing it to be prefixed with an xml prelude. Sed is used to remove
+    # that prelude. If not, the program wkhtmltopdf will not function
+    # properly.
+    #
+    wk2: |
+     | xmllint --format - 
+     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
+     ; wkhtmltopdf __BASENAME__.html __BASENAME__.pdf
+
+#-------------------------------------------------------------------------------
+# html 5. Example using javascript library d3
+#
+- Shortcuts parse=off:
+- DOCTYPE root=html:
+- html class=no-js:
+   - head:
+      - meta charset=utf-8:
+      - meta http-equiv=X-UA-Compatible:
+         content: IE=edge,chrome=1
+      - title: Example 3, Sara Soueidan, shaped text
+      - meta name=description content="":
+      - meta name=viewport:
+         content: width=device-width
+
+      # Include the stylesheets from document 1
+      #
+      - link rel=stylesheet type=text/css:
+         href: http://localhost/I/Css/normalize.css
+
+      - link rel=stylesheet type=text/css:
+         href: http://localhost/I/Css/css-shapes-main.css
+
+      - link rel=stylesheet type=text/css:
+         href: http://fonts.googleapis.com/css?family=Nunito:300
+
+      - link rel=stylesheet type=text/css:
+         href: http://fonts.googleapis.com/css?family=UnifrakturMaguntia
+
+
+   - body:
+      - Shortcuts parse=on:
+      - div class=container:
+         - p:
+            - !perl/Data2any::Any::LoremIpsum
+               type: cupcake-ipsum
+
+
+
+#-------------------------------------------------------------------------------

@@ -243,7 +243,7 @@ $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
 # Transform steps to get results
 #
 $data2any->nodetreeFromData;
-$self->gtls->set_dollar_var( version_yaml2any => $VERSION);
+$self->gtls->set_variables( version_yaml2any => $VERSION);
 $data2any->transform_nodetree;
 $data2any->postprocess;
 

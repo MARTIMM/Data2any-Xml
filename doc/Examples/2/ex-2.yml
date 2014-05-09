@@ -1,0 +1,119 @@
+#!/usr/bin/env yaml2any
+#
+---
+#-------------------------------------------------------------------------------
+# Document 0, The document to start with.
+#
+- DocumentControl:
+   Translator: Xml
+
+   SendTo:
+    # ex-2.yml -s cat
+    #
+    cat: '| cat > __BASENAME__.html'
+
+    # ex-2.yml -s xml
+    #
+    xml: |
+     | xmllint --format -
+     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
+
+    # ex-2.yml -s wk
+    #
+    # Stream the data directly to wkhtmltopdf.
+    #
+    wk: '| wkhtmltopdf - __BASENAME__.pdf'
+
+    # ex-2.yml -s wk2
+    #
+    # xmllint formats the file nicely treating it however as an xml file
+    # causing it to be prefixed with an xml prelude. Sed is used to remove
+    # that prelude. If not, the program wkhtmltopdf will not function
+    # properly.
+    #
+    wk2: |
+     | xmllint --format - 
+     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
+     ; wkhtmltopdf __BASENAME__.html __BASENAME__.pdf
+
+#-------------------------------------------------------------------------------
+# html 5. Example using javascript library d3
+#
+- DOCTYPE root=html:
+- html lang=en-US dir=ltr:
+   - head:
+      - meta charset=utf-8:
+      - title: Example 2, D3 javascript and SVG.
+      - script type=text/javascript src=http://localhost/Javascript/D3/d3.v3.js: |
+
+      # Include the javascript into the document
+      #
+      - !perl/Data2any::Any::IncludeDocument
+         type: includeThis
+	 document: 2
+
+      # Include the stylesheets from document 1
+      #
+      - !perl/Data2any::Any::IncludeDocument
+         type: includeThis
+         document: 1
+
+   - body:
+      - div id=viz:
+
+#-------------------------------------------------------------------------------
+---
+# Document 1, Css3 stylesheet
+#
+- style: >
+
+   /* These are styles for html
+   */
+   #viz
+   {
+     background:	yellow;
+     color:		blue;
+   }
+
+   /* These are styles for svg
+   */
+   circle
+   {
+     stroke:		red;
+     stroke-width:	5;
+     fill:		orange;
+   }
+
+#-------------------------------------------------------------------------------
+---
+# Document 2, Javascript
+#
+- script: |
+
+   function f0()
+   {
+     var sampleSVG = d3.select("#viz")
+   		       .append('svg')
+		       .attr( 'width', '100px')
+		       .attr( 'height', '100px');
+
+     sampleSVG.append("circle")
+              .attr( 'class', "circle")
+#	      .attr( 'fill', 'blue')
+#	      .attr( 'stroke', 'orange')
+	      .attr( "r", '40px')
+              .attr( "cx", '50px')
+              .attr( "cy", '50px');
+
+     var p = d3.select('#viz')
+               .append('p')
+	       .text('Dat is het dus');
+
+#     console.log(d3.select("#viz").childNodes);
+   }
+
+   // Javascript using global objects
+   //
+   window.onload = f0;
+
+   // console.log(window.onload);

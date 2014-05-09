@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example 4, Html5 and Css styling.</title>
+    <script type="text/javascript" src="http://localhost/I/Javascript/D3/d3.v3.js">
+</script>
+    <script>
+function f0()
+{
+  var sampleSVG = d3.select("#viz")
+                    .append('svg')
+                    .attr( 'width', '100px')
+                    .attr( 'height', '100px');
+
+  sampleSVG.append("circle")
+           .attr( 'class', "circle")
+           .attr( "r", '40px')
+           .attr( "cx", '50px')
+           .attr( "cy", '50px');
+
+  var p = d3.select('#viz')
+            .append('p')
+            .text('Dat is het dus');
+
+}
+
+// Javascript using global objects
+//
+window.onload = f0;
+
+// console.log(window.onload);
+</script>
+    <style>
+/* These are styles for html */
+/* http://en.wikipedia.org/wiki/Paper_size */ .A4-Paper { width:             210mm;
+  height:            297mm;
+  min-width:         210mm;
+  min-height:        297mm;
+  padding:           5mm;
+  margin:            0;
+  border-style:      solid;
+  border-width:      1px;
+  background-color:  #fefffe;
+}
+.fit { width:             100vw;
+  height:            100vh;
+}
+#viz {
+  background:        yellow;
+  color:             blue;
+}
+/* These are styles for svg */ circle {
+  stroke:            red;
+  stroke-width:      5;
+  fill:              orange;
+}
+</style>
+  </head>
+  <body>
+    <div class="A4-Paper">
+      <div class="fit" id="viz"/>
+    </div>
+    <div class="A4-Paper">
+      <div class="fit">
+        <p>Een ander stukje tekst</p>
+      </div>
+    </div>
+  </body>
+</html>

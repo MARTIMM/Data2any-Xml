@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example 2, D3 javascript and SVG.</title>
+    <script type="text/javascript" src="http://localhost/Javascript/D3/d3.v3.js">
+</script>
+    <script>
+function f0()
+{
+  var sampleSVG = d3.select("#viz")
+                    .append('svg')
+                    .attr( 'width', '100px')
+                    .attr( 'height', '100px');
+  console.log(sampleSVG);
+
+  sampleSVG.append("circle")
+           .attr( 'class', "circle")
+           .attr( "r", '40px')
+           .attr( "cx", '50px')
+           .attr( "cy", '50px');
+
+
+
+}
+
+// Javascript using global objects
+//
+window.onload = f0;
+
+// console.log(window.onload);
+</script>
+    <style>
+#viz {
+  background:        yellow;
+  color:             blue;
+}
+circle {
+  stroke:            red;
+  stroke-width:      5;
+  fill:              yellow;
+}
+</style>
+  </head>
+  <body>
+    <div id="viz"/>
+  </body>
+</html>

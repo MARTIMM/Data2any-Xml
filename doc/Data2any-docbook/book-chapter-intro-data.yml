@@ -15,7 +15,7 @@
       - title: Simple example
       - para: Lorem ipsum
 
-      - DollarVars substitute=0:
+      - Variables substitute=0:
       - programlisting xml:id=ex.simpleprog.1:
 #         - PI:
 #	    target: dbfo
@@ -109,7 +109,7 @@
 	       The last step is to add some extra's like a httpheader, or to
 	       send the xml to other processors for translation or storage.
 
-      - DollarVars substitute=1:
+      - Variables substitute=1:
 
       - para:
 	 - Which will produce the following

@@ -19,7 +19,7 @@
 	 prepared after which the initialization, the conversion and generation
 	 of XML will take place. 
 
-      - DollarVars substitute=0:
+      - Variables substitute=0:
       - Shortcuts parse=0:
       - programlisting: |
 	 # Importing modules
@@ -40,7 +40,7 @@
 	 $d2xml->nodetreeFromData;
 	 $d2xml->xmlFromNodetree;	 
 	 $d2xml->postprocess;
-      - DollarVars substitute=1:
+      - Variables substitute=1:
       - Shortcuts parse=1:
 
       - para: >
@@ -55,12 +55,12 @@
 	 references in an array reference like the following example is a
 	 declaration of a set of two douments.
 	    
-      - DollarVars substitute=0:
+      - Variables substitute=0:
       - programlisting: |
          my $document1 = [];
 	 my $document2 = [];
 	 my $data = [ $document1, $document2];
-      - DollarVars substitute=1:
+      - Variables substitute=1:
 
    - section:
       - info:

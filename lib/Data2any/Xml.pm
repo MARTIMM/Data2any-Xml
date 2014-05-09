@@ -30,14 +30,14 @@ has _gtls =>
     , default           => sub { return Data2any::Aux::GeneralTools->new; }
     );
 
-has substituteDollarVars =>
+has substitute_variables =>
     ( is                => 'rw'
     , isa               => 'Bool'
     , default           => 1
     , traits            => ['Bool']
     , handles           =>
-      { setSubstituteDollarVars         => 'set'
-      , stopSubstituteDollarVars        => 'unset'
+      { start_substitute_variables      => 'set'
+      , stop_substitute_variables       => 'unset'
       }
     );
 
@@ -320,9 +320,9 @@ sub goingUpHandler
 
     else
     {
-      # Substitute dollar variable if nessesary
+      # Substitute variable if nessesary
       #
-      $node->rename($self->doSubstituteDollarVars($node->name))
+      $node->rename($self->do_substitute_variables($node->name))
         if $node->name =~ m/\$/;
 
       $self->addToXml($self->mkXmlStartTag($node));
@@ -366,7 +366,7 @@ sub goingDownHandler
     else
     {
       # Node converted when going up!
-      # $node->rename($self->doSubstituteDollarVars($node->name))
+      # $node->rename($self->do_substitute_variables($node->name))
       #  if $node->name =~ m/\$/;
       $self->addToXml('</' . $node->name . '>') if defined $node->name;
     }
@@ -414,7 +414,7 @@ sub atTheEndHandler
 
     elsif( $node->name eq 'SetVariables' )
     {
-      $self->_gtls->set_dollar_var( %{$node->attributes})
+      $self->_gtls->set_variables( %{$node->attributes})
         if ref $node->attributes eq 'HASH';
     }
 
@@ -431,16 +431,16 @@ sub atTheEndHandler
       }
     }
 
-    elsif( $node->name eq 'DollarVars' )
+    elsif( $node->name eq 'Variables' )
     {
       if( $node->get_attribute('substitute') =~ m/(1|on|yes)/i )
       {
-        $self->setSubstituteDollarVars;
+        $self->start_substitute_variables;
       }
 
       elsif( $node->get_attribute('substitute') =~ m/(0|off|no)/i )
       {
-        $self->stopSubstituteDollarVars;
+        $self->stop_substitute_variables;
       }
     }
 
@@ -526,9 +526,9 @@ sub atTheEndHandler
 
     else
     {
-      # Substitute dollar variable if nessesary
+      # Substitute variable if nessesary
       #
-      $node->rename($self->doSubstituteDollarVars($node->name))
+      $node->rename($self->do_substitute_variables($node->name))
         if $node->name =~ m/\$/;
 
       $self->addToXml($self->mkXmlStartEndTag($node));
@@ -598,8 +598,8 @@ sub mkStringAttribute
   my( $self, $attrName, $attrValue) = @_;
 
 #  my $str = " $attrName=" . '"' .  XML::Quote::xml_quote($attrValue) . '"';
-  $attrName = $self->doSubstituteDollarVars($attrName) if $attrName =~ m/\$/;
-  $attrValue = $self->doSubstituteDollarVars($attrValue) if $attrValue =~ m/\$/;
+  $attrName = $self->do_substitute_variables($attrName) if $attrName =~ m/\$/;
+  $attrValue = $self->do_substitute_variables($attrValue) if $attrValue =~ m/\$/;
   $attrValue =~ s/["]/\&quot;/g;
   my $str = " $attrName=\"$attrValue\"";
 
@@ -649,19 +649,19 @@ sub convertValue
 #  $value = XML::Quote::xml_quote($value);
   }
 
-  return $value =~ m/\$/ ? $self->doSubstituteDollarVars($value) : $value;
+  return $value =~ m/\$/ ? $self->do_substitute_variables($value) : $value;
 }
 
 
 #-------------------------------------------------------------------------------
 #
-sub doSubstituteDollarVars
+sub do_substitute_variables
 {
   my( $self, $value) = @_;
 
   # Fill in any variables if there are any and if substituting is turned on
   #
-  if( $self->substituteDollarVars )
+  if( $self->substitute_variables )
   {
     my( $counterName, $counterValue);
     do
@@ -671,24 +671,24 @@ sub doSubstituteDollarVars
           $value =~ m/\$(COUNT[_\w\d]+)=(\w+)/
         )
       {
-        $self->_gtls->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_variables( $counterName => $counterValue);
         $value =~ s/\$(COUNT[_\w\d]+)=(\w+)\s+//;
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\+\+/ )
       {
-        $counterValue =$self->_gtls->get_dollar_var($counterName);
+        $counterValue =$self->_gtls->get_variables($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\+\+/$counterValue/;
         $counterValue++;
-        $self->_gtls->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_variables( $counterName => $counterValue);
       }
 
       elsif( ($counterName) = $value =~ m/\$(COUNT[_\w\d]+)\-\-/ )
       {
-        $counterValue =$self->_gtls->get_dollar_var($counterName);
+        $counterValue =$self->_gtls->get_variables($counterName);
         $value =~ s/\$(COUNT[_\w\d]+)\-\-/$counterValue/;
         $counterValue--;
-        $self->_gtls->set_dollar_var( $counterName => $counterValue);
+        $self->_gtls->set_variables( $counterName => $counterValue);
       }
 
     } while( defined $counterName );
@@ -698,7 +698,7 @@ sub doSubstituteDollarVars
     foreach my $vn ($self->_gtls->get_dvar_names)
     {
       last unless $value =~ m/\$\{?[_\w\d]+/;
-      $value =~ s/\$\{?$vn\b\}?/$self->_gtls->get_dollar_var($vn)/ge;
+      $value =~ s/\$\{?$vn\b\}?/$self->_gtls->get_variables($vn)/ge;
     }
   }
 

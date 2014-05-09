@@ -2,7 +2,7 @@
 ################################################################################
 # Chapter. Document number 0
 #
-#- DollarVars substitute=1:
+#- Variables substitute=1:
 #- Shortcuts parse=1:
 - chapter:
    - info:
