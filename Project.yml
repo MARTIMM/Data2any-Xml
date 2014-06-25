@@ -150,4 +150,11 @@ Tests:
     test-programs:
       - t/100-test.t
 Todo:
-  2014-04-17: Think of what to build
+  2014-05-13:
+   - >
+      Xml.pm needs an InsertTag tag to insert a tag with a name like
+      'InsertTag'. This is not possible now.
+   - >
+      Try to recognize the special tags when there are small mistakes and then
+      make a message about this. E.g. mistakenly write Shortcut instead of the
+      proper one called Shortcuts.

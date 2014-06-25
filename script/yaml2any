@@ -127,8 +127,8 @@ sub BUILD
     # Error codes
     #
     $self->code_reset;
-    $self->const( 'C_PROJECTREADERR',   qw(M_ERROR M_FAIL));
-    $self->const( 'C_TESTFILENTFND',    qw(M_WARNING));
+    $self->const( 'C_PROJECTREADERR', 'M_ERROR');
+    $self->const( 'C_TESTFILENTFND',  'M_WARNING');
 
     __PACKAGE__->meta->make_immutable;
   }
@@ -147,12 +147,11 @@ sub BUILD
 
   #$log->show_on_error(0);
   $log->do_append_log(0);
+  #$log->do_flush_log(1);
 
   $log->start_logging;
 
-  #$log->do_flush_log(1);
-#  $log->log_mask($self->M_ERROR|$self->M_WARNING);
-$log->log_mask($self->M_ERROR|$self->M_WARNING|$self->M_INFO);
+  $log->log_level($self->M_ERROR);
 
   $log->add_tag('Y2A');
 }

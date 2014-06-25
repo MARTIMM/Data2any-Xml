@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-  <head>
-    <meta charset="utf-8"/>
-    <title>Example 4, Html5 and Css styling.</title>
-    <script type="text/javascript" src="http://localhost/I/Javascript/D3/d3.v3.js">
-</script>
-    <script>
+<html lang="en-US" dir="ltr"><head><meta charset="utf-8" /><title>Example 4, Html5 and Css styling.</title><script type="text/javascript" src="http://localhost/I/Javascript/D3/d3.v3.js">
+</script><script><![CDATA[
 function f0()
 {
   var sampleSVG = d3.select("#viz")
@@ -24,16 +19,65 @@ function f0()
             .text('Dat is het dus');
 
 }
+]]></script><style><![CDATA[
 
-// Javascript using global objects
-//
-window.onload = f0;
-
-// console.log(window.onload);
-</script>
-    <style>
 /* These are styles for html */
-/* http://en.wikipedia.org/wiki/Paper_size */ .A4-Paper { width:             210mm;
+body { width:             210mm;
+  margin:            15px auto;
+  font-family:       Arial, sans-serif;
+}
+p { margin:            0 0 20px 0; }
+
+p, li { line-height:       20px; }
+header#page_header { width:             100%; }
+
+header#page_header nav ul, #page_footer nav ul { list-style:        none;
+  margin:            0;
+  padding:           0;
+}
+#page_header nav ul li, footer#page_footer nav ul li { margin:            0 20px 0 0;
+  padding:           0;
+  display:           inline;
+}
+section#posts { float:             left;
+  width:             74%;
+}
+section#posts aside { float:             right;
+  width:             35%;
+  margin-left:       5%;
+  font-size:         20px;
+  line-height:       40px;
+}
+section#sidebar { float:             left;
+  width:             25%;
+}
+footer#page_footer { clear:             both;
+  width:             100%;
+  display:           block;
+  text-align:        center;
+}
+
+
+
+/* My part */ section { background-color:  #ffeeff;
+  border-style:      solid;
+  border-width:      1px;
+}
+section#sidebar { background-color:  #ffddff;
+  border-style:      solid;
+  border-width:      1px;
+}
+aside { background-color:  #ffffee;
+  border-style:      solid;
+  border-width:      1px;
+}
+footer { background-color:  #eeffff;
+  border-style:      solid;
+  border-width:      1px;
+}
+
+/* http://en.wikipedia.org/wiki/Paper_size */ .A4-Paper {
+  width:             210mm;
   height:            297mm;
   min-width:         210mm;
   min-height:        297mm;
@@ -43,28 +87,9 @@ window.onload = f0;
   border-width:      1px;
   background-color:  #fefffe;
 }
-.fit { width:             100vw;
-  height:            100vh;
-}
-#viz {
-  background:        yellow;
-  color:             blue;
-}
-/* These are styles for svg */ circle {
-  stroke:            red;
-  stroke-width:      5;
-  fill:              orange;
-}
-</style>
-  </head>
-  <body>
-    <div class="A4-Paper">
-      <div class="fit" id="viz"/>
-    </div>
-    <div class="A4-Paper">
-      <div class="fit">
-        <p>Een ander stukje tekst</p>
-      </div>
-    </div>
-  </body>
-</html>
+]]></style></head><body><section id="posts"><article class="posts"><header><h1>First page from HTML5 and CSS3</h1><nav><ul><li>Contact</li><li>Download</li><li>Help</li></ul></nav></header><aside><p>Et et voluptas maiores aut suscipit sit nobis quaerat. Modi necessitatibus cumque qui beatae molestias non occaecati. Perferendis repudiandae aut et. Autem et qui quisquam itaque.</p></aside><p>Veggies sunt bona vobis, proinde vos postulo esse magis grape pea sprouts
+horseradish courgette maize spinach prairie turnip jicama coriander quandong
+gourd broccoli seakale gumbo. Parsley corn lentil zucchini radicchio maize
+horseradish courgette maize spinach prairie turnip jícama coriander quandong
+burdock avocado sea lettuce. Garbanzo tigernut earthnut pea fennel.
+</p><footer><p>© mt1957</p><nav><ul><li>Contact</li></ul></nav></footer></article></section><section id="sidebar"><nav><ul><li>Oct 2010</li><li>Nov 2010</li></ul></nav></section></body></html>

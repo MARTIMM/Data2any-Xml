@@ -160,5 +160,5 @@
 	       chapter I will explain the messages and what they all mean.
 
 	 - listitem:
-	    - para: $COUNT_app=A Chapter $COUNT_app++, Availability
+	    - para: $COUNT_app=A Appendix $COUNT_app++, Availability
 	    - para: >

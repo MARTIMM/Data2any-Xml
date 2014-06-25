@@ -5,7 +5,7 @@
 package Data2any::Xml;
 
 use Modern::Perl;
-use version; our $VERSION = '' . version->parse('v0.2.1');
+use version; our $VERSION = '' . version->parse('v0.2.2');
 use 5.016003;
 
 use namespace::autoclean;
@@ -28,6 +28,12 @@ has _gtls =>
     ( is                => 'ro'
     , isa               => 'Data2any::Aux::GeneralTools'
     , default           => sub { return Data2any::Aux::GeneralTools->new; }
+    );
+
+has data2any =>
+    ( is                => 'ro'
+    , isa               => 'Data2any'
+    , writer            => '_set_data2any'
     );
 
 has substitute_variables =>
@@ -254,9 +260,9 @@ sub BUILD
   {
     # Error codes
     #
-    $self->code_reset;
-#    $self->const( 'C_PROJECTREADERR',   qw(M_ERROR M_FAIL));
-#    $self->const( 'C_TESTFILENTFND',    qw(M_WARNING));
+#    $self->code_reset;
+#    $self->const( 'C_PROJECTREADERR', '');
+#    $self->const( 'C_TESTFILENTFND', '');
 
     __PACKAGE__->meta->make_immutable;
   }
@@ -268,6 +274,8 @@ sub init
 {
   my( $self, $data2any) = @_;
 
+  $self->_set_data2any($data2any);
+
   $self->addHtmlChar( '"' => 'quot', '&' => 'amp', '<' => 'lt', '>' => 'gt');
   $self->resetXml;
 }
@@ -276,7 +284,9 @@ sub init
 #
 sub preprocess
 {
-  my( $self, $data2any, $root) = @_;
+  my( $self, $root) = @_;
+
+  my $data2any = $self->data2any;
 
   # Prepare the traversal process
   #
@@ -285,19 +295,20 @@ sub preprocess
 
   # Each handler will be called with the following arguments
   # - this translator object($self)
-  # - data2any object
   # - node object of which there are several types
   #
-  $data2any->node_handler_up(sub{ $self->goingUpHandler( $data2any, @_); });
-  $data2any->node_handler_down(sub{ $self->goingDownHandler( $data2any, @_); });
-  $data2any->node_handler_end(sub{ $self->atTheEndHandler( $data2any, @_); });
+  $data2any->node_handler_up(sub{ $self->goingUpHandler(@_); });
+  $data2any->node_handler_down(sub{ $self->goingDownHandler(@_); });
+  $data2any->node_handler_end(sub{ $self->atTheEndHandler(@_); });
 }
 
 #-------------------------------------------------------------------------------
 #
 sub goingUpHandler
 {
-  my( $self, $data2any, $node) = @_;
+  my( $self, $node) = @_;
+
+  my $data2any = $self->data2any;
 
   if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
   {
@@ -334,7 +345,9 @@ sub goingUpHandler
 #
 sub goingDownHandler
 {
-  my( $self, $data2any, $node) = @_;
+  my( $self, $node) = @_;
+
+  my $data2any = $self->data2any;
 
   if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
   {
@@ -377,7 +390,9 @@ sub goingDownHandler
 #
 sub atTheEndHandler
 {
-  my( $self, $data2any, $node) = @_;
+  my( $self, $node) = @_;
+
+  my $data2any = $self->data2any;
 
   if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
   {
@@ -386,7 +401,10 @@ sub atTheEndHandler
 
   elsif( ref($node) eq 'AppState::NodeTree::NodeText' )
   {
-    my $v = Encode::decode( 'UTF-8', $self->convertValue($node->value));
+#    my $v = Encode::decode( $self->_gtls->get_variable('Encoding')
+#                          , $self->convertValue($node->value)
+#                          );
+    my $v = $self->convertValue($node->value);
 
     # Translate short written xml like b[...] or br[] into <b>...</b> or <br/>
     #
@@ -402,7 +420,8 @@ sub atTheEndHandler
 #    $v =~ s/^\n+//;
 #    $v =~ s/\n+$//;
 
-    $self->addToXml(Encode::encode( 'UTF-8', $v));
+#say "Encoding: ", $self->_gtls->get_variable('Encoding');
+    $self->addToXml(Encode::encode( $self->_gtls->get_variable('Encoding'), $v));
   }
 
   elsif( ref($node) eq 'AppState::NodeTree::Node' )
@@ -735,7 +754,9 @@ sub convertHtmlChar
 #
 sub postprocess
 {
-  my( $self, $data2any) = @_;
+  my($self) = @_;
+
+  my $data2any = $self->data2any;
 
   my $xmlHeader = '';
 

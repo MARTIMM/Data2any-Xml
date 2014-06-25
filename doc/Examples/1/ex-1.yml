@@ -103,10 +103,8 @@
      | tee Data2any.xml | xmllint --format -
      | rnv /usr/share/xml/docbook5/schema/rng/5.0/docbook.rnc
 
-
 - XML version=1.0 encoding=utf-8:
 - DOCTYPE root=book:
-
 
 - book:
   xmlns=http://docbook.org/ns/docbook:

@@ -6,51 +6,59 @@
 #
 - DocumentControl:
    Translator: Xml
+   Encoding: UTF-8
 
    SendTo:
     # ex-4.yml -s cat
     #
     cat: '| cat > __BASENAME__.html'
 
-    # ex-4.yml -s xml
+    # ex-4.yml -s xml*
     #
     xml: |
-     | xmllint --format -
-     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
+     | xml_pp -p 'pre script style'  > __BASENAME__.html
 
-    # ex-4.yml -s wk
+#    xml1: '| xmllint --format --encode utf-8 - __BASENAME__.html'
+
+    # ex-4.yml -s wk*
     #
     # Stream the data directly to wkhtmltopdf.
     #
-    wk: '| wkhtmltopdf - __BASENAME__.pdf'
+    wk: '| wkhtmltopdf --encoding UTF-8 --page-size A4 --print-media-type - __BASENAME__.pdf'
 
-    # ex-4.yml -s wk2
-    #
     # xmllint formats the file nicely treating it however as an xml file
     # causing it to be prefixed with an xml prelude. Sed is used to remove
     # that prelude. If not, the program wkhtmltopdf will not function
     # properly.
     #
+    wk1: |
+     | xml_pp -e utf-8 -p 'pre script style'
+     | tee __BASENAME__.html 
+     | wkhtmltopdf --page-size A4 --print-media-type - __BASENAME__.pdf
+
     wk2: |
-     | xmllint --format - 
-     | sed "/<?xml version=\"1.0\"?>/ { D }" > __BASENAME__.html
-     ; wkhtmltopdf __BASENAME__.html __BASENAME__.pdf
+     | tidy 
+     | tee __BASENAME__.html 
+     | wkhtmltopdf --page-size A4 --print-media-type - __BASENAME__.pdf
+
+#    wk3: |
+#     | xmllint --format --html -
+#     | tee __BASENAME__.html 
+#     | wkhtmltopdf --page-size A4 --print-media-type __BASENAME__.html __BASENAME__.pdf
 
 #-------------------------------------------------------------------------------
 # html 5. Example using javascript library d3
 #
 - DOCTYPE root=html:
+
+# No entities definitions possible in html5. Use unicode directly
+#   entities:
+#    - copy "&#x00A9;"
+
 - html lang=en-US dir=ltr:
    - head:
       - meta charset=utf-8:
       - title: Example 4, Html5 and Css styling.
-      - script type=text/javascript src=http://localhost/I/Javascript/D3/d3.v3.js: |
-
-      # Include the javascript into the document
-      #
-      - !perl/Data2any::Any::IncludeDocument
-         type: includeThis
-	 document: 2
 
       # Include the stylesheets from document 1
       #
@@ -59,12 +67,39 @@
          document: 1
 
    - body:
-      - div class=A4-Paper:
-         - div class=fit id=viz:
+      - section id=posts:
+         - article class=posts:
+            - header:
+               - h1: First page from HTML5 and CSS3
 
-      - div class=A4-Paper:
-         - div class=fit:
-            - p: Een ander stukje tekst
+               - nav:
+                  - ul:
+                     - li: Contact
+                     - li: Download
+                     - li: Help
+
+            - aside:
+               - p:
+                  - !perl/Data2any::Any::LoremIpsum
+                     type: sentences
+                     size: 4
+
+            - p:
+               - !perl/Data2any::Any::LoremIpsum
+                  type: veggie-ipsum
+
+            - footer:
+               - p: "\xA9 mt1957"
+
+               - nav:
+                  - ul:
+                     - li: Contact
+
+      - section id=sidebar:
+         - nav:
+            - ul:
+               - li: Oct 2010
+               - li: Nov 2010
 
 #-------------------------------------------------------------------------------
 ---
@@ -74,9 +109,108 @@
 
    /* These are styles for html */
 
+   @font-face
+   { font-family: 'Pamela';
+     font-style: normal;
+     font-weight: 400;
+     src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+   }
+
+   body
+   { width:             210mm;
+     margin:            15px auto;
+     font-family:       Arial, sans-serif;
+   }
+
+   p
+   { margin:            0 0 20px 0;
+   }
+
+   p, li
+   { line-height:       20px;
+   }
+
+   header#page_header
+   { width:             100%;
+   }
+
+   header#page_header nav ul, #page_footer nav ul
+   { list-style:        none;
+     margin:            0;
+     padding:           0;
+   }
+
+   #page_header nav ul li, footer#page_footer nav ul li
+   { margin:            0 20px 0 0;
+     padding:           0;
+     display:           inline;
+   }
+
+   section#posts
+   { float:             left;
+     width:             74%;
+   }
+
+   section#posts aside
+   { float:             right;
+     width:             35%;
+     margin-left:       5%;
+     font-size:         20px;
+     line-height:       40px;
+     font-family:       Pamela;
+   }
+
+   section#sidebar
+   { float:             left;
+     width:             25%;
+   }
+
+   footer#page_footer
+   { clear:             both;
+     width:             100%;
+     display:           block;
+     text-align:        center;
+   }
+
+
+#      @media print
+#      { nav, article > footer
+#        { display:         none;
+#        }
+#      }
+
+
+   /* My part */
+   section
+   { background-color:  #ffeeff;
+#        border-style:      solid;
+#        border-width:      1px;
+   }
+
+   section#sidebar
+   { background-color:  #ffddff;
+#        border-style:      solid;
+#        border-width:      1px;
+   }
+
+   aside
+   { background-color:  #ffffee;
+     border-style:      solid;
+     border-width:      1px;
+     padding:           2px;
+   }
+
+   footer
+   { background-color:  #eeffff;
+#     border-style:      solid;
+#     border-width:      1px;
+   }
+
+
    /* http://en.wikipedia.org/wiki/Paper_size */
    .A4-Paper
-   { width:             210mm;
+   {
+     width:             210mm;
      height:            297mm;
      min-width:         210mm;
      min-height:        297mm;
@@ -85,59 +219,5 @@
      border-style:      solid;
      border-width:      1px;
      background-color:  #fefffe;
-#     position:          absolute;
-#     overflow:          hidden;
    }
 
-   .fit
-   { width:             100vw;
-     height:            100vh;
-   }
-
-   #viz
-   {
-     background:	yellow;
-     color:		blue;
-   }
-
-   /* These are styles for svg */
-   circle
-   {
-     stroke:		red;
-     stroke-width:	5;
-     fill:		orange;
-   }
-
-#-------------------------------------------------------------------------------
----
-# Document 2, Javascript
-#
-- script: |
-
-   function f0()
-   {
-     var sampleSVG = d3.select("#viz")
-   		       .append('svg')
-		       .attr( 'width', '100px')
-		       .attr( 'height', '100px');
-
-     sampleSVG.append("circle")
-              .attr( 'class', "circle")
-#	      .attr( 'fill', 'blue')
-#	      .attr( 'stroke', 'orange')
-	      .attr( "r", '40px')
-              .attr( "cx", '50px')
-              .attr( "cy", '50px');
-
-     var p = d3.select('#viz')
-               .append('p')
-	       .text('Dat is het dus');
-
-#     console.log(d3.select("#viz").childNodes);
-   }
-
-   // Javascript using global objects
-   //
-   window.onload = f0;
-
-   // console.log(window.onload);
