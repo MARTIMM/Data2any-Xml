@@ -5,7 +5,7 @@
 package Data2any::Xml;
 
 use Modern::Perl;
-use version; our $VERSION = '' . version->parse('v0.2.2');
+use version; our $VERSION = '' . version->parse('v0.2.3');
 use 5.016003;
 
 use namespace::autoclean;
@@ -17,6 +17,7 @@ extends 'AppState::Ext::Constants';
 require Encode;
 require HTTP::Headers;
 require Data2any::Aux::GeneralTools;
+#use AppState::Ext::Meta_Constants;
 
 use Parse::RecDescent;
 $::RD_HINT = 1;
@@ -252,21 +253,10 @@ EOGRAMMAR
 
 #-------------------------------------------------------------------------------
 #
-sub BUILD
-{
-  my($self) = @_;
-
-  if( $self->meta->is_mutable )
-  {
-    # Error codes
-    #
-#    $self->code_reset;
-#    $self->const( 'C_PROJECTREADERR', '');
-#    $self->const( 'C_TESTFILENTFND', '');
-
-    __PACKAGE__->meta->make_immutable;
-  }
-}
+#sub BUILD
+#{
+#  my($self) = @_;
+#}
 
 #-------------------------------------------------------------------------------
 #
@@ -780,7 +770,7 @@ sub postprocess
 }
 
 #-------------------------------------------------------------------------------
-
+__PACKAGE__->meta->make_immutable;
 1;
 #-------------------------------------------------------------------------------
 # Documentation

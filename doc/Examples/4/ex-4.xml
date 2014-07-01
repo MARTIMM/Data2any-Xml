@@ -1,0 +1,96 @@
+<!DOCTYPE html[
+<!ENTITY copy "&#x00A9;">
+]>
+<html lang="en-US" dir="ltr"><head><meta charset="utf-8" /><title>Example 4, Html5 and Css styling.</title><script type="text/javascript" src="http://localhost/I/Javascript/D3/d3.v3.js">
+</script><script><![CDATA[
+function f0()
+{
+  var sampleSVG = d3.select("#viz")
+                    .append('svg')
+                    .attr( 'width', '100px')
+                    .attr( 'height', '100px');
+
+  sampleSVG.append("circle")
+           .attr( 'class', "circle")
+           .attr( "r", '40px')
+           .attr( "cx", '50px')
+           .attr( "cy", '50px');
+
+  var p = d3.select('#viz')
+            .append('p')
+            .text('Dat is het dus');
+
+}
+]]></script><style>
+/* These are styles for html */
+body { width:             210mm;
+  margin:            15px auto;
+  font-family:       Arial, sans-serif;
+}
+p { margin:            0 0 20px 0; }
+
+p, li { line-height:       20px; }
+header#page_header { width:             100%; }
+
+header#page_header nav ul, #page_footer nav ul { list-style:        none;
+  margin:            0;
+  padding:           0;
+}
+#page_header nav ul li, footer#page_footer nav ul li { margin:            0 20px 0 0;
+  padding:           0;
+  display:           inline;
+}
+section#posts { float:             left;
+  width:             74%;
+}
+section#posts aside { float:             right;
+  width:             35%;
+  margin-left:       5%;
+  font-size:         20px;
+  line-height:       40px;
+}
+section#sidebar { float:             left;
+  width:             25%;
+}
+
+
+/* My part */ section { background-color:  #ffeeff;
+  border-style:      solid;
+  border-width:      1px;
+}
+section#sidebar { background-color:  #ffddff;
+  border-style:      solid;
+  border-width:      1px;
+}
+aside { background-color:  #ffffee;
+  border-style:      solid;
+  border-width:      1px;
+}
+footer { background-color:  #eeffff;
+  border-style:      solid;
+  border-width:      1px;
+}
+
+/* http://en.wikipedia.org/wiki/Paper_size */ .A4-Paper {
+  width:             210mm;
+  height:            297mm;
+  min-width:         210mm;
+  min-height:        297mm;
+  padding:           5mm;
+  margin:            0;
+  border-style:      solid;
+  border-width:      1px;
+  background-color:  #fefffe;
+}
+</style></head><body><section id="posts"><article class="posts"><header><h1>First page from HTML5 and CSS3</h1><nav><ul><li>Contact</li><li>Download</li><li>Help</li></ul></nav></header><aside><p>Facere odio magnam aliquam sed expedita. Voluptate voluptas sint voluptates. Nam id voluptatem aut occaecati sed. Et tempora numquam mollitia voluptas fuga.</p></aside><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem
+rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis
+est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere
+possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
+autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
+ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum
+rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores
+alias consequatur aut perferendis doloribus asperiores repellat.
+</p><footer><p>&copy; mt1957</p><nav><ul><li>Contact</li></ul></nav></footer></article></section><section id="sidebar"><nav><ul><li>Oct 2010</li><li>Nov 2010</li></ul></nav></section></body></html>

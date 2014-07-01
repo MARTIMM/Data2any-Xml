@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example 5, Html5 and Css styling.</title>
+    <style>
+/* These are styles for html */
+/* See also:  http://en.wikipedia.org/wiki/Paper_size */
+
+
+@media print {
+  .A4-Paper
+  {
+    /* The page must be defined on its outside maximum values */
+    box-sizing:      border-box;
+
+    /* Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
+       to use the values like this. Use padding to specify the print margin
+    */
+    width:           210mm;
+    height:          297.2mm;
+
+    /* Everything outside the page will disappear */
+    overflow:        hidden;
+    
+    word-wrap:       break-word;
+    text-wrap:       suppress;
+    text-rendering:  optimizeLegibility;
+
+    /* Inside area which is the printable area. wkhtmltopdf has the default
+       of 10mm from the edge.
+    */
+    padding:         10mm;
+    margin:          0;
+
+    border-width:    1px;
+    bolder-color:    #ff0055;
+    border-style:    solid;
+
+  }
+
+}
+
+
+/* Font definitions */ @font-face { font-family:       Pamela;
+  font-style:        normal;
+  src:               url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+}
+
+
+
+
+
+body { margin:            0;
+  font-family:       Arial, sans-serif;
+}
+.weird { font-family:       Pamela;
+  font-size:         40px;
+}
+.weird2 { font-size:         80px; }
+
+.weird3 { font-family:       Pamela;
+  font-size:         25px;
+  color:             #777;
+}
+.blue {
+  color:             #77f;
+}
+.mcln {
+  -webkit-column-count:      2;
+}
+.mcln p {
+  margin-bottom:     0;
+  text-indent:       1em;
+}
+.shadow { text-shadow:       100px 90px 20px #AAA; }
+
+.shadow2 { text-shadow:       0 0 20px black;
+  color:             white;
+}
+.shadow3 { text-shadow:       5px 5px 2px black, 10px 10px 4px #ddd, 15px 15px 8px #444;
+  color:             white;
+}
+.gray {
+  background-color:  #787878;
+}
+.shadow4 { color:             #555;
+  text-shadow:       1px 1px 0 #ddd, -1px -1px 0 black;
+}
+/* text-outline not implemented */ .outline { -webkit-text-fill-color:   #aaf;
+  -webkit-text-stroke:       5px blue;
+}
+p[data-c='ok'] { color:                     #50ee3a; }
+
+p[data-c='nok'] { color:                     #ee503a;
+  -webkit-column-count:      2;
+  font-size:                 30px;
+}
+.turn { border:            1px solid blue;
+  padding:           3px;
+  width:             70px;
+  height:            70px;
+  -webkit-transform: rotate(45deg);
+}
+.container { overflow:          hidden;
+  height:            100%;
+  width:             60%;
+}
+.shaped { 
+  float:             right;
+  height:            100%;
+  width:             40%;
+
+  background:        #ddd url(http://localhost/I/Icons/512x512/Face-Avatars-F/FH02.png) center top no-repeat;
+  background-size:   cover;
+  shape-outside:     polygon( 0 0, 100% 0, 100% 100%, 30% 100%);
+  shape-margin:      20px;
+}
+</style>
+  </head>
+  <body>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <div class="container">
+          <div class="shaped"></div>
+          <div class="content">
+            <h1 class="weird3">Testje</h1>
+            <p class="weird3">Laudantium voluptates eum quia consequatur. Dolores consequuntur rerum sunt libero natus voluptas sint. Cumque deleniti non reprehenderit. Non tempora eos rerum. Sint porro quos voluptas assumenda aut nesciunt. Repellendus beatae et sed eum voluptatem atque quia nobis. Enim aut quos reiciendis ea illo nihil assumenda explicabo. Sit porro nostrum repudiandae dolores aperiam. Rerum cumque pariatur saepe libero et. Saepe libero eveniet aliquam.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <div class="gray">
+          <h1 class="weird2 shadow4">Section 5</h1>
+        </div>
+        <h1 class="weird2 outline">Page 2</h1>
+        <p class="weird">Quasi sequi facilis soluta consectetur in autem nam. Magni natus et nihil eos illum ad. Quibusdam et distinctio voluptatibus accusantium occaecati minima. Temporibus doloribus cum animi perferendis optio enim. Nesciunt quam alias est possimus. Dolorem sequi neque tempore nisi expedita illo. Nihil nam esse ad dolores. Est eaque ut ullam expedita ad sint suscipit. Modi explicabo facere ab itaque delectus. Ratione ipsum fuga aperiam ab quo accusantium non dicta. Tempora eaque quo temporibus. Rerum rem quia numquam veritatis aut esse. Corrupti distinctio consequatur rerum dolores nobis iusto in doloremque. Debitis quo laborum ut quia ut temporibus laborum id. Animi non omnis cumque dolor. Neque nulla eveniet sit neque. Velit error odio sit est sed est. Error rerum porro dolorem fugiat fugit quas est. Dolorem ducimus consequuntur deserunt amet dolor sed rerum. Enim earum earum adipisci et eaque.</p>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1>Page 3</h1>
+        <h1 class="weird2 shadow">Page 1</h1>
+        <h1 class="weird2 shadow2">Section 1</h1>
+        <h1 class="weird2 shadow3">Section 2</h1>
+        <p data-c="ok">Soluta sunt minus aut quaerat est expedita omnis molestiae. Non perspiciatis ad quia alias praesentium. Possimus omnis id doloremque a veniam laborum quis veniam. Assumenda accusamus mollitia omnis minus culpa omnis et. Itaque nemo animi velit et sequi aut rerum qui. Veniam nobis nostrum eveniet. Est libero cupiditate assumenda perspiciatis. Voluptate incidunt aperiam voluptatibus qui vel aspernatur assumenda. Rerum laborum voluptates dicta et voluptatem voluptatibus. Quam ut aliquam aliquam.</p>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1 class="weird">Page 4</h1>
+        <p class="weird" data-c="nok">Excepturi voluptatibus aut et asperiores nisi nam delectus. Nemo aliquid eos accusantium et sit sit. Quis vitae ea est ad. Pariatur beatae et velit. Et vel quia occaecati. Omnis est quibusdam officiis et dolorem cum. Quo consequuntur libero qui vitae quisquam dolor officiis odio. Aut vel qui accusantium autem omnis minima. Sed et temporibus illo est et. Voluptatem sint repellat libero id quia aut aperiam. Ab eveniet numquam et quae nihil magni ut. In aut nulla est harum. Quod qui eveniet quis cumque velit. Ut enim aut explicabo. Minus quia nulla atque. Debitis optio id neque numquam. Ullam quisquam quo eaque. Officiis modi pariatur perferendis vel sunt consectetur. Autem maiores nulla consequatur et consequuntur. Eos adipisci totam debitis.</p>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1 class="weird">Page 1</h1>
+        <p class="weird">Quaerat sit nostrum vero tempora. Eos alias amet eum tenetur aut. Voluptatum distinctio inventore consequuntur sit et. Ut veniam magnam dolor quam rerum totam. Impedit sit quidem odit maxime quae. Reprehenderit eos nemo voluptatum. Eum voluptatem repellat adipisci est beatae qui. Fuga laborum eum rerum maxime possimus sequi sunt. Ut iste rerum voluptatem sit est sed. Doloribus qui distinctio dolorem voluptatum rerum quis aut mollitia.</p>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1 class="weird">Page 2</h1>
+        <p class="weird">Fugiat facere at at explicabo voluptates quibusdam est magnam. Voluptatem sed sapiente omnis culpa vero ipsam dolores. Ut cupiditate et est eligendi expedita. Harum eligendi et eos hic omnis magni velit qui. Eos unde voluptatem magnam sint non. Recusandae ullam ut voluptate voluptatem rem tempora autem recusandae. Vel earum est ab. Facere iure optio sunt sed nulla. Omnis autem voluptatum fuga optio. Ipsam labore enim enim suscipit. Voluptatem soluta quas adipisci. Facilis aperiam quos porro ducimus deleniti deleniti rerum. Laborum sit excepturi et quo sed minus exercitationem ut. Tempore nihil eos exercitationem ex. Esse quia sint nihil quia.</p>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1 class="weird">Page 3</h1>
+      </article>
+    </section>
+    <section class="A4-Paper" id="posts">
+      <article class="posts">
+        <h1 class="weird">Page 4</h1>
+        <p class="weird">Soluta reiciendis perferendis consectetur quo. Ea et exercitationem qui sed et. Tenetur pariatur earum qui nobis autem sequi corrupti qui. Eos cupiditate nisi et assumenda. Nemo et iusto consectetur. Quas similique quis possimus dolore. Perspiciatis qui voluptatem vero aut illo molestiae. Voluptatibus laborum repudiandae corporis fugiat ut omnis. Mollitia cumque quia omnis dolores ipsa dolorem quasi voluptatem. Dignissimos laudantium qui sunt maxime. Voluptate suscipit omnis architecto alias. Ipsa est ducimus eos quia. Beatae aut quo tempore nulla molestias quia quisquam quia. Doloremque sed ea minima. Modi sint sint harum quis consectetur repellendus et. Dolor et cupiditate enim.</p>
+      </article>
+    </section>
+    <section class="A4-Paper">
+      <article class="posts">
+        <h1 class="weird">Page 5</h1>
+        <div class="mcln">
+          <p class="weird3 blue">Id error est eligendi nihil odio pariatur quo. Incidunt repellendus exercitationem et consequatur non consequuntur. Ut repellendus in quia consectetur. Tempore autem id consequatur. Id nobis a voluptas. Rerum nemo eligendi dolore et laborum sunt et porro. Corrupti inventore sunt deleniti quas excepturi maxime quia omnis. A sequi quibusdam aut. Maxime quam rerum dicta suscipit sunt. Aut nulla excepturi mollitia vero ut. Porro eius consequatur aut aut eum autem. Ipsam in sed cumque numquam corporis maiores quo. Maxime velit sed consectetur fugiat ut et qui. Recusandae aut qui quisquam eum dolores. Delectus et exercitationem quis voluptas ex voluptatem ut. Dolorem veritatis dicta iusto. Provident non cum eum ea voluptatum. Laborum et quidem accusantium voluptatem dolorem. Animi voluptatem reprehenderit quia quod numquam voluptatem harum. Esse quis qui facere dolor aliquam veniam magnam dicta. Autem at eligendi aliquid deserunt sequi. Suscipit qui molestias velit nam omnis consectetur dicta. Ut voluptatem repellendus impedit ut ipsum iste deleniti. A quas soluta itaque culpa et corrupti. Ea fugit sed voluptatibus quia ad eveniet sit. Neque velit et quam reprehenderit mollitia velit dolor. Voluptas laudantium ullam eligendi necessitatibus. Ullam beatae recusandae rerum. Saepe at aliquid harum qui. Aut perferendis odit nisi harum.</p>
+        </div>
+      </article>
+    </section>
+  </body>
+</html>

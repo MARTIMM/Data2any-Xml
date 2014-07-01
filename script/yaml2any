@@ -1,29 +1,25 @@
 #!/usr/bin/env perl
 #
 use Modern::Perl;
+use version; our $VERSION = version->parse('v0.0.6');
+use 5.016003;
+
 use namespace::autoclean;
 use English qw(-no_match_vars); # Avoids regex perf penalty, perl < v5.016000
-
 use Moose;
 extends qw(AppState::Ext::Constants);
 
-use version; our $VERSION = version->parse('v0.0.5');
-use 5.016003;
-
-#-------------------------------------------------------------------------------
-# Temporary solution to use lib locally before install
-# and to let apache look into my libraries.
-#
-#use lib qw( lib ../../lib
-#            /home/marcel/Software/lib/perl5
-#            /home/marcel/Software/lib64/perl5
-#          );
-
-# Temporary solution to let apache look into my libraries.
-#
-#use lib qw( /home/marcel/Software/lib/perl5 /home/marcel/Software/lib64/perl5);
 require Data2any;
 require Data2any::Aux::GeneralTools;
+
+use AppState;
+#use AppState::Ext::Meta_Constants;
+
+#-------------------------------------------------------------------------------
+# Error codes
+#
+#def_sts( 'C_PROJECTREADERR', 'M_ERROR', '');
+#def_sts( 'C_TESTFILENTFND',  'M_WARNING', '');
 
 #-------------------------------------------------------------------------------
 #
@@ -40,19 +36,6 @@ has description =>
 yaml2any is used to convert a YAML data structure into any structure using
 Data2any perl module and a translator plugin.
 EODSCR
-    , init_arg		=> undef
-    , lazy		=> 1
-    );
-
-has usage =>
-    ( is		=> 'ro'
-    , isa		=> 'ArrayRef'
-    , default		=> 
-      sub
-      { return
-	[
-        ];
-      }
     , init_arg		=> undef
     , lazy		=> 1
     );
@@ -101,6 +84,19 @@ EOENTRY
     , lazy		=> 1
     );
 
+has usage =>
+    ( is		=> 'ro'
+    , isa		=> 'ArrayRef'
+    , default		=> 
+      sub
+      { return
+	[
+        ];
+      }
+    , init_arg		=> undef
+    , lazy		=> 1
+    );
+
 has examples =>
     ( is		=> 'ro'
     , isa		=> 'ArrayRef'
@@ -122,16 +118,7 @@ sub BUILD
 {
   my($self) = @_;
 
-  if( $self->meta->is_mutable )
-  {
-    # Error codes
-    #
-    $self->code_reset;
-    $self->const( 'C_PROJECTREADERR', 'M_ERROR');
-    $self->const( 'C_TESTFILENTFND',  'M_WARNING');
-
-    __PACKAGE__->meta->make_immutable;
-  }
+  __PACKAGE__->meta->make_immutable;
 
   #-----------------------------------------------------------------------------
   # Setup application
@@ -146,13 +133,12 @@ sub BUILD
   my $log = $app->get_app_object('Log');
 
   #$log->show_on_error(0);
+  $log->show_on_warning(1);
   $log->do_append_log(0);
   #$log->do_flush_log(1);
-
   $log->start_logging;
-
-  $log->log_level($self->M_ERROR);
-
+#  $log->log_level($self->M_ERROR);
+  $log->log_level($self->M_TRACE);
   $log->add_tag('Y2A');
 }
 
@@ -162,10 +148,7 @@ sub BUILD
 my $self = main->new;
 
 #-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
 #
-use AppState;
 my $app = AppState->instance;
 my $log = $app->get_app_object('Log');
 
