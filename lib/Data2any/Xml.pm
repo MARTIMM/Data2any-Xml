@@ -5,7 +5,7 @@
 package Data2any::Xml;
 
 use Modern::Perl;
-use version; our $VERSION = '' . version->parse('v0.2.3');
+use version; our $VERSION = '' . version->parse('v0.2.4');
 use 5.016003;
 
 use namespace::autoclean;
@@ -300,12 +300,12 @@ sub goingUpHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top nodes.
   }
 
-  elsif( ref($node) eq 'AppState::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
   {
     if( $node->name eq 'CDATA' )
     {
@@ -339,12 +339,12 @@ sub goingDownHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top nodes.
   }
 
-  elsif( ref($node) eq 'AppState::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
   {
     if( $node->name eq 'CDATA' )
     {
@@ -384,12 +384,12 @@ sub atTheEndHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top root.
   }
 
-  elsif( ref($node) eq 'AppState::NodeTree::NodeText' )
+  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::NodeText' )
   {
 #    my $v = Encode::decode( $self->_gtls->get_variable('Encoding')
 #                          , $self->convertValue($node->value)
@@ -414,7 +414,7 @@ sub atTheEndHandler
     $self->addToXml(Encode::encode( $self->_gtls->get_variable('Encoding'), $v));
   }
 
-  elsif( ref($node) eq 'AppState::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
   {
     if( $node->name eq 'InsertTag' )
     {

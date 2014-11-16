@@ -1,6 +1,6 @@
 package Data2any::Xml::Html::LinkFile;
 
-use version; our $VERSION = '' . version->parse("v0.0.10");
+use version; our $VERSION = '' . version->parse("v0.0.11");
 use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
@@ -24,7 +24,7 @@ sub BUILD
 }
 
 #-------------------------------------------------------------------------------
-# Called by AppState::NodeTree tree builder after creating this object.
+# Called by AppState::Plugins::Feature::NodeTree tree builder after creating this object.
 # This type of use doesn't need to return a value. After process() is done
 # the current config file and current document can be changed into others.
 #
