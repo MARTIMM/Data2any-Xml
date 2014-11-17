@@ -300,12 +300,12 @@ sub goingUpHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top nodes.
   }
 
-  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::NodeTree::Node' )
   {
     if( $node->name eq 'CDATA' )
     {
@@ -339,12 +339,12 @@ sub goingDownHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top nodes.
   }
 
-  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::NodeTree::Node' )
   {
     if( $node->name eq 'CDATA' )
     {
@@ -384,12 +384,12 @@ sub atTheEndHandler
 
   my $data2any = $self->data2any;
 
-  if( ref($node) =~ m/AppState::Plugins::Feature::NodeTree::Node(DOM|Root)/ )
+  if( ref($node) =~ m/AppState::Plugins::NodeTree::Node(DOM|Root)/ )
   {
     # Skip the top root.
   }
 
-  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::NodeText' )
+  elsif( ref($node) eq 'AppState::Plugins::NodeTree::NodeText' )
   {
 #    my $v = Encode::decode( $self->_gtls->get_variable('Encoding')
 #                          , $self->convertValue($node->value)
@@ -414,7 +414,7 @@ sub atTheEndHandler
     $self->addToXml(Encode::encode( $self->_gtls->get_variable('Encoding'), $v));
   }
 
-  elsif( ref($node) eq 'AppState::Plugins::Feature::NodeTree::Node' )
+  elsif( ref($node) eq 'AppState::Plugins::NodeTree::Node' )
   {
     if( $node->name eq 'InsertTag' )
     {
