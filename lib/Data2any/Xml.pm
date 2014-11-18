@@ -12,12 +12,12 @@ use namespace::autoclean;
 
 use Moose;
 
-extends 'AppState::Ext::Constants';
+extends 'AppState::Plugins::Log::Constants';
 
 require Encode;
 require HTTP::Headers;
 require Data2any::Aux::GeneralTools;
-#use AppState::Ext::Meta_Constants;
+#use AppState::Plugins::Log::Meta_Constants;
 
 use Parse::RecDescent;
 $::RD_HINT = 1;
