@@ -11,7 +11,7 @@
 ################################################################################
 # 
 - DocumentControl:
-#   Translator: Xml
+   Translator: Xml
 
    SendTo:
     xml: '| xmllint --format - > Data2any.xml'

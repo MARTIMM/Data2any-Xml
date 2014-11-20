@@ -205,7 +205,7 @@ my $data2any = Data2any->new( input_file => $filename
                             );
 
 # ==!!==
-$data2any->translator('Xml');
+#$data2any->translator('Xml');
 # ==!!==
 
 # And modify some object values
@@ -219,7 +219,7 @@ $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
 
 # Transform steps to get results
 #
-$data2any->nodetreeFromData;
+$data2any->nodetree_from_data;
 $self->gtls->set_variables( version_yaml2any => $VERSION);
 $data2any->transform_nodetree;
 $data2any->postprocess;
