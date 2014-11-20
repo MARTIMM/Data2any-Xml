@@ -193,8 +193,7 @@ my $filename = shift @ARGV;
 if( !defined $filename )
 {
   say STDERR "No filename given;";
-  
-  say $cmd->usage;
+  say STDERR $cmd->usage;
   exit(1);
 }
 
@@ -204,7 +203,7 @@ my $data2any = Data2any->new( input_file => $filename
                             , data_file_type => 'Yaml'
                             );
 
-# ==!!==
+# ==! Use Translator key under DocumentControl !==
 #$data2any->translator('Xml');
 # ==!!==
 
@@ -215,7 +214,6 @@ $data2any->request_document($docnbr) if defined $docnbr;
 
 my $sendToSelect = $cmd->get_option('sendToSelect');
 $data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
-
 
 # Transform steps to get results
 #

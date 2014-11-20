@@ -3,6 +3,60 @@
   <head>
     <meta charset="utf-8"/>
     <title>Example 5, Html5 and Css styling.</title>
+    <style>
+.A4-Paper
+{
+  /* The page must be defined on its outside maximum values */
+  box-sizing:      border-box;
+
+  /* Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
+     to use the values like this. Use padding to specify the print margin
+  */
+  width:           210mm;
+#       height:          297mm;
+  height:          297.2mm;
+
+  /* Everything outside the page will disappear */
+#       text-overflow:   ellipsis;
+  overflow:        hidden;
+
+  word-wrap:       break-word;
+  text-wrap:       suppress;
+  text-rendering:  optimizeLegibility;
+#       -webkit-font-smoothing: pixel-antialiased;
+
+  /* Inside area which is the printable area. wkhtmltopdf has the default
+     of 10mm from the edge.
+  */
+  padding:         10mm;
+  margin:          0;
+
+  border-width:    1px;
+  bolder-color:    #ff0055;
+  border-style:    solid;
+}
+
+
+
+/* Font definitions */
+@font-face
+{ font-family:       Pamela;
+  font-style:        normal;
+  src:               url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+}
+
+body
+{ margin:            0;
+  font-family:       Arial, sans-serif;
+}
+
+.weird3
+{ font-family:       Pamela;
+  font-size:         25px;
+  color:             #777;
+}
+
+</style>
   </head>
   <body>
     <section class="A4-Paper" id="posts">
@@ -11,7 +65,7 @@
           <div class="shaped"></div>
           <div class="content">
             <h1 class="weird3">Testje</h1>
-            <p class="weird3">Natus animi ea eos. Pariatur rerum maxime eligendi molestias dolores est. Eveniet voluptatem consequuntur debitis dolorem debitis. Necessitatibus et soluta consequatur. Aut inventore quasi labore incidunt. Ipsa aliquam omnis sequi sunt commodi nulla. Quia sed illum minus enim dolorem repellat odit. Ipsa et qui nostrum est. Quam quis ad nemo sunt sit. Eveniet rerum ducimus quam quae id blanditiis.</p>
+            <p class="weird3">Quo sint voluptates eligendi minus a atque rerum dolorum. Fuga perferendis aliquid aut rerum. Est accusamus nesciunt rerum sed et rerum officia maiores. Omnis rerum natus voluptatibus magnam. Nesciunt dolores hic sit et placeat exercitationem. Voluptatem unde nihil voluptatem totam voluptatem non voluptatibus sed. Ut soluta et doloremque. Sapiente praesentium unde distinctio aliquam fugit. Quo deserunt quam nulla quos rem aut ea debitis. Debitis quasi a sed molestiae.</p>
             <p>
               <a href="http://google.com/search?q=lorem+ipsum">google for lorem</a>
             </p>

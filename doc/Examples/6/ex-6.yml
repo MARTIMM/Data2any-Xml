@@ -72,6 +72,8 @@
                         size: 10
                         type: sentences
 
+                  - !perl/Data2any::Xml::Html::Css
+
                   - p:
                      - !perl/Data2any::Xml::Html::LinkFile
                         reference: http://google.com/search?q=lorem+ipsum
