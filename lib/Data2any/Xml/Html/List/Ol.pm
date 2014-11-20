@@ -9,14 +9,16 @@ use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
 use Moose;
-extends 'Data2any::Aux::BlessedStructTools';
+extends qw(Data2any::Aux::BlessedStructTools AppState::Plugins::Log::Constants);
 
 use AppState;
-use AppState::Ext::Constants;
-my $m = AppState::Ext::Constants->new;
+use AppState::Plugins::Log::Meta_Constants;
 
 #-------------------------------------------------------------------------------
-has '+version' => ( default => $VERSION);
+def_sts( qw(E_LISTNOTARRAY M_ERROR), 'List is not an ARRAY type. Level: %s');
+
+#-------------------------------------------------------------------------------
+#has '+version' => ( default => $VERSION);
 
 has level =>
     ( is                => 'ro'
@@ -142,9 +144,7 @@ sub convertList
 
   if( ref $list ne 'ARRAY' )
   {
-    $self->wlog( [ "List is not an ARRAY type. Level:", $self->level]
-               , $m->M_ERROR
-               );
+    $self->log( $self->E_LISTNOTARRAY, [$self->level]);
   }
 
   else

@@ -5,14 +5,17 @@ use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
 use Moose;
-extends 'Data2any::Aux::BlessedStructTools';
+extends qw(Data2any::Aux::BlessedStructTools AppState::Plugins::Log::Constants);
 
 use AppState;
-use AppState::Ext::Constants;
-my $m = AppState::Ext::Constants->new;
+use AppState::Plugins::Log::Meta_Constants;
 
 #-------------------------------------------------------------------------------
-has '+version' => ( default => $VERSION);
+def_sts( 'E_NOTXTIMG',  'M_ERROR', 'No text or image to used with html link');
+def_sts( 'E_REFNOTSUP', 'M_ERROR', 'Reference type %s not supported');
+
+#-------------------------------------------------------------------------------
+#has '+version' => ( default => $VERSION);
 
 #-------------------------------------------------------------------------------
 #
@@ -76,16 +79,14 @@ sub process
 
       else
       {
-        $self->log( ["No text or image to used with html link"], $m->M_ERROR);
+        $self->log($self->E_NOTXTIMG);
       }
     }
   }
 
   else
   {
-    $self->log( [ "Type $type not supported."
-                ], $m->M_ERROR
-              );
+    $self->log( $self->E_REFNOTSUP, [$type]);
   }
 }
 
