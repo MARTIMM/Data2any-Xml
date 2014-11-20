@@ -1,0 +1,285 @@
+#!/usr/bin/env yaml2any
+#
+---
+#-------------------------------------------------------------------------------
+# Document 0, The document to start with.
+#
+- DocumentControl:
+   Translator: Xml
+   Encoding: UTF-8
+
+   SendTo:
+    # ex-5.yml -s cat
+    #
+    cat: '| cat > __BASENAME__.html'
+
+    # ex-5.yml -s xml*
+    #
+    xml: |
+     | xml_pp -p 'pre script style'  > __BASENAME__.html
+
+#    xml1: '| xmllint --format --encode utf-8 - __BASENAME__.html'
+
+    # ex-5.yml -s wk*
+    #
+    # Stream the data directly to wkhtmltopdf. Remove all margins. There is no
+    # need to set paper size.
+    #
+    wk: |
+     | wkhtmltopdf -B 0 -L 0 -R 0 -T 0 -s A4 --print-media-type --encoding UTF-8 - __BASENAME__.pdf
+
+    # xmllint formats the file nicely treating it however as an xml file
+    # causing it to be prefixed with an xml prelude. Sed is used to remove
+    # that prelude. If not, the program wkhtmltopdf will not function
+    # properly.
+    #
+    wk1: |
+     | xml_pp -e utf-8 -p 'pre script style'
+     | tee __BASENAME__.html 
+     | wkhtmltopdf -B 0 -L 0 -R 0 -T 0 -s A4 --encoding UTF-8 --print-media-type - __BASENAME__.pdf
+
+#-------------------------------------------------------------------------------
+# html 5. Example using javascript library d3
+#
+- DOCTYPE root=html:
+
+# No entities definitions possible in html5. Use unicode directly
+#   entities:
+#    - copy "&#x00A9;"
+
+- html lang=en-US dir=ltr:
+   - head:
+      - meta charset=utf-8:
+      - title: Example 5, Html5 and Css styling.
+
+      # Include the stylesheets from document 1
+      #
+#      - !perl/Data2any::Any::IncludeDocument
+#         type: includeThis
+#         document: 1
+
+
+   - body:
+      - section class=A4-Paper id=posts:
+         - article class=posts:
+            - div class=container:
+               - div class=shaped: >
+
+               - div class=content:
+                  - h1 class=weird3: Testje
+                  - p class=weird3:
+                     - !perl/Data2any::Any::LoremIpsum
+                        size: 10
+                        type: sentences
+
+                  - p:
+                     - !perl/Data2any::Xml::Html::LinkFile
+                        reference: http://google.com/search?q=lorem+ipsum
+                        text: google for lorem
+
+#-------------------------------------------------------------------------------
+---
+# Document 1, Css3 stylesheet
+#
+- Shortcuts parse=off:
+- style: >
+
+   /* These are styles for html */
+
+   /* See also:  http://en.wikipedia.org/wiki/Paper_size */
+
+# I want to do the following;
+# - wkhtmltopdf -s A5 -O Landscape
+# - The following nn and mm measures are for A5 landscape paper size
+#   @media print and (width: nn) and height: mm)
+#   { width: nn;
+#     height: mm;
+#     ...
+
+   @media print
+   {
+     .A4-Paper
+     {
+       /* The page must be defined on its outside maximum values */
+       box-sizing:      border-box;
+
+       /* Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
+          to use the values like this. Use padding to specify the print margin
+       */
+       width:           210mm;
+#       height:          297mm;
+       height:          297.2mm;
+
+       /* Everything outside the page will disappear */
+#       text-overflow:   ellipsis;
+       overflow:        hidden;
+       
+       word-wrap:       break-word;
+       text-wrap:       suppress;
+       text-rendering:  optimizeLegibility;
+#       -webkit-font-smoothing: pixel-antialiased;
+
+       /* Inside area which is the printable area. wkhtmltopdf has the default
+          of 10mm from the edge.
+       */
+       padding:         10mm;
+       margin:          0;
+
+       border-width:    1px;
+       bolder-color:    #ff0055;
+       border-style:    solid;
+
+#       background-color:  #fffeae;
+     }
+
+#     *
+#     { background-color:        #eea;
+#     }
+   }
+
+
+
+   /* Font definitions */
+   @font-face
+   { font-family:       Pamela;
+     font-style:        normal;
+#     font-weight:       200;
+     src:               url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+   }
+
+
+
+
+
+
+   body
+   { margin:            0;
+     font-family:       Arial, sans-serif;
+   }
+
+   .weird
+   { font-family:       Pamela;
+     font-size:         40px;
+   }
+
+   .weird2
+   { font-size:         80px;
+   }
+
+   .weird3
+   { font-family:       Pamela;
+     font-size:         25px;
+#     border-radius:     40px;
+     color:             #777;
+   }
+
+   .blue
+   {
+     color:             #77f;
+   }
+
+   .mcln
+   {
+     -webkit-column-count:      2;
+   }
+
+   .mcln p
+   {
+     margin-bottom:     0;
+     text-indent:       1em;
+   }
+
+   .shadow
+   { text-shadow:       100px 90px 20px #AAA;
+   }
+
+   .shadow2
+   { text-shadow:       0 0 20px black;
+     color:             white;
+   }
+
+   .shadow3
+   { text-shadow:       5px 5px 2px black, 10px 10px 4px #ddd, 15px 15px 8px #444;
+     color:             white;
+   }
+
+   .gray
+   {
+#     padding:           1px;
+     background-color:  #787878;
+   }
+
+   .shadow4
+   { color:             #555;
+     text-shadow:       1px 1px 0 #ddd, -1px -1px 0 black;
+   }
+
+   /* text-outline not implemented */
+   .outline
+   { -webkit-text-fill-color:   #aaf;
+     -webkit-text-stroke:       5px blue;
+   }
+
+   p[data-c='ok']
+   { color:                     #50ee3a;
+   }
+
+   p[data-c='nok']
+   { color:                     #ee503a;
+     -webkit-column-count:      2;
+     font-size:                 30px;
+   }
+
+   .turn
+   { border:            1px solid blue;
+     padding:           3px;
+#     display:           absolute;
+     width:             70px;
+     height:            70px;
+     -webkit-transform: rotate(45deg);
+   }
+
+   .container
+   { overflow:          hidden;
+     height:            100%;
+     width:             60%;
+   }
+
+   .shaped
+   { 
+#     float:             left;
+     float:             right;
+     height:            100%;
+     width:             40%;
+
+     background:        #ddd url(http://localhost/I/Icons/512x512/Face-Avatars-F/FH02.png) center top no-repeat;
+     background-size:   cover;
+     shape-outside:     polygon( 0 0, 100% 0, 100% 100%, 30% 100%);
+     shape-margin:      20px;
+#     -webkit-shape-outside:     polygon( 0 0, 100% 0, 100% 100%, 30% 100%);
+#     -webkit-shape-margin:      20px;
+   }
+
+- Shortcuts parse=on:
+
+
+#-------------------------------------------------------------------------------
+---
+- style: >
+   /* http://en.wikipedia.org/wiki/Paper_size */
+   .A4-Paper
+   {
+     width:             210mm;
+     height:            297mm;
+     min-width:         210mm;
+     min-height:        297mm;
+     padding:           5mm;
+     margin:            0;
+     border-style:      solid;
+     border-width:      1px;
+     background-color:  #fefffe;
+   }
+
+#-------------------------------------------------------------------------------
+---
+
