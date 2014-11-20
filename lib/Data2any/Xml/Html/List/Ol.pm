@@ -161,7 +161,7 @@ sub convertList
     else
     {
       $listTreeNode = $self->mk_node('ol');
-      $listTreeNode->addAttr( type => $self->levelType
+      $listTreeNode->add_attribute( type => $self->levelType
                             , start => $self->levelStart
                             );
     }

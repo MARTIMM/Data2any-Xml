@@ -1,6 +1,6 @@
 package Data2any::Xml::Html::LinkFile;
 
-use version; our $VERSION = '' . version->parse("v0.0.11");
+use version; our $VERSION = '' . version->parse("v0.0.12");
 use 5.014003;
 #-------------------------------------------------------------------------------
 use Modern::Perl;
@@ -9,6 +9,7 @@ extends qw(Data2any::Aux::BlessedStructTools AppState::Plugins::Log::Constants);
 
 use AppState;
 use AppState::Plugins::Log::Meta_Constants;
+use AppState::Plugins::NodeTree::NodeText;
 
 #-------------------------------------------------------------------------------
 def_sts( 'E_NOTXTIMG',  'M_ERROR', 'No text or image to used with html link');
@@ -36,7 +37,7 @@ sub process
   my($self) = @_;
 
   my $nd = $self->get_data_item('node_data');
-  my $cfg = AppState->instance->get_app_object('Config');
+#  my $cfg = AppState->instance->get_app_object('ConfigManager');
 
   # Get and check type
   #
@@ -53,28 +54,31 @@ sub process
     my $href = $nd->{reference};
     if( defined $href )
     {
-      $aNode = $self->mk_node('a');
+      $aNode = $self->mk_node( 'a', $self->get_data_item('parent_node'));
       $self->set_default_attributes( $aNode, 1);
-      $aNode->parent($self->get_data_item('parent_node'));
-      $aNode->addAttr( href => $href);
-      $aNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
+
+      my $attr = {href => $href};
+      $attr->{alt} = $nd->{alttext} if defined $nd->{alttext};
+      $aNode->add_attribute(%$attr);
 
       # Is there an image ?
       #
       if( defined $nd->{image} and -r $nd->{image} )
       {
-        my $imgNode = $self->mk_node('img');
+        my $imgNode = $self->mk_node( 'img', $aNode);
         $self->set_default_attributes( $imgNode, 2);
-        $imgNode->parent($aNode);
-        $imgNode->addAttr( src => $nd->{image});
-        $imgNode->addAttr( alt => $nd->{alttext}) if defined $nd->{alttext};
+
+        my $attr = {src => $nd->{image}};
+        $attr->{alt} = $nd->{alttext} if defined $nd->{alttext};
+        $imgNode->add_attribute(%$attr);
       }
 
       # Or is there text ?
       #
       elsif( defined $nd->{text} and $nd->{text} )
       {
-        $aNode->value($nd->{text});
+        my $text_node = AppState::Plugins::NodeTree::NodeText->new(value => $nd->{text});
+        $aNode->link_with_node($text_node);
       }
 
       else

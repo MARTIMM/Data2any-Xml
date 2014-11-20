@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #
 use Modern::Perl;
-use version; our $VERSION = version->parse('v0.0.6');
+use version; our $VERSION = version->parse('v0.0.7');
 use 5.016003;
 
 use namespace::autoclean;
@@ -64,7 +64,6 @@ Document number in file to process. Default number 0
 EOENTRY
           ]
         , [ 'help|h:s'	        => 'Help on this program']
-        , [ 'logging|l:i'	=> 'Turn logging on, default is 0(off)']
         , [ 'sendToSelect|s:s'	=> <<EOENTRY
 Select SENDTO entry. Default is STDOUT which is a special SENDTO value and will
 send the result to the standard output channel of the program, mostly the
@@ -124,8 +123,7 @@ sub BUILD
   # Setup application
   #
   my $app = AppState->instance;
-  $app->initialize;
-  $app->check_directories;
+  $app->initialize(check_directories => 1);
 
   #-----------------------------------------------------------------------------
   # Setup logging
@@ -133,9 +131,11 @@ sub BUILD
   my $log = $app->get_app_object('Log');
 
   $log->do_append_log(0);
-  #$log->do_flush_log(1);
+  $log->write_start_message(0);
+  $log->message_wrapping(0);
   $log->start_logging;
-  $log->file_log_level($self->M_ERROR);
+  $log->file_log_level( { level => $self->M_TRACE, package => 'root'});
+  $log->stderr_log_level( { level => $self->M_TRACE, package => 'root'});
   $log->stderr_log_level( { level => $self->M_TRACE, package => 'root'});
   $log->add_tag('Y2A');
 }
@@ -203,9 +203,6 @@ if( !defined $filename )
 my $data2any = Data2any->new( input_file => $filename
                             , data_file_type => 'Yaml'
                             );
-
-my $logging = $cmd->get_option('logging');
-$data2any->logging($logging) if defined $logging;
 
 # ==!!==
 $data2any->translator('Xml');
