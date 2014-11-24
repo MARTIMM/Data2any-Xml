@@ -13,7 +13,10 @@ use AppState::Plugins::Log::Meta_Constants;
 #-------------------------------------------------------------------------------
 def_sts( 'E_NOMODE',    'M_ERROR', 'No mode defined or recognized');
 def_sts( 'E_NOFILE',    'M_ERROR', 'No file defined for mode link_to_file');
-def_sts( 'E_STOREDFD',   'M_ERROR', 'Storage already defined (%s)');
+def_sts( 'E_STOREDFD',  'M_ERROR', 'Storage already defined (%s)');
+def_sts( 'W_NORULES',   'M_WARN', 'No css rules found');
+def_sts( 'W_NOSTRUCT',  'M_WARN', 'No proper structure, ignored');
+def_sts( 'W_STRUCTFLT', 'M_WARN', 'Css structure not properly defined, ignored');
 
 #-------------------------------------------------------------------------------
 #
@@ -132,7 +135,34 @@ say "Set object up on style";
     
   elsif( $mode eq 'css_rule' )
   {
+    my $rules = $nd->{rules} // '';
+    return $self->log($self->W_NORULES) unless ref $rules eq 'ARRAY';
+    
+    my $rule_set = $head_node->get_global_data('css_rules') // [];
+    foreach my $prop_struct (@$rules)
+    {
+      if( ref $prop_struct eq 'HASH' )
+      {
+        my $selector = $prop_struct->{select} // '';
+        my $properties = $prop_struct->{props} // '';
+        if( $selector and ref $properties eq 'HASH' )
+        {
+          push @$rule_set, {$selector => $properties};
+        }
 
+        else
+        {
+          $self->log($self->W_STRUCTFLT);
+        }
+      }
+
+      else
+      {
+        $self->log($self->W_NOSTRUCT);
+      }
+    }
+
+    $head_node->set_global_data(css_rules => $rule_set);
   }
 
   else
@@ -160,7 +190,7 @@ say "Text: $text_node";
 
     # Test of the css text from location
     #
-    my $text = $self->_get_css_text;
+    my $text = $self->_get_css_text($style_node);
 
     $text_node->value($text);
     $style_node->link_with_node($text_node);
@@ -174,13 +204,13 @@ say "Text: $text_node";
 sub handler_down
 {
   my( $self, $html_node, $object_key) = @_;
-  
+
 say "Down handler, $object_key, node=", $html_node->name;
   if( $object_key eq 'css_object_down' )
   {
     my $nd = $self->get_data_item('node_data');
     open my $css_file, '>', $nd->{file};
-    say $css_file $self->_get_css_text;
+    say $css_file $self->_get_css_text($html_node);
     close $css_file;
   }
 }
@@ -189,61 +219,27 @@ say "Down handler, $object_key, node=", $html_node->name;
 #
 sub _get_css_text
 {
-  return <<'EOTXT';
+  my( $self, $node) = @_;
+  
+  my $css_text = '';
+  my $rule_set = $node->get_global_data('css_rules') // [];
+  foreach my $rule (@$rule_set)
+  {
+    my( $selector, $properties) = each %$rule;
+    my $prop_text = join( "\n  "
+                        , map {"$_: $properties->{$_};"} (keys %$properties)
+                        );
 
-.A4-Paper
+    $css_text .=<<EOCSS;
+
+$selector
 {
-  /* The page must be defined on its outside maximum values */
-  box-sizing:      border-box;
-
-  /* Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
-     to use the values like this. Use padding to specify the print margin
-  */
-  width:           210mm;
-#       height:          297mm;
-  height:          297.2mm;
-
-  /* Everything outside the page will disappear */
-#       text-overflow:   ellipsis;
-  overflow:        hidden;
-
-  word-wrap:       break-word;
-  text-wrap:       suppress;
-  text-rendering:  optimizeLegibility;
-#       -webkit-font-smoothing: pixel-antialiased;
-
-  /* Inside area which is the printable area. wkhtmltopdf has the default
-     of 10mm from the edge.
-  */
-  padding:         10mm;
-  margin:          0;
-
-  border-width:    1px;
-  bolder-color:    #ff0055;
-  border-style:    solid;
+  $prop_text
 }
+EOCSS
+  }
 
-
-
-/* Font definitions */
-@font-face
-{ font-family:       Pamela;
-  font-style:        normal;
-  src:               url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
-}
-
-body
-{ margin:            0;
-  font-family:       Arial, sans-serif;
-}
-
-.weird3
-{ font-family:       Pamela;
-  font-size:         25px;
-  color:             #777;
-}
-
-EOTXT
+  return $css_text;
 }
 
 #-------------------------------------------------------------------------------

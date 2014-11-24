@@ -50,7 +50,7 @@
 - html lang=en-US dir=ltr:
    - head:
       - meta charset=utf-8:
-      - title: Example 5, Html5 and Css styling.
+      - title: Example 6, Html5 and Css styling.
 
       # Include the stylesheets from document 1
       #
@@ -58,64 +58,65 @@
 #         type: includeThis
 #         document: 1
 
+#   - !perl/Data2any::Xml::Html::Css
+#      mode: link_to_file
+#      file: ex-6.css
+#      url: file:///home/marcel/Languages/Perl/Lib/Modules/Data2any-Xml/doc/Examples/6/ex-6.css
+
    - !perl/Data2any::Xml::Html::Css
-      mode: link_to_file
-      file: ex-6.css
-      url: file:///home/marcel/Languages/Perl/Lib/Modules/Data2any-Xml/doc/Examples/6/ex-6.css
+      mode: inline
 
    - !perl/Data2any::Xml::Html::Css
       mode: css_rule
       rules:
        # The page must be defined on its outside maximum values
        #
-       .A4-Paper:
-        box-sizing: border-box;
+       - select: A4-Paper
+         props: 
+          box-sizing: border-box
 
-        # Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
-        # to use the values like this. Use padding to specify the print margin
-        #
-        width: 210mm
-        #height: 297mm
-        height: 297.2mm
+          # Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
+          # to use the values like this. Use padding to specify the print margin
+          #
+          width: 210mm
+          #height: 297mm
+          height: 297.2mm
 
-        # Everything outside the page will disappear
-        #
-        #text-overflow: ellipsis
-        overflow: hidden
+          # Everything outside the page will disappear
+          #
+          #text-overflow: ellipsis
+          overflow: hidden
 
-        word-wrap: break-word
-        text-wrap: suppress
-        text-rendering: optimizeLegibility
-        #-webkit-font-smoothing: pixel-antialiased
+          word-wrap: break-word
+          text-wrap: suppress
+          text-rendering: optimizeLegibility
+          #-webkit-font-smoothing: pixel-antialiased
 
-        # Inside area which is the printable area. wkhtmltopdf has the default
-        # of 10mm from the edge.
-        #
-        padding: 10mm
-        margin: 0
+          # Inside area which is the printable area. wkhtmltopdf has the default
+          # of 10mm from the edge.
+          #
+#          padding: 10mm
+#          margin: 0
 
-        border-width: 1px
-        bolder-color: #ff0055
-        border-style: solid
+          border-width: 1px
+          bolder-color: #ff0055
+          border-style: solid
 
-       # Font definitions
-       #
-       '@font-face':
-        font-family: Pamela
-        font-style: normal
-        src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype')
-       
-
-#   - !perl/Data2any::Xml::Html::Css
-#      mode: inline
+         # Font definitions
+         #
+       - select: '@font-face'
+         props:
+          font-family: Pamela
+          font-style: normal
+          src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype')
 
 
    - !perl/Data2any::Xml::Html::Css
       mode: css_rule
       rules:
-       body:
-        margin: 0
-        font-family: Arial, sans-serif
+       - select: body
+         props:
+          font-family: Arial, sans-serif
 
    - body:
       - section class=A4-Paper id=posts:
@@ -124,10 +125,19 @@
                - !perl/Data2any::Xml::Html::Css
                   mode: css_rule
                   rules:
-                   .weird3:
-                    font-family: Pamela
-                    font-size: 25px
-                    color: #777
+                   - select: .weird3
+                     props:
+                      font-family: Pamela
+                      font-size: 25px
+                      color: #777
+
+                   - select: .green
+                     props:
+                      color: #4d4
+                   
+                   - select: p
+                     props:
+                      padding: 10mm;
 
                - div:
                   - h1 class=weird3: Testje
@@ -140,7 +150,7 @@
                      - !perl/Data2any::Xml::Html::LinkFile
                         reference: http://google.com/search?q=lorem+ipsum
                         text: google for lorem
-                        class: weird3
+                        class: weird3 green
 
 #-------------------------------------------------------------------------------
 ---

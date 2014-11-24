@@ -1,54 +1,43 @@
 
-.A4-Paper
+
+A4-Paper
 {
-  /* The page must be defined on its outside maximum values */
-  box-sizing:      border-box;
-
-  /* Sizes of A4 type page size. Margins of wkhtmltopdf must be set to 0
-     to use the values like this. Use padding to specify the print margin
-  */
-  width:           210mm;
-#       height:          297mm;
-  height:          297.2mm;
-
-  /* Everything outside the page will disappear */
-#       text-overflow:   ellipsis;
-  overflow:        hidden;
-
-  word-wrap:       break-word;
-  text-wrap:       suppress;
-  text-rendering:  optimizeLegibility;
-#       -webkit-font-smoothing: pixel-antialiased;
-
-  /* Inside area which is the printable area. wkhtmltopdf has the default
-     of 10mm from the edge.
-  */
-  padding:         10mm;
-  margin:          0;
-
-  border-width:    1px;
-  bolder-color:    #ff0055;
-  border-style:    solid;
+  width: 210mm;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 1px;
+  bolder-color: #ff0055;
+  text-wrap: suppress;
+  padding: 10mm;
+  height: 297.2mm;
+  word-wrap: break-word;
+  overflow: hidden;
+  margin: 0;
+  text-rendering: optimizeLegibility;
 }
 
-
-
-/* Font definitions */
 @font-face
-{ font-family:       Pamela;
-  font-style:        normal;
-  src:               url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+{
+  font-style: normal;
+  font-family: Pamela;
+  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
 }
 
 body
-{ margin:            0;
-  font-family:       Arial, sans-serif;
+{
+  font-family: Arial, sans-serif;
+  margin: 10;
 }
 
 .weird3
-{ font-family:       Pamela;
-  font-size:         25px;
-  color:             #777;
+{
+  font-size: 25px;
+  color: #777;
+  font-family: Pamela;
 }
 
+.green
+{
+  color: #4d4;
+}
 
