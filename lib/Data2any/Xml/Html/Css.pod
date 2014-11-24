@@ -1,0 +1,89 @@
+#-------------------------------------------------------------------------------
+# Documentation
+#
+
+=head1 NAME
+
+Data2any::Xml::Html::Css - Data2any Module to insert css
+
+=head1 SYNOPSIS
+ 
+ # Start html document with a head tag below it
+ #
+ - html lang=en-US dir=ltr:
+    - head:
+       - title: Introducing css
+
+    # Create the style tag to store the css rules below it
+    #
+    - !perl/Data2any::Xml::Html::Css
+       mode: inline
+
+    # The contents
+    #
+    - body:
+       # Define two selectors for class green and tag p
+       #
+       - !perl/Data2any::Xml::Html::Css
+          mode: css_rule
+          rules:
+           - select: .green
+             props:
+              color: #4d4
+
+           - select: p
+             props:
+              padding: 10mm;
+       
+       # Write some text
+       #
+       - p class=green: >
+          This text is printed in green color
+
+=head1 DESCRIPTION
+
+This module helps to insert css information into a file or style tag. There
+three ways to use it and it all depends on the parameter mode. The mode can be
+one of link_to_file, inline or css_rule. The first two can not be used together,
+it must be a choice  between either one of them. These can also not be used
+twice. The mode css_rule can be used anywhere in the program and more than once.
+
+=head2 Mode link_to_file
+
+This will create a link tag in the head tag. At the end of the process it stores
+the css data in the file where it refers to. With this mode the I<file>
+parameter is obligatory and it defines the filename where to write to. An
+optional parameter is I<url> to specify the precise path to find the file for a
+browser or other program like wkhtml2pdf.
+
+=head2 Mode inline
+
+This will create a style tag where in the end of the process all gathered css
+rules will be stored.
+
+=head2 Mode css_rule
+
+Define the css rules with this. There is a property called I<rules> needed. This
+is an array of rules of which each entry is defined by I<select> for selector
+rules, and I<props> for properties. The properties are key - value pairs which
+are normal css properties.
+
+=head1 SEE ALSO
+
+ L<Data2any>
+ L<Data2any::Xml>
+
+=head1 AUTHOR
+
+Marcel Timmerman, E<lt>mt1957@gmail.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2013 by Marcel Timmerman
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.14.3 or,
+at your option, any later version of Perl 5 you may have available.
+
+
+=cut
