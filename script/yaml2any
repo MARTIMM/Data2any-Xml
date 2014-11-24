@@ -213,7 +213,7 @@ my $docnbr = $cmd->get_option('docnbr');
 $data2any->request_document($docnbr) if defined $docnbr;
 
 my $sendToSelect = $cmd->get_option('sendToSelect');
-$data2any->sendToSelect($sendToSelect) if defined $sendToSelect;
+$data2any->send_to_select($sendToSelect) if defined $sendToSelect;
 
 # Transform steps to get results
 #
