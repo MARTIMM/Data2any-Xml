@@ -50,27 +50,23 @@ sub process
   {
     # Get the variables to generate html link.
     #
-    my $aNode;
+    my $a_node;
     my $href = $nd->{reference};
     if( defined $href )
     {
-      $aNode = $self->mk_node( 'a', $self->get_data_item('parent_node'));
-      $self->set_default_attributes( $aNode, 1);
-
+      $a_node = $self->mk_node( 'a', $self->get_data_item('parent_node'));
       my $attr = {href => $href};
       $attr->{alt} = $nd->{alttext} if defined $nd->{alttext};
-      $aNode->add_attribute(%$attr);
+      $a_node->add_attribute(%$attr);
 
       # Is there an image ?
       #
       if( defined $nd->{image} and -r $nd->{image} )
       {
-        my $imgNode = $self->mk_node( 'img', $aNode);
-        $self->set_default_attributes( $imgNode, 2);
-
+        my $img_node = $self->mk_node( 'img', $a_node);
         my $attr = {src => $nd->{image}};
         $attr->{alt} = $nd->{alttext} if defined $nd->{alttext};
-        $imgNode->add_attribute(%$attr);
+        $img_node->add_attribute(%$attr);
       }
 
       # Or is there text ?
@@ -78,7 +74,7 @@ sub process
       elsif( defined $nd->{text} and $nd->{text} )
       {
         my $text_node = AppState::Plugins::NodeTree::NodeText->new(value => $nd->{text});
-        $aNode->link_with_node($text_node);
+        $a_node->link_with_node($text_node);
       }
 
       else
@@ -106,7 +102,7 @@ __END__
 
 =head1 NAME
 
-Data2any::Xml::Html::LinkFile - Generate html code to make a link reference
+Data2any::Xml::Html::LinkFile - Generate html code to connect documents
 
 =head1 SYNOPSIS
 
