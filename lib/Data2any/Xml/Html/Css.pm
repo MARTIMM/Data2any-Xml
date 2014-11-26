@@ -90,7 +90,6 @@ sub process
         #
         my $html_node = $parent_node->xpath('/html');
         $html_node->set_object(css_object_down => $self);
-say "Set object down on head";
       }
 
       else
@@ -120,7 +119,6 @@ say "Set object down on head";
       #
       my $text_node = $style_node->xpath('text()')
                         // AppState::Plugins::NodeTree::NodeText->new;
-say "Text: $text_node";
 
       $text_node->value('');
       $style_node->link_with_node($text_node);
@@ -128,7 +126,6 @@ say "Text: $text_node";
       # Store this object in the style node so as to run the 'up' handler
       # when traversing the tree on its first visit to the style node.
       #
-say "Set object up on style";
       $style_node->set_object(css_object_up => $self);
     }
   }
@@ -182,11 +179,9 @@ sub handler_up
 {
   my( $self, $style_node, $object_key) = @_;
 
-say "Up andler, $object_key, node=", $style_node->name;
   if( $object_key eq 'css_object_up' )
   {
     my $text_node = $style_node->xpath('text()');
-say "Text: $text_node";
 
     # Test of the css text from location
     #
@@ -205,7 +200,6 @@ sub handler_down
 {
   my( $self, $html_node, $object_key) = @_;
 
-say "Down handler, $object_key, node=", $html_node->name;
   if( $object_key eq 'css_object_down' )
   {
     my $nd = $self->get_data_item('node_data');
@@ -216,6 +210,7 @@ say "Down handler, $object_key, node=", $html_node->name;
 }
 
 #-------------------------------------------------------------------------------
+# Gather all css rules and return this as text
 #
 sub _get_css_text
 {

@@ -3,27 +3,44 @@
   <head>
     <meta charset="utf-8"/>
     <title>Example 6, Html5 and Css styling.</title>
+    <script>
+setInterval
+( function()
+  {
+    function r( el, deg)
+    {
+      el.setAttribute( 'transform', 'rotate('+ deg +' 50 50)')
+    }
+
+    var d = new Date();
+    r(sec, 6*d.getSeconds());
+    r(min, 6*d.getMinutes());
+    r(hour, 30*(d.getHours()%12) + d.getMinutes()/2);
+  }
+
+  , 1000
+)
+</script>
     <style>
-
 A4-Paper
 {
-  overflow: hidden;
-  word-wrap: break-word;
-  box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  bolder-color: #ff0055;
   border-style: solid;
-  height: 297.2mm;
+  box-sizing: border-box;
   border-width: 1px;
-  text-wrap: suppress;
   width: 210mm;
+  word-wrap: break-word;
+  height: 297.2mm;
+  overflow: hidden;
+  bolder-color: #ff0055;
+  text-wrap: suppress;
 }
 
 @font-face
 {
   font-family: Pamela;
-  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
   font-style: normal;
+  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
 }
 
 body
@@ -34,8 +51,8 @@ body
 .weird3
 {
   font-family: Pamela;
-  font-size: 25px;
   color: #777;
+  font-size: 25px;
 }
 
 .green
@@ -48,26 +65,43 @@ p
   padding: 10mm;;
 }
 
+#face
+{
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+#hour, #min, #sec
+{
+  stroke: #555;
+  stroke-width: 1px;
+  fill: #333;
+}
+
+#sec
+{
+  stroke: #f55;
+}
 
 A4-Paper
 {
-  overflow: hidden;
-  word-wrap: break-word;
-  box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  bolder-color: #ff0055;
   border-style: solid;
-  height: 297.2mm;
+  box-sizing: border-box;
   border-width: 1px;
-  text-wrap: suppress;
   width: 210mm;
+  word-wrap: break-word;
+  height: 297.2mm;
+  overflow: hidden;
+  bolder-color: #ff0055;
+  text-wrap: suppress;
 }
 
 @font-face
 {
   font-family: Pamela;
-  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
   font-style: normal;
+  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
 }
 
 body
@@ -78,8 +112,8 @@ body
 .weird3
 {
   font-family: Pamela;
-  font-size: 25px;
   color: #777;
+  font-size: 25px;
 }
 
 .green
@@ -90,6 +124,24 @@ body
 p
 {
   padding: 10mm;;
+}
+
+#face
+{
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+#hour, #min, #sec
+{
+  stroke: #555;
+  stroke-width: 1px;
+  fill: #333;
+}
+
+#sec
+{
+  stroke: #f55;
 }
 </style>
   </head>
@@ -97,13 +149,19 @@ p
     <section class="A4-Paper" id="posts">
       <article>
         <div>
-          <div>
-            <h1 class="weird3">Testje</h1>
-            <p class="weird3">Quod quae fugit quod debitis qui. Asperiores ut sit atque porro officiis aut earum. Odio animi earum cupiditate voluptas. Deserunt quam esse aut delectus ipsam. Eos deserunt rem alias illo et ratione illum quasi. Deserunt similique officiis at qui eius nulla itaque laborum. Nostrum ullam nemo ut nisi consequatur enim hic nemo. Hic corrupti non velit. Et similique officiis natus sint recusandae quis iste aperiam. Laborum sapiente dolores deserunt illum ut.</p>
-            <p>
-              <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum">google for lorem</a>
-            </p>
-          </div>
+          <h1 class="weird3">Testje</h1>
+          <p class="weird3">Accusamus molestias asperiores recusandae soluta est quis nobis quia. Non dolor mollitia cupiditate in rerum. Voluptates et numquam recusandae et accusamus accusamus. Eum magni debitis non fugiat vero reiciendis repudiandae. Qui in consectetur atque voluptas voluptates consectetur. Voluptatem aspernatur qui eveniet. Qui eos nesciunt quis aut totam. Odio expedita suscipit est enim consequuntur ut. Consequuntur error quia voluptates. Amet eaque id molestias.</p>
+          <p>
+            <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum">google for lorem</a>
+          </p>
+          <svg id="clock" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" id="face" r="45"/>
+            <g id="hands">
+              <rect height="30" id="hour" rx="2.5" ry="2.55" width="5" x="47.5" y="22.0"/>
+              <rect height="40" id="min" rx="2" ry="2" width="3" x="48.5" y="12.5"/>
+              <line id="sec" x1="50" x2="50" y1="50" y2="16"/>
+            </g>
+          </svg>
         </div>
       </article>
     </section>
