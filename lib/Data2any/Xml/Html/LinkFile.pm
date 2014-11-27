@@ -54,8 +54,16 @@ sub process
     my $href = $nd->{reference};
     if( defined $href )
     {
-      $a_node = $self->mk_node( 'a', $self->get_data_item('parent_node'));
-      my $attr = {href => $href};
+      my $target = $nd->{target} // '_self';
+    
+      my $a_node_parent = $self->get_data_item('parent_node');
+      my $text_node_space = AppState::Plugins::NodeTree::NodeText
+                              ->new(value => ' ');
+      $a_node_parent->link_with_node($text_node_space);
+
+
+      $a_node = $self->mk_node( 'a', $a_node_parent);
+      my $attr = { href => $href, target => $target};
       $attr->{alt} = $nd->{alttext} if defined $nd->{alttext};
       $a_node->add_attribute(%$attr);
 
@@ -73,7 +81,9 @@ sub process
       #
       elsif( defined $nd->{text} and $nd->{text} )
       {
-        my $text_node = AppState::Plugins::NodeTree::NodeText->new(value => $nd->{text});
+
+        my $text_node = AppState::Plugins::NodeTree::NodeText
+                          ->new(value => ' ' . $nd->{text} . ' ');
         $a_node->link_with_node($text_node);
       }
 
@@ -81,6 +91,10 @@ sub process
       {
         $self->log($self->E_NOTXTIMG);
       }
+
+      $text_node_space = AppState::Plugins::NodeTree::NodeText
+                              ->new(value => ' ');
+      $a_node_parent->link_with_node($text_node_space);
     }
   }
 

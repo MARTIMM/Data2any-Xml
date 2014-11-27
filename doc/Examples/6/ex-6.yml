@@ -150,7 +150,7 @@
                      reference: http://google.com/search?q=lorem+ipsum
                      text: google for lorem
                      class: weird3 green
-
+                     target: _blank
 
 
                - !perl/Data2any::Xml::Html::Css
@@ -169,6 +169,13 @@
                      props:
                       stroke: #f55
 
+               - h1 class=green:
+                  - A Clock from an example on the site
+                  - !perl/Data2any::Xml::Html::LinkFile
+                     reference: http://demosthenes.info/blog
+                     text: demosthenes
+                     class: green
+                     target: _blank
                - svg id=clock viewBox="0 0 100 100":
                   - circle id=face cx=50 cy=50 r=45:
                   - g id=hands:
