@@ -24,22 +24,22 @@ setInterval
     <style>
 A4-Paper
 {
-  height: 297.2mm;
   text-rendering: optimizeLegibility;
-  bolder-color: #ff0055;
-  border-style: solid;
   box-sizing: border-box;
-  width: 210mm;
-  text-wrap: suppress;
-  border-width: 1px;
-  overflow: hidden;
   word-wrap: break-word;
+  height: 297.2mm;
+  border-width: 1px;
+  text-wrap: suppress;
+  width: 210mm;
+  border-style: solid;
+  bolder-color: #ff0055;
+  overflow: hidden;
 }
 
 @font-face
 {
-  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
   font-family: Pamela;
+  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
   font-style: normal;
 }
 
@@ -51,18 +51,13 @@ body
 .weird3
 {
   font-size: 25px;
-  color: #777;
   font-family: Pamela;
+  color: #777;
 }
 
 .green
 {
   color: #4d4;
-}
-
-p
-{
-  padding: 10mm;;
 }
 
 #face
@@ -83,74 +78,37 @@ p
   stroke: #f55;
 }
 
-A4-Paper
+a.iris-wipe
 {
-  height: 297.2mm;
-  text-rendering: optimizeLegibility;
-  bolder-color: #ff0055;
-  border-style: solid;
   box-sizing: border-box;
-  width: 210mm;
-  text-wrap: suppress;
-  border-width: 1px;
-  overflow: hidden;
-  word-wrap: break-word;
+  -moz-box-sizing: border-box;
+  border: 64px solid rgba(150,0,150,1);
+  text-decoration: none;
+  -moz-transition: .3s all ease-in;
+  -webkit-box-sizing: border-box;
+  background-size: 128px 128px;
+  display: block;
+  height: 128px;
+  width: 128px;
+  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
+  border-radius: 50%;
+  -webkit-transition: .3s all ease-in;
+  background-position: center;
+  transition: .3s all ease-in;
 }
 
-@font-face
+a.iris-wipe:hover
 {
-  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
-  font-family: Pamela;
-  font-style: normal;
-}
-
-body
-{
-  font-family: Arial, sans-serif;
-}
-
-.weird3
-{
-  font-size: 25px;
-  color: #777;
-  font-family: Pamela;
-}
-
-.green
-{
-  color: #4d4;
-}
-
-p
-{
-  padding: 10mm;;
-}
-
-#face
-{
-  stroke: #fff;
-  stroke-width: 2px;
-}
-
-#hour, #min, #sec
-{
-  fill: #333;
-  stroke: #555;
-  stroke-width: 1px;
-}
-
-#sec
-{
-  stroke: #f55;
+  border: 0px solid rgba(0,0,0,1);
 }
 </style>
   </head>
   <body>
     <section class="A4-Paper" id="posts">
       <article>
-        <div>
+        <section>
           <h1 class="weird3">Testje</h1>
-          <p class="weird3">Sint et ut eaque. Ratione nemo at qui porro necessitatibus et impedit. Ut nesciunt aperiam recusandae iste iure quia. Quos et tempore impedit sapiente beatae ea et reprehenderit. Minus maiores aut ut exercitationem mollitia saepe culpa nostrum. Omnis similique hic laboriosam similique et eveniet consequatur. Eum enim omnis ut unde rerum quis expedita. Et enim sint repudiandae. Voluptatem alias non enim debitis. Voluptates est suscipit sed qui neque sint repudiandae.</p>
+          <p class="weird3">Aspernatur quos nihil minima vitae voluptatum nisi culpa suscipit. Illum est ab doloremque veniam. Eius nobis nam blanditiis optio aut autem quasi pariatur. Distinctio voluptate sint facilis. Vitae qui sapiente nihil dolor et iure autem. Necessitatibus natus esse ipsam sit asperiores et nesciunt. Mollitia autem explicabo quos fugiat qui. Aperiam dolorem et dolorem animi officiis deleniti vel ipsum. Quaerat voluptatum quo et suscipit sit ipsam velit. Qui enim non et quidem voluptatem est omnis.</p>
           <p> <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum" target="_blank"> google for lorem </a> </p>
           <h1 class="green">A Clock from an example on the site <a class="green" href="http://demosthenes.info/blog" target="_blank"> demosthenes </a> </h1>
           <svg id="clock" viewBox="0 0 100 100">
@@ -161,7 +119,9 @@ p
               <line id="sec" x1="50" x2="50" y1="50" y2="16"/>
             </g>
           </svg>
-        </div>
+          <h1 class="green">An iris wipe effect from the same site</h1>
+          <a class="iris-wipe"> </a>
+        </section>
       </article>
     </section>
   </body>

@@ -144,6 +144,7 @@ sub process
         my $properties = $prop_struct->{props} // '';
         if( $selector and ref $properties eq 'HASH' )
         {
+          $self->log( $self->C_LOG_TRACE, ["Add ccs property $selector => $properties"]);
           push @$rule_set, {$selector => $properties};
         }
 
@@ -183,12 +184,10 @@ sub handler_up
   {
     my $text_node = $style_node->xpath('text()');
 
-    # Test of the css text from location
+    # Insert the css text
     #
-    my $text = $self->_get_css_text($style_node);
-
-    $text_node->value($text);
-    $style_node->link_with_node($text_node);
+    $text_node->value($self->_get_css_text($style_node));
+    $self->log( $self->C_LOG_TRACE, ["Ccs properties inserted in style tag"]);
   }
 }
 
@@ -202,10 +201,14 @@ sub handler_down
 
   if( $object_key eq 'css_object_down' )
   {
+    # Save the css text in a file
+    #
     my $nd = $self->get_data_item('node_data');
     open my $css_file, '>', $nd->{file};
     say $css_file $self->_get_css_text($html_node);
     close $css_file;
+
+    $self->log( $self->C_LOG_TRACE, ["Ccs properties saved in file"]);
   }
 }
 
@@ -233,6 +236,8 @@ $selector
 }
 EOCSS
   }
+
+    $self->log( $self->C_LOG_TRACE, ["Ccs properties inserted in style tag"]);
 
   return $css_text;
 }

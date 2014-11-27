@@ -121,7 +121,7 @@
    - body:
       - section class=A4-Paper id=posts:
          - article:
-            - div:
+            - section:
                - !perl/Data2any::Xml::Html::Css
                   mode: css_rule
                   rules:
@@ -135,9 +135,9 @@
                      props:
                       color: #4d4
                    
-                   - select: p
-                     props:
-                      padding: 10mm;
+#                   - select: p
+#                     props:
+#                      padding: 10mm;
 
                - h1 class=weird3: Testje
                - p class=weird3:
@@ -171,6 +171,7 @@
 
                - h1 class=green:
                   - A Clock from an example on the site
+#                  - a class=green target=_blank href=http://demosthenes.info/blog: demosthenes
                   - !perl/Data2any::Xml::Html::LinkFile
                      reference: http://demosthenes.info/blog
                      text: demosthenes
@@ -182,6 +183,34 @@
                      - rect id=hour x=47.5 y=22.0 width=5 height=30 rx=2.5 ry=2.55:
                      - rect id=min x=48.5 y=12.5 width=3 height=40 rx=2 ry=2:
                      - line id=sec x1=50 y1=50 x2=50 y2=16:
+
+               - h1 class=green: An iris wipe effect from the same site
+               - !perl/Data2any::Xml::Html::Css
+                  mode: css_rule
+                  rules:
+                   - select: a.iris-wipe
+                     props:
+                      width: 128px
+                      height: 128px
+                      display: block
+                      border-radius: 50%
+                      box-sizing: border-box
+                      -moz-box-sizing: border-box
+                      -webkit-box-sizing: border-box
+                      transition: .3s all ease-in
+                      -moz-transition: .3s all ease-in
+                      -webkit-transition: .3s all ease-in
+                      text-decoration: none
+                      background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png)
+                      background-position: center
+                      background-size: 128px 128px
+                      border: 64px solid rgba(150,0,150,1)
+
+                   - select: a.iris-wipe:hover
+                     props:
+                      border: 0px solid rgba(0,0,0,1)
+
+               - a class=iris-wipe: ' '
 
 #-------------------------------------------------------------------------------
 ---
