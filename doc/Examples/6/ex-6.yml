@@ -184,7 +184,13 @@
                      - rect id=min x=48.5 y=12.5 width=3 height=40 rx=2 ry=2:
                      - line id=sec x1=50 y1=50 x2=50 y2=16:
 
-               - h1 class=green: An iris wipe effect from the same site
+               - h1 class=green:
+                  - An iris wipe effect from the same site
+                  - !perl/Data2any::Xml::Html::LinkFile
+                     reference: http://demosthenes.info/blog/558/Super-Easy-Iris-Wipe-in-CSS3#
+                     text: demosthenes
+                     class: green
+                     target: _blank
                - !perl/Data2any::Xml::Html::Css
                   mode: css_rule
                   rules:
@@ -205,6 +211,7 @@
                       background-position: center
                       background-size: 128px 128px
                       border: 64px solid rgba(150,0,150,1)
+#                      opacity: .4
 
                    - select: a.iris-wipe:hover
                      props:

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Example 7, Html5 Drag 'n drop</title>
+    <meta content="html5,drag,drop" name="keywords"/>
+    <script src="http://localhost/I/Javascript/JQuery/jquery-2.1.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+var tid;
+
+function allowDrop(ev)
+{
+  ev.preventDefault();
+
+}
+
+function drag(ev)
+{
+  ev.dataTransfer.setData( 'id1', ev.target.id);
+}
+
+function drop(ev)
+{
+  ev.preventDefault();
+
+  var targetId = ev.dataTransfer.getData('id1');
+  tid = $('#' + targetId);
+  var img = tid.find('img');
+  alert(img);
+  ev.target.appendChild(document.getElementById(targetId));
+}
+</script>
+    <style>
+.divs
+{
+  margin: 2px;
+  float: left;
+  border: 1px solid #832;
+  width: 128px;
+  height: 128px;
+}
+</style>
+  </head>
+  <body>
+    <section>
+      <article>
+        <section>
+          <h1>Drag and drop from <a href="http://www.w3schools.com/html/html5_draganddrop.asp" target="_blank"> w3schools </a> </h1>
+          <div class="divs" id="div1" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="divs" id="div2" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="divs" id="div3" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="divs" id="div4" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <img draggable="true" id="drag1" ondragstart="drag(event)" src="http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png"/>
+          </div>
+          <div class="divs" id="div5" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="divs" id="div6" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <img draggable="true" id="drag2" ondragstart="drag(event)" src="http://localhost/I/Icons/128x128/Face-Avatars-F/FH02.png"/>
+          </div>
+        </section>
+      </article>
+    </section>
+  </body>
+</html>

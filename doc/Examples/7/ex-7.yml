@@ -1,0 +1,127 @@
+#!/usr/bin/env yaml2any
+#
+---
+#-------------------------------------------------------------------------------
+# Document 0, The document to start with.
+#
+- DocumentControl:
+   Translator: Xml
+   Encoding: UTF-8
+
+   SendTo:
+    # ex-5.yml -s cat
+    #
+    cat: '| cat > __BASENAME__.html'
+
+    # ex-5.yml -s xml*
+    #
+    xml: |
+     | xml_pp -p 'pre script style'  > __BASENAME__.html
+
+    # ex-5.yml -s wk*
+    #
+    # Stream the data directly to wkhtmltopdf. Remove all margins. There is no
+    # need to set paper size.
+    #
+    wk: |
+     | wkhtmltopdf -B 0 -L 0 -R 0 -T 0 -s A4 --print-media-type --encoding UTF-8 - __BASENAME__.pdf
+
+#-------------------------------------------------------------------------------
+# html 5. Example using javascript library d3
+#
+- DOCTYPE root=html:
+
+# No entities definitions possible in html5. Use unicode directly
+#   entities:
+#    - copy "&#x00A9;"
+
+- html lang=en-US dir=ltr:
+   - head:
+      - meta charset=utf-8:
+      - title: Example 7, Html5 Drag 'n drop
+      - meta name=keywords:
+         content: html5,drag,drop
+      - script src=http://localhost/I/Javascript/JQuery/jquery-2.1.1.js:
+        type=text/javascript: ''
+
+      # Include javascript drag and drop code from document 1
+      #
+      - !perl/Data2any::Any::IncludeDocument
+         type: includeThis
+         document: 1
+
+   - !perl/Data2any::Xml::Html::Css
+      mode: inline
+
+   - body:
+      - section:
+         - article:
+            - section:
+               - h1:
+                  - Drag and drop from
+                  - !perl/Data2any::Xml::Html::LinkFile
+                     reference: http://www.w3schools.com/html/html5_draganddrop.asp
+                     text: w3schools
+                     target: _blank
+                  
+               - !perl/Data2any::Xml::Html::Css
+                  mode: css_rule
+                  rules:
+                   - select: .divs
+                     props:
+                      border: 1px solid #832
+                      height: 128px
+                      width: 128px
+                      float: left
+                      margin: 2px
+
+               - div id=div1 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+               - div id=div2 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+               - div id=div3 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+               - div id=div4 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+                  - img id=drag1 draggable=true ondragstart=drag(event):
+                    src=http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png:
+               - div id=div5 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+               - div id=div6 class=divs: ''
+                 ondrop=drop(event) ondragover=allowDrop(event):
+                  - img id=drag2 draggable=true ondragstart=drag(event):
+                    src=http://localhost/I/Icons/128x128/Face-Avatars-F/FH02.png:
+
+#-------------------------------------------------------------------------------
+---
+# Document 1, Javascript for drag and drop
+
+- script type=text/javascript: |
+
+   var tid;
+   
+   function allowDrop(ev)
+   {
+     ev.preventDefault();
+
+#     var targetId = ev.dataTransfer.getData('id1');
+#     tid = $('#' + targetId);
+#     tid.fadeOut('slow');
+   }
+
+   function drag(ev)
+   {
+     ev.dataTransfer.setData( 'id1', ev.target.id);
+   }
+
+   function drop(ev)
+   {
+     ev.preventDefault();
+
+     var targetId = ev.dataTransfer.getData('id1');
+     tid = $('#' + targetId);
+#     tid.fadeIn('slow');
+     var img = tid.find('img');
+#     alert(img);
+     ev.target.appendChild(document.getElementById(targetId));
+   }

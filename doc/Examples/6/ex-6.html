@@ -24,23 +24,23 @@ setInterval
     <style>
 A4-Paper
 {
-  text-rendering: optimizeLegibility;
-  box-sizing: border-box;
-  word-wrap: break-word;
+  overflow: hidden;
   height: 297.2mm;
+  bolder-color: #ff0055;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
   border-width: 1px;
   text-wrap: suppress;
-  width: 210mm;
   border-style: solid;
-  bolder-color: #ff0055;
-  overflow: hidden;
+  width: 210mm;
 }
 
 @font-face
 {
-  font-family: Pamela;
   src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
   font-style: normal;
+  font-family: Pamela;
 }
 
 body
@@ -50,9 +50,9 @@ body
 
 .weird3
 {
+  color: #777;
   font-size: 25px;
   font-family: Pamela;
-  color: #777;
 }
 
 .green
@@ -69,8 +69,8 @@ body
 #hour, #min, #sec
 {
   fill: #333;
-  stroke: #555;
   stroke-width: 1px;
+  stroke: #555;
 }
 
 #sec
@@ -80,21 +80,21 @@ body
 
 a.iris-wipe
 {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  border: 64px solid rgba(150,0,150,1);
-  text-decoration: none;
-  -moz-transition: .3s all ease-in;
-  -webkit-box-sizing: border-box;
-  background-size: 128px 128px;
-  display: block;
   height: 128px;
-  width: 128px;
-  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
-  border-radius: 50%;
+  -moz-transition: .3s all ease-in;
   -webkit-transition: .3s all ease-in;
-  background-position: center;
   transition: .3s all ease-in;
+  background-position: center;
+  display: block;
+  border-radius: 50%;
+  text-decoration: none;
+  -moz-box-sizing: border-box;
+  background-size: 128px 128px;
+  box-sizing: border-box;
+  border: 64px solid rgba(150,0,150,1);
+  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
+  width: 128px;
+  -webkit-box-sizing: border-box;
 }
 
 a.iris-wipe:hover
@@ -108,7 +108,7 @@ a.iris-wipe:hover
       <article>
         <section>
           <h1 class="weird3">Testje</h1>
-          <p class="weird3">Aspernatur quos nihil minima vitae voluptatum nisi culpa suscipit. Illum est ab doloremque veniam. Eius nobis nam blanditiis optio aut autem quasi pariatur. Distinctio voluptate sint facilis. Vitae qui sapiente nihil dolor et iure autem. Necessitatibus natus esse ipsam sit asperiores et nesciunt. Mollitia autem explicabo quos fugiat qui. Aperiam dolorem et dolorem animi officiis deleniti vel ipsum. Quaerat voluptatum quo et suscipit sit ipsam velit. Qui enim non et quidem voluptatem est omnis.</p>
+          <p class="weird3">Cupiditate optio aperiam et temporibus. Occaecati laboriosam magnam laudantium cum itaque dolor sed. Ut ipsam et sunt corrupti voluptas voluptatibus. Et error non cumque aliquam et et. Voluptate dolorum est velit. Modi magnam culpa ut. Dolores aliquam a id quidem voluptas. Recusandae quia impedit reiciendis minima officia quasi eum. Labore et officia sunt corrupti odit. Eos placeat quo non voluptas.</p>
           <p> <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum" target="_blank"> google for lorem </a> </p>
           <h1 class="green">A Clock from an example on the site <a class="green" href="http://demosthenes.info/blog" target="_blank"> demosthenes </a> </h1>
           <svg id="clock" viewBox="0 0 100 100">
@@ -119,7 +119,7 @@ a.iris-wipe:hover
               <line id="sec" x1="50" x2="50" y1="50" y2="16"/>
             </g>
           </svg>
-          <h1 class="green">An iris wipe effect from the same site</h1>
+          <h1 class="green">An iris wipe effect from the same site <a class="green" href="http://demosthenes.info/blog/558/Super-Easy-Iris-Wipe-in-CSS3#" target="_blank"> demosthenes </a> </h1>
           <a class="iris-wipe"> </a>
         </section>
       </article>
