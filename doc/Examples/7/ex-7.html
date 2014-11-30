@@ -26,17 +26,16 @@ function drop(ev)
   var targetId = ev.dataTransfer.getData('id1');
   tid = $('#' + targetId);
   var img = tid.find('img');
-  alert(img);
   ev.target.appendChild(document.getElementById(targetId));
 }
 </script>
     <style>
 .divs
 {
-  margin: 2px;
-  float: left;
   border: 1px solid #832;
   width: 128px;
+  float: left;
+  margin: 2px;
   height: 128px;
 }
 </style>

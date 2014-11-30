@@ -124,4 +124,5 @@
      var img = tid.find('img');
 #     alert(img);
      ev.target.appendChild(document.getElementById(targetId));
+#     ev.target.appendChild(tid.contents());
    }

@@ -24,23 +24,23 @@ setInterval
     <style>
 A4-Paper
 {
-  overflow: hidden;
-  height: 297.2mm;
+  border-width: 1px;
   bolder-color: #ff0055;
-  word-wrap: break-word;
+  overflow: hidden;
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  border-width: 1px;
-  text-wrap: suppress;
   border-style: solid;
+  height: 297.2mm;
   width: 210mm;
+  word-wrap: break-word;
+  text-wrap: suppress;
 }
 
 @font-face
 {
-  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
-  font-style: normal;
   font-family: Pamela;
+  font-style: normal;
+  src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
 }
 
 body
@@ -50,8 +50,8 @@ body
 
 .weird3
 {
-  color: #777;
   font-size: 25px;
+  color: #777;
   font-family: Pamela;
 }
 
@@ -62,14 +62,14 @@ body
 
 #face
 {
-  stroke: #fff;
   stroke-width: 2px;
+  stroke: #fff;
 }
 
 #hour, #min, #sec
 {
-  fill: #333;
   stroke-width: 1px;
+  fill: #333;
   stroke: #555;
 }
 
@@ -80,21 +80,21 @@ body
 
 a.iris-wipe
 {
-  height: 128px;
-  -moz-transition: .3s all ease-in;
+  -webkit-box-sizing: border-box;
+  background-size: 128px 128px;
   -webkit-transition: .3s all ease-in;
   transition: .3s all ease-in;
-  background-position: center;
   display: block;
-  border-radius: 50%;
+  width: 128px;
+  height: 128px;
   text-decoration: none;
   -moz-box-sizing: border-box;
-  background-size: 128px 128px;
+  -moz-transition: .3s all ease-in;
+  background-position: center;
+  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
+  border-radius: 50%;
   box-sizing: border-box;
   border: 64px solid rgba(150,0,150,1);
-  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
-  width: 128px;
-  -webkit-box-sizing: border-box;
 }
 
 a.iris-wipe:hover
@@ -108,7 +108,7 @@ a.iris-wipe:hover
       <article>
         <section>
           <h1 class="weird3">Testje</h1>
-          <p class="weird3">Cupiditate optio aperiam et temporibus. Occaecati laboriosam magnam laudantium cum itaque dolor sed. Ut ipsam et sunt corrupti voluptas voluptatibus. Et error non cumque aliquam et et. Voluptate dolorum est velit. Modi magnam culpa ut. Dolores aliquam a id quidem voluptas. Recusandae quia impedit reiciendis minima officia quasi eum. Labore et officia sunt corrupti odit. Eos placeat quo non voluptas.</p>
+          <p class="weird3">Aut modi ad atque neque. Quod voluptas similique deleniti nihil ad sit temporibus doloremque. Optio et quaerat voluptates. Recusandae dolores sunt placeat asperiores est at ab. Impedit exercitationem vero delectus at ea autem et est. Nulla ipsum provident sapiente accusamus distinctio non. Temporibus veniam tempora quidem voluptas voluptas et exercitationem. Voluptas at vero ut. Voluptates asperiores dolor suscipit porro accusamus. Labore ut unde suscipit blanditiis rerum excepturi et porro.</p>
           <p> <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum" target="_blank"> google for lorem </a> </p>
           <h1 class="green">A Clock from an example on the site <a class="green" href="http://demosthenes.info/blog" target="_blank"> demosthenes </a> </h1>
           <svg id="clock" viewBox="0 0 100 100">

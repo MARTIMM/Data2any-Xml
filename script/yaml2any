@@ -133,9 +133,9 @@ sub BUILD
   $log->do_append_log(0);
   $log->write_start_message(0);
   $log->message_wrapping(0);
-  $log->start_logging;
+  $log->start_file_logging;
   $log->file_log_level( { level => $self->M_TRACE, package => 'root'});
-  $log->stderr_log_level( { level => $self->M_TRACE, package => 'root'});
+  $log->start_stderr_logging;
   $log->stderr_log_level( { level => $self->M_TRACE, package => 'root'});
   $log->add_tag('Y2A');
 }
