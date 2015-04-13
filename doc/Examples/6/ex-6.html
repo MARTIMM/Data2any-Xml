@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-  <head>
-    <meta charset="utf-8"/>
-    <title>Example 6, Html5 and Css styling.</title>
-    <script>
+<html lang="en-US" dir="ltr"><head><meta charset="utf-8" /><title>Example 6, Html5 and Css styling.</title><script>
 setInterval
 ( function()
   {
@@ -20,26 +16,25 @@ setInterval
 
   , 1000
 )
-</script>
-    <style>
+</script><style>
 A4-Paper
 {
-  border-style: solid;
-  border-width: 1px;
-  text-wrap: suppress;
   overflow: hidden;
-  height: 297.2mm;
-  bolder-color: #ff0055;
-  width: 210mm;
+  border-width: 1px;
+  border-style: solid;
   text-rendering: optimizeLegibility;
+  bolder-color: #ff0055;
+  height: 297.2mm;
   word-wrap: break-word;
+  width: 210mm;
+  text-wrap: suppress;
   box-sizing: border-box;
 }
 
 @font-face
 {
-  font-style: normal;
   src: url('http://localhost/I/Fonts/Pamela.ttf') format('truetype');
+  font-style: normal;
   font-family: Pamela;
 }
 
@@ -50,9 +45,9 @@ body
 
 .weird3
 {
-  font-size: 25px;
   font-family: Pamela;
   color: #777;
+  font-size: 25px;
 }
 
 .green
@@ -62,8 +57,8 @@ body
 
 #face
 {
-  stroke-width: 2px;
   stroke: #fff;
+  stroke-width: 2px;
 }
 
 #hour, #min, #sec
@@ -80,49 +75,25 @@ body
 
 a.iris-wipe
 {
-  -webkit-box-sizing: border-box;
-  text-decoration: none;
-  border-radius: 50%;
-  display: block;
-  border: 64px solid rgba(150,0,150,1);
-  -moz-transition: .3s all ease-in;
-  background-position: center;
-  box-sizing: border-box;
-  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
-  background-size: 128px 128px;
-  -webkit-transition: .3s all ease-in;
-  height: 128px;
   width: 128px;
-  transition: .3s all ease-in;
+  background-size: 128px 128px;
+  text-decoration: none;
+  -webkit-transition: .3s all ease-in;
+  box-sizing: border-box;
+  border-radius: 10%;
+  background: url(http://localhost/I/Icons/128x128/Face-Avatars-F/FH05.png);
   -moz-box-sizing: border-box;
+  background-position: center;
+  -webkit-box-sizing: border-box;
+  -moz-transition: .3s all ease-in;
+  border: 64px solid rgba(150,0,150,1);
+  height: 128px;
+  transition: .3s all ease-in;
+  display: block;
 }
 
 a.iris-wipe:hover
 {
   border: 0px solid rgba(0,0,0,1);
 }
-</style>
-  </head>
-  <body>
-    <section class="A4-Paper" id="posts">
-      <article>
-        <section>
-          <h1 class="weird3">Testje</h1>
-          <p class="weird3">Maxime in nam et nemo consequatur quam dolorem. Sunt omnis reprehenderit aut consequuntur praesentium perferendis similique. Aut et accusantium velit veniam temporibus omnis excepturi. Velit tempore reiciendis impedit aut natus. Quia ipsam quam eaque id voluptatum id. Eaque architecto dolorem sed odio aut aliquam nihil. Consequatur aperiam et similique neque quod. Cumque eum facere enim aut nisi temporibus. Ducimus molestiae similique atque. Voluptatem placeat aperiam aut necessitatibus facilis sint.</p>
-          <p> <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum" target="_blank"> google for lorem </a> </p>
-          <h1 class="green">A Clock from an example on the site <a class="green" href="http://demosthenes.info/blog" target="_blank"> demosthenes </a> </h1>
-          <svg id="clock" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" id="face" r="45"/>
-            <g id="hands">
-              <rect height="30" id="hour" rx="2.5" ry="2.55" width="5" x="47.5" y="22.0"/>
-              <rect height="40" id="min" rx="2" ry="2" width="3" x="48.5" y="12.5"/>
-              <line id="sec" x1="50" x2="50" y1="50" y2="16"/>
-            </g>
-          </svg>
-          <h1 class="green">An iris wipe effect from the same site <a class="green" href="http://demosthenes.info/blog/558/Super-Easy-Iris-Wipe-in-CSS3#" target="_blank"> demosthenes </a> </h1>
-          <a class="iris-wipe"> </a>
-        </section>
-      </article>
-    </section>
-  </body>
-</html>
+</style></head><body><section class="A4-Paper" id="posts"><article><section><h1 class="weird3">Testje</h1><p class="weird3">Molestias quia optio in. Omnis velit earum et magnam occaecati non rerum nihil. Ipsam officiis vitae eos odio. Officia eius iste facere. Sint eum illo enim et. Similique assumenda pariatur accusantium et aut. Est tenetur sapiente eveniet asperiores suscipit. Temporibus in quis molestiae molestias accusamus eum. Quasi nam nulla dignissimos modi quos enim. Perferendis cumque autem facere et libero deserunt nostrum.</p><p> <a class="weird3 green" href="http://google.com/search?q=lorem+ipsum" target="_blank"> google for lorem </a> </p><h1 class="green">A Clock from an example on the site <a class="green" target="_blank" href="http://demosthenes.info/blog"> demosthenes </a> </h1><svg viewBox="0 0 100 100" id="clock"><circle id="face" cx="50" cy="50" r="45" /><g id="hands"><rect id="hour" x="47.5" y="22.0" width="5" height="30" rx="2.5" ry="2.55" /><rect id="min" x="48.5" y="12.5" width="3" height="40" rx="2" ry="2" /><line id="sec" x1="50" y1="50" x2="50" y2="16" /></g></svg><h1 class="green">An iris wipe effect from the same site <a class="green" href="http://demosthenes.info/blog/558/Super-Easy-Iris-Wipe-in-CSS3#" target="_blank"> demosthenes </a> </h1><a class="iris-wipe"> </a></section></article></section></body></html>

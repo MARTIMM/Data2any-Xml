@@ -142,13 +142,13 @@
       <year>2013</year>
       <holder>Marcel Timmerman</holder>
     </copyright>
-    <date>2014-04-29</date>
+    <date>2015-03-29</date>
     <abstract>
       <para>&product; is capable of transforming an internally build data structure into xml after which it is possible to store it in a file or send it to any program for conversion or some other type of processor. 
 </para>
-      <para>Version of yaml2any when book is written: v0.0.5</para>
-      <para>Version of Data2any when book is written: v0.1.1</para>
-      <para>Generated on date 2014-04-29.</para>
+      <para>Version of yaml2any when book is written: v0.0.7</para>
+      <para>Version of Data2any when book is written: v0.1.4</para>
+      <para>Generated on date 2015-03-29.</para>
     </abstract>
   </info>
   <dedication>
@@ -240,7 +240,7 @@
 </para>
         </listitem>
         <listitem>
-          <para>Chapter A, Availability</para>
+          <para>Appendix A, Availability</para>
           <para>
 </para>
         </listitem>
@@ -343,7 +343,7 @@ cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow
 port-salut camembert de normandie macaroni cheese feta who moved my cheese
 babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue
 castello caerphilly chalk and cheese. Lancashire.
-<sidebar><?dbfo float-type='right' sidebar-width='160px' ?><mediaobject><imageobject><imagedata format="SVG" width="75"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseprofile="full" width="300" height="200"><rect width="300" height="200" fill="red"/><circle cx="150" cy="100" r="80" fill="green"/><text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text></svg></imagedata></imageobject></mediaobject></sidebar><sidebar><?dbfo float-type='right' sidebar-width='160px' ?>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+<sidebar><?dbfo sidebar-width='160px' float-type='right' ?><mediaobject><imageobject><imagedata format="SVG" width="75"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseprofile="full" width="300" height="200"><rect width="300" height="200" fill="red"/><circle cx="150" cy="100" r="80" fill="green"/><text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text></svg></imagedata></imageobject></mediaobject></sidebar><sidebar><?dbfo float-type='right' sidebar-width='160px' ?>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -365,18 +365,18 @@ voluptas nulla pariatur?
 advertised as the most popular gun in American crime. Do you believe that shit?
 It actually says that in the little book that comes with it: the most popular
 gun in American crime. Like they're actually proud of that shit.
-</para></caution><tip><title>Tip section</title><para>Accusantium dicta vero dolorem. Repellat reprehenderit sapiente facilis et dignissimos. Accusantium expedita est ea expedita dolor atque et. Ab soluta ea aspernatur. Aut enim porro laboriosam maiores qui dolore. Quia dolores tempore voluptate placeat quasi cumque nisi laborum.
+</para></caution><tip><title>Tip section</title><para>Tenetur est rerum ea nisi. Expedita voluptates enim necessitatibus magnam. Harum eveniet voluptatibus illum qui qui. Inventore voluptatem magnam natus quis dignissimos omnis id quia. Tempore qui rerum tempora qui et. Autem non repellendus explicabo.
 
-Voluptatem blanditiis vel laudantium assumenda et. Voluptatem perferendis sapiente in. At consequatur voluptas mollitia iusto et dolorem voluptates. Quod non odio impedit amet dolorum molestiae nulla. Rerum temporibus esse deleniti quaerat sit ut exercitationem.
+Exercitationem error illo similique qui aliquam laboriosam. Est dolore dignissimos ea enim velit. Iusto inventore incidunt qui ut. Et ut qui officia architecto. Cupiditate aut sunt quasi molestias. Corrupti porro nihil deserunt qui error veniam quo non.
 
-Unde asperiores voluptatem impedit. Et voluptatem quia quibusdam. Possimus est ut asperiores.
+Voluptas voluptatem dolore dolore quas. Voluptas pariatur et sunt rerum et. Accusamus rerum asperiores et explicabo. Alias qui velit non repellendus eos sint nesciunt et. Fugit quaerat rem aut reprehenderit sit consectetur. Non voluptate possimus repudiandae voluptatibus itaque fugiat perspiciatis ducimus.
 
-Quos et voluptatem voluptas soluta est et. Rerum et optio temporibus fugiat laboriosam. Voluptas consequatur nobis voluptas suscipit vitae saepe saepe.</para></tip><important><title>Important section</title><para>Veggies sunt bona vobis, proinde vos postulo esse magis grape pea sprouts
+Eligendi aliquam sunt illo ut qui ab nulla quod. Optio aperiam doloribus eligendi eos impedit. Earum fuga occaecati quidem ullam est ullam quidem ea. Hic nisi impedit iusto. Ipsum vero facere voluptas iure praesentium hic voluptates ea.</para></tip><important><title>Important section</title><para>Veggies sunt bona vobis, proinde vos postulo esse magis grape pea sprouts
 horseradish courgette maize spinach prairie turnip jicama coriander quandong
 gourd broccoli seakale gumbo. Parsley corn lentil zucchini radicchio maize
 horseradish courgette maize spinach prairie turnip jícama coriander quandong
 burdock avocado sea lettuce. Garbanzo tigernut earthnut pea fennel.
-</para></important><warning><title>Warning section</title><para>explicabo dignissimos rem consequatur quam</para></warning></para>
+</para></important><warning><title>Warning section</title><para>eos explicabo eveniet rem optio</para></warning></para>
     </section>
   </chapter>
   <chapter audience="programmers">

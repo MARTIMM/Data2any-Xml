@@ -27,8 +27,7 @@
      | wkhtmltopdf -B 0 -L 0 -R 0 -T 0 -s A4 --print-media-type --encoding UTF-8 - __BASENAME__.pdf
 
 #-------------------------------------------------------------------------------
-# html 5. Example using javascript library d3
-#
+# html 5. Example 7
 - DOCTYPE root=html:
 
 # No entities definitions possible in html5. Use unicode directly
