@@ -1,0 +1,117 @@
+#!/usr/bin/env yaml2any
+#
+---
+#-------------------------------------------------------------------------------
+# Document 0, The document to start with.
+#
+- DocumentControl:
+   Translator: Xml
+   Encoding: UTF-8
+
+   SendTo:
+    # cat to file
+    #
+    cat: '| cat > __BASENAME__.opf'
+
+    # dump via xml checker
+    #
+    xml: |
+     | xml_pp -p 'pre script style'  > __BASENAME__.opf
+
+#-------------------------------------------------------------------------------
+# Example 8: ebook formatted as EPUB 3
+#
+- DOCTYPE root=package:
+
+# Package document EPUB 3
+#
+- package version=3.0 xmlns=http://www.idpf.org/2007/opf xml:lang=en dir=ltr:
+  unique-identifier=pub-identifier:
+
+   # Required. dc is the namespace for elements from the Dublin Core.
+   #
+   - metadata xmlns:dc=http://purl.org/dc/elements/1.1/:
+      # refines= is not used when it does not refines an element. If not, it 
+      # says something over the whole doc.
+      #
+      - meta: Info about whole book
+
+      - meta refines=#chap-5: Chapter reveils everything what is told in chap 4
+      - meta refines=#french property=alternate-script xml:lang=fr: toute acoupe
+
+      # At least one
+      #
+      - dc:identifier id=pub-identifier: urn:mt1957:0000000001
+      - meta refines=#pub-identifier:
+        property=identifier-type scheme=proprietary:
+      - meta property=dcterms:modified: ${date}T${time}Z
+
+      - dc:identifier: urn:mt1957.2:test-1
+      
+      # At least one
+      #
+      - dc:title id=pup-title: Test of my first EPUB 3 e-book
+      - meta refines=#pup-title property=title-type: main
+      - meta refines=#pup-title property=title-type scheme=onix:codelist15: 01
+
+      - dc:title id=title-dutch:
+        xml:lang=nl_NL dir=ltr: Test van mijn eerste EPUB 3 e-boek
+      - meta refines=#title-dutch property=title-type scheme=onix:codelist15: 06
+
+      - dc:title id=series: Series of EPUB 3 studies
+      - meta refines=#series property=title-type: collection
+
+      - dc:title id=edition1: First Edition
+      - meta refines=#edition1 property=title-type: edition
+
+      - dc:title id=ext1: >
+         The glorious rise of the EPUB 3 study series of which this is the
+         birtday edition of the series.
+      - meta refines=#ext1 property=title-type: extended
+
+      # At least one
+      #
+      - dc:language id=pub-language: en
+      
+      # Optional, more than one is ok
+      #
+      - dc:creator id=author:
+        opf:role=aut opf:file-as='M. Timmerman': Timmerman Marcel
+
+
+      # Optional, only one
+      #
+      - dc:date: 2014-12-04T00:00:00Z
+      
+      # Optional, only one
+      #
+      - dc:source id=src-id: urn:mt1957:0000000001
+      
+      # Optional, best not to use it yet, no values defined (2014-12-05)
+      #
+      # dc:type:
+      
+      
+   # Required
+   #
+   - manifest:
+   
+   # Required
+   #
+   - spine:
+   
+   # Optional and depricated, carryover from EPUB 2
+   #
+   #- guide:
+   
+   # Optional
+   #
+   - bindings:
+
+
+
+
+
+
+
+
